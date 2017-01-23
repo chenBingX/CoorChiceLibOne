@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.chenbing.iceweather.CustemViews.HSlideListView.SlideView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/slide_view"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="horizontal"
+  android:background="@color/opacity_5_red"
+  >
+
+  <TextView
+    android:id="@+id/tv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/opacity_6_5_white"
+    android:padding="10dp"
+    android:textSize="22sp"
+    android:gravity="center"
+    tools:text="asdfasdf"
+    />
+
+
+</com.chenbing.iceweather.CustemViews.HSlideListView.SlideView>

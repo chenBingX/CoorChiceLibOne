@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="com.chenbing.iceweather.Views.DrawTextActivity">
+
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      >
+
+      <TextView
+        android:id="@+id/tv_text_info"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:textSize="@dimen/text_size_l"
+        android:scrollbars="vertical"
+        />
+
+      <include layout="@layout/divide_normal"/>
+
+      <ImageView
+        android:id="@+id/iv_display_text"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:scaleType="center"
+        tools:background="@color/yellow"
+        />
+
+      <include layout="@layout/divide_normal"/>
+
+      <EditText
+        android:id="@+id/et_input_string"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/et_bg_round_shape"
+        android:gravity="center"
+        android:textColor="@color/opacity_9_black"
+        android:textSize="@dimen/text_size_l"
+        />
+
+      <include layout="@layout/divide_normal"/>
+
+      <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_text_set_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray"
+        tools:listitem="@layout/item_text_set_input"
+        />
+    </LinearLayout>
+  </ScrollView>
+
+</RelativeLayout>

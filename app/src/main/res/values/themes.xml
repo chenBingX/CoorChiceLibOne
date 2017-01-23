@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="custom_dialog_in_bottom_animation_hurry" parent="@android:style/Animation.Dialog">
+    <item name="android:windowEnterAnimation">@anim/slide_in_from_bottom_hurry</item>
+    <item name="android:windowExitAnimation">@anim/slide_out_to_bottom_hurry</item>
+  </style>
+
+  <style name="custom_dialog" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowFrame">@null</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowAnimationStyle">@style/custom_dialog_in_bottom_animation_hurry</item>
+    <item name="android:windowIsFloating">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:backgroundDimEnabled">true</item>
+    <item name="android:background">@color/transparent</item>
+    <item name="android:windowBackground">@color/transparent</item>
+  </style>
+
+  <style name="custom_activity" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowFrame">@null</item>
+    <item name="android:windowNoTitle">false</item>
+    <!--<item name="android:windowIsTranslucent">true</item>-->
+    <item name="android:windowAnimationStyle">@style/custom_dialog_in_bottom_animation_hurry</item>
+    <item name="android:windowIsFloating">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <!--<item name="android:backgroundDimEnabled">true</item>-->
+    <item name="android:background">@color/transparent</item>
+    <item name="android:windowBackground">@color/transparent</item>
+  </style>
+
+
+</resources>

@@ -1,0 +1,481 @@
+<resources>
+  <!-- Default screen margins, per the Android Design guidelines. -->
+  <dimen name="text_size_l">18sp</dimen>
+
+  <dimen name="padding_s">5dp</dimen>
+  <dimen name="padding_normal">10dp</dimen>
+
+  <dimen name="normal_radius">10dp</dimen>
+  <!-- Default screen margins, per the Android Design guidelines. -->
+  <dimen name="popular_users_avatar_size">42dp</dimen>
+  <dimen name="popular_users_margin">14dp</dimen>
+  <dimen name="popular_users_mid_margin">11.5dp</dimen>
+  <dimen name="popular_users_small_margin">9.3dp</dimen>
+  <dimen name="popular_users_title_font_size">12.1sp</dimen>
+  <dimen name="popular_users_small_title_font_size">10.2sp</dimen>
+  <dimen name="popular_users_two_line_title_margin">1dp</dimen>
+  <dimen name="popular_users_button_width">56dp</dimen>
+  <dimen name="popular_users_button_height">23.3dp</dimen>
+  <dimen name="popular_users_button_font_size">11.2sp</dimen>
+  <dimen name="bottom_tab_bar_height">51dp</dimen>
+  <dimen name="bottom_tab_bar_height_small">46dp</dimen>
+  <dimen name="top_bar_height">35dp</dimen>
+  <dimen name="bottom_tab_item_width">66dp</dimen>
+  <dimen name="bottom_tab_item_icon_size">33dp</dimen>
+  <dimen name="bottom_tab_item_icon_margin_top">2dp</dimen>
+  <dimen name="home_tab_width">60dp</dimen>
+  <dimen name="home_right_tab_mr">25dp</dimen>
+  <dimen name="home_right_tab_widht">160dp</dimen>
+  <dimen name="home_right_tab_height">53.5dp</dimen>
+  <dimen name="child_tab_layout_mr">10dp</dimen>
+  <dimen name="child_tab_item_mr">10dp</dimen>
+  <dimen name="child_tab_name_size">12sp</dimen>
+  <dimen name="home_indicator_width">130dp</dimen>
+  <dimen name="home_indicator_height">2.5dp</dimen>
+  <dimen name="home_indicator_mt">5dp</dimen>
+  <dimen name="common_botton_stroke_width">1.4dp</dimen>
+  <dimen name="search_friend_margin">17dp</dimen>
+  <dimen name="search_friend_layout_size">112dp</dimen>
+  <dimen name="search_friend_icon_size">62dp</dimen>
+  <dimen name="search_friend_icon_vertical_margin">18.6dp</dimen>
+  <dimen name="search_friend_edit_height">28dp</dimen>
+  <dimen name="big_img_close_size">56dp</dimen>
+  <dimen name="first_count_game_card_mt">10dp</dimen>
+  <dimen name="loading_footer_height">50dp</dimen>
+  <dimen name="profile_tab_bar_height">47dp</dimen>
+  <dimen name="profile_tab_name_size">12sp</dimen>
+  <dimen name="loading_header_gif_width">30dp</dimen>
+  <dimen name="loading_header_height">80dp</dimen>
+  <dimen name="spit_line_height">0.2dp</dimen>
+  <dimen name="spit_line_ml">15dp</dimen>
+  <dimen name="setting_mb">35dp</dimen>
+  <dimen name="session_detail_item_height">61dp</dimen>
+  <dimen name="last_session_detail_item_mb">40dp</dimen>
+  <dimen name="comment_avatar_image_size">30dp</dimen>
+  <dimen name="small_avatar_layout_plr">20dp</dimen>
+  <dimen name="small_avatar_layout_plr_padding">15dp</dimen>
+  <dimen name="small_avatar_border">10.0dp</dimen>
+  <dimen name="indicator_height">2dp</dimen>
+  <dimen name="main_tab_bottom_bar_plr">10dp</dimen>
+  <dimen name="live_share_tab_icon_padding">18dp</dimen>
+  <dimen name="under_line_round">5px</dimen>
+
+  <dimen name="avatar_to_top_distance">45dp</dimen>
+
+  <dimen name="live_bottom_icon_size">35dp</dimen>
+
+  <!-- Tencent Live -->
+  <!-- 视频聊天中小窗口移动时的阈值 -->
+  <dimen name="follows_line_offset_left">-73dp</dimen>
+  <dimen name="private_live_setting_item_margin_left">73dp</dimen>
+  <!--Empty-->
+  <dimen name="empty_img_size">186dp</dimen>
+  <dimen name="empty_des_margin_top">9.3dp</dimen>
+  <dimen name="empty_title_font_size">14sp</dimen>
+  <dimen name="empty_des_font_size">11.16sp</dimen>
+  <!--alert page-->
+  <dimen name="alert_avatar_size">60dp</dimen>
+  <dimen name="alert_avatar_margin">21.4dp</dimen>
+  <dimen name="alert_img_size">55.81dp</dimen>
+  <dimen name="alert_img_margin">16.75dp</dimen>
+  <dimen name="alert_title_font_size">14sp</dimen>
+  <dimen name="alert_title_margin">9.3dp</dimen>
+  <dimen name="alert_title_margin_small">6.51dp</dimen>
+  <dimen name="alert_gender_size">14.88dp</dimen>
+  <dimen name="alert_level_font_size">11.16sp</dimen>
+  <dimen name="alert_button_height">30.7dp</dimen>
+  <dimen name="alert_button_margin_top">22.33dp</dimen>
+  <dimen name="show_rec_gift_avator_size">44dp</dimen>
+  <dimen name="live_viewer_avatar_size">36dp</dimen>
+  <dimen name="live_viewer_avatar_height_size">45dp</dimen>
+  <dimen name="setting_name_ml">15dp</dimen>
+  <dimen name="setting_name_ml_small">5dp</dimen>
+
+
+  <!--pre bind-->
+  <dimen name="pre_bind_img_margin_top">95.44dp</dimen>
+  <dimen name="pre_bind_title_margin_top">37.21dp</dimen>
+  <dimen name="pre_bind_button_margin_top">27.91dp</dimen>
+  <dimen name="pre_bind_button_margin_height">31.63dp</dimen>
+  <dimen name="pre_bind_button_margin_width">130dp</dimen>
+  <dimen name="bind_phone_text_font_size">13sp</dimen>
+  <dimen name="bind_phone_text_margin_top">23.26dp</dimen>
+  <dimen name="bind_phone_text_margin">9.3dp</dimen>
+  <dimen name="bind_phone_code_height">27.9dp</dimen>
+  <dimen name="bind_phone_code_width">93dp</dimen>
+  <dimen name="bind_phone_action_margin_top">22.33dp</dimen>
+  <dimen name="bind_phone_action_height">37.21dp</dimen>
+  <dimen name="seat_avatar_size">74dp</dimen>
+
+  <!--handsel list-->
+  <dimen name="handsel_header_height">254dp</dimen>
+  <dimen name="handsel_header_intro_height">65.12dp</dimen>
+  <dimen name="handsel_header_margin_top_43">40dp</dimen>
+  <dimen name="handsel_header_margin_top_10">9.3dp</dimen>
+  <dimen name="handsel_header_margin_top_5">4.65dp</dimen>
+  <dimen name="handsel_header_margin_top_3">2.79dp</dimen>
+  <dimen name="handsel_header_crown_size">37.21dp</dimen>
+  <dimen name="handsel_header_tag_size">20.47dp</dimen>
+  <dimen name="handsel_header_avatar_size">65.12dp</dimen>
+  <dimen name="handsel_header_title_font_size">13sp</dimen>
+  <dimen name="handsel_header_des_font_size">9.3sp</dimen>
+  <dimen name="handsel_header_crown_bg_height">27.91dp</dimen>
+  <dimen name="handsel_header_crown_bg_width">84.65dp</dimen>
+  <dimen name="live_num_m">40dp</dimen>
+  <dimen name="live_chat_content_normal_ml">20dp</dimen>
+
+  <!--recommend-->
+  <dimen name="recommend_header_height">60dp</dimen>
+  <dimen name="recommend_checkbox_size">42.8dp</dimen>
+  <dimen name="recommend_margin">18.6dp</dimen>
+  <dimen name="recommend_small_button_height">18.6dp</dimen>
+  <dimen name="recommend_small_button_width">55.8dp</dimen>
+  <dimen name="recommend_big_button_height">37.21dp</dimen>
+  <dimen name="recommend_big_button_width">137.7dp</dimen>
+  <dimen name="recommend_small_button_font_size">9.3sp</dimen>
+  <dimen name="dice_child_p">2.5dp</dimen>
+  <dimen name="dice_child_num_m">-2dp</dimen>
+  <dimen name="dice_child_des_size">13sp</dimen>
+  <dimen name="dice_child_sum_des_mt">1dp</dimen>
+  <dimen name="dice_size">67dp</dimen>
+  <dimen name="seat_height">91dp</dimen>
+  <dimen name="seat_content_size">75dp</dimen>
+  <dimen name="coin_change_size">87dp</dimen>
+  <dimen name="reduce_coin_mt">-20dp</dimen>
+  <dimen name="bet_image_view_width">186dp</dimen>
+  <dimen name="bet_image_view_height">93dp</dimen>
+  <dimen name="dice_item_image_ml">-5dp</dimen>
+  <dimen name="dice_item_image_mt">3dp</dimen>
+  <dimen name="dice_bet_content_detail_mlr">14dp</dimen>
+  <dimen name="dice_bet_content_detail_mb">9dp</dimen>
+  <dimen name="seat_recyclerview_width">130dp</dimen>
+  <dimen name="seat_recyclerview_mt">70dp</dimen>
+  <dimen name="add_coin_100_width">39dp</dimen>
+  <dimen name="add_coin_100_height">19dp</dimen>
+  <dimen name="change_coin_text_size">10dp</dimen>
+  <dimen name="change_coin_text_height">20dp</dimen>
+
+  <dimen name="live_end_num_font_size">16.75sp</dimen>
+  <dimen name="live_end_num_des_font_size">11.16sp</dimen>
+  <dimen name="live_end_num_margin">8dp</dimen>
+  <dimen name="bet_his_bg_radius">10dp</dimen>
+  <dimen name="first_bet_his_item_mt">21dp</dimen>
+  <dimen name="bet_his_item_mb">10dp</dimen>
+  <dimen name="gift_animation_size">65dp</dimen>
+  <dimen name="live_bottom_height">51.2dp</dimen>
+  <dimen name="live_chat_list_margin_bottom">46dp</dimen>
+
+  <!--UI 2.0-->
+  <!--Margin Size-->
+  <dimen name="smallest_margin_size_2">1.86dp</dimen>
+  <dimen name="smallest_margin_size_3">2.8dp</dimen>
+  <dimen name="smallest_margin_size">4.65dp</dimen>
+  <dimen name="tiny_margin_size">6.5dp</dimen>
+  <dimen name="small_margin_size">9.3dp</dimen>
+  <dimen name="live_small_margin_size">6dp</dimen>
+  <dimen name="bottom_icon_size">47dp</dimen>
+  <dimen name="live_user_list_margin_right">42dp</dimen>
+  <dimen name="small_lest_margin_size">4.65dp</dimen>
+  <dimen name="big_margin_size">14dp</dimen>
+  <dimen name="bigger_margin_size">23.3dp</dimen>
+  <dimen name="biggest_margin_size">27.91dp</dimen>
+  <dimen name="huge_margin_size">32.56dp</dimen>
+  <dimen name="normal_size">18.6dp</dimen>
+  <!--Font-->
+  <dimen name="default_font_size_28">26sp</dimen>
+  <dimen name="smallest_title_font_size_9">8.37sp</dimen>
+  <dimen name="small_title_font_size_10">9.3sp</dimen>
+  <dimen name="small_title_font_size_12">11.16sp</dimen>
+  <dimen name="sub_title_font_size_12">11.16sp</dimen>
+  <dimen name="sub_title_font_size_14">13.02sp</dimen>
+  <dimen name="small_sub_title_font_size_11">10.23sp</dimen>
+  <dimen name="small_sub_title">10.23sp</dimen>
+  <dimen name="big_title_font_size_14">13sp</dimen>
+  <dimen name="big_title">13sp</dimen>
+  <dimen name="bigest_title">18sp</dimen>
+  <dimen name="biggest_title_font_size_16">14.88sp</dimen>
+  <dimen name="normal_title_font_size_12">11.16sp</dimen>
+  <dimen name="round_big_font_size_14">13sp</dimen>
+  <dimen name="huge_font_size_18">16.7sp</dimen>
+  <dimen name="title_font_size_14">13sp</dimen>
+  <dimen name="bold_sub_title">13sp</dimen>
+  <dimen name="bold_sub_title2">11sp</dimen>
+  <dimen name="grand_title_font_size_24">22sp</dimen>
+  <dimen name="grand_title_font_size_28">26sp</dimen>
+
+  <dimen name="small_georgia_font">10sp</dimen>
+  <dimen name="top_name_padding">4dp</dimen>
+
+  <dimen name="empty_sub_title_font_size_12">11.16sp</dimen>
+
+  <dimen name="delete_his_live_content_height">47dp</dimen>
+  <dimen name="stroke_9_3_width">0.93dp</dimen>
+
+  <dimen name="biggest_title_size">16sp</dimen>
+  <dimen name="small_title_size">10sp</dimen>
+  <dimen name="small_margin">10dp</dimen>
+  <dimen name="tiny_margin">7dp</dimen>
+  <dimen name="seat_poker_view_width">32dp</dimen>
+  <dimen name="seat_poker_view_height">42dp</dimen>
+  <dimen name="owner_poker_view_width">44dp</dimen>
+  <dimen name="owner_poker_view_height">58dp</dimen>
+  <dimen name="periscope_size">37dp</dimen>
+  <dimen name="sp_periscope_size">51dp</dimen>
+  <dimen name="live_btn_size">35dp</dimen>
+  <dimen name="live_btn_mb">2dp</dimen>
+  <dimen name="live_btn_mlr">5dp</dimen>
+
+  <dimen name="live_btn_size_plus_mlr">46dp</dimen>
+  <dimen name="live_btn_progress_mlr">6dp</dimen>
+  <dimen name="viewer_max_num_tips">9sp</dimen>
+  <dimen name="sign_today_item_height">52dp</dimen>
+  <dimen name="small_profile_corner">10dp</dimen>
+  <dimen name="other_buttom_height">40dp</dimen>
+
+  <dimen name="live_user_name_title">11.2dp</dimen>
+  <dimen name="close_game_width">80dp</dimen>
+  <dimen name="close_game_height">20dp</dimen>
+  <dimen name="thin_smallest_title">8.4dp</dimen>
+  <dimen name="normal_georgia">11.2sp</dimen>
+  <dimen name="thin_big_title">13sp</dimen>
+  <dimen name="toolbar_title_size">16sp</dimen>
+  <dimen name="huge_italic_georgia">16.47sp</dimen>
+  <dimen name="big_georgia">13sp</dimen>
+  <dimen name="smallest_title">8.4dp</dimen>
+
+  <!--Corner Radius-->
+  <dimen name="big_corner_radius">14dp</dimen>
+
+  <!--alert dialog-->
+  <dimen name="alert_dialog_width">261dp</dimen>
+  <dimen name="bet_control_alert_dialog_width">221dp</dimen>
+  <dimen name="dialog_bg_light_height">190dp</dimen>
+  <dimen name="bet_control_alert_dialog_height">223dp</dimen>
+  <dimen name="bet_control_dialog_bg_light_height">161dp</dimen>
+  <dimen name="alert_dialog_icon_size">140dp</dimen>
+  <dimen name="alert_dialog_botton_height">55.8dp</dimen>
+  <dimen name="live_share_item_icon_size">37dp</dimen>
+  <dimen name="live_player_info_height">40dp</dimen>
+  <dimen name="present_gift_item_size">52dp</dimen>
+  <dimen name="live_chat_item_avatar_size">28dp</dimen>
+  <dimen name="show_gift_icon_size">55dp</dimen>
+  <dimen name="profile_avatar_size">80dp</dimen>
+  <dimen name="mid_avatar_size">42dp</dimen>
+  <dimen name="chat_recyclerview_height">180dp</dimen>
+  <dimen name="bet_image_view_mb">246dp</dimen>
+  <dimen name="level_name">18sp</dimen>
+  <dimen name="level_info">12sp</dimen>
+
+
+  <!--Overlay-->
+  <dimen name="overlay_avatar_size">90dp</dimen>
+  <dimen name="overlay_small_avatar_size">33dp</dimen>
+  <dimen name="overlay_avatar_border_width">5dp</dimen>
+
+  <dimen name="dice_bet_item_height">28dp</dimen>
+  <dimen name="bet_sum_height">37dp</dimen>
+  <dimen name="black_jack_select_type_timer_size">49dp</dimen>
+  <dimen name="poker_point_second_num_ml">-8dp</dimen>
+  <dimen name="poker_explosion_size">50dp</dimen>
+
+  <!--avatar size-->
+  <dimen name="smaller_avatar_size">23dp</dimen>
+  <dimen name="normal_avatar_size">41.86dp</dimen>
+  <dimen name="small_avatar_size">32.56dp</dimen>
+  <dimen name="middle_avatar_size">37dp</dimen>
+  <dimen name="big_avatar_size">65dp</dimen>
+  <dimen name="bigger_avatar_size">74dp</dimen>
+
+  <dimen name="center_dialog_big_size">450dp</dimen>
+  <dimen name="center_dialog_small_size">260dp</dimen>
+  <dimen name="center_dialog_normal_size">380dp</dimen>
+
+  <dimen name="live_chat_list_margin_right">104dp</dimen>
+  <dimen name="dialog_titile_rignth">108dp</dimen>
+  <dimen name="dialog_assist_title_rignth">91dp</dimen>
+  <dimen name="dialog_noramal_title_rignth">48dp</dimen>
+  <dimen name="chat_bottom_item_icon_size">22dp</dimen>
+  <dimen name="chat_bottom_item_size">47dp</dimen>
+  <dimen name="chat_emoji_bar_height">32dp</dimen>
+  <dimen name="other_chat_type_content_height">195dp</dimen>
+  <dimen name="photo_chat_type_content_margin">2dp</dimen>
+  <dimen name="basic_border_height">0.5dp</dimen>
+  <dimen name="small_border_width">1dp</dimen>
+  <dimen name="big_small_border_width">1.5dp</dimen>
+  <dimen name="normal_border_height">2dp</dimen>
+  <dimen name="crude_border_width">3dp</dimen>
+  <dimen name="big_border_height">5dp</dimen>
+  <dimen name="chat_gift_item_mlr">8dp</dimen>
+  <dimen name="chat_gift_item_size">52dp</dimen>
+  <dimen name="level_icon_size">18.6dp</dimen>
+
+  <!-- top item -->
+  <dimen name="top_top1_cell_height">140dp</dimen>
+  <dimen name="top_top23_cell_height">111dp</dimen>
+  <dimen name="top_normal_cell_height">70dp</dimen>
+  <dimen name="top_head_icon_width">70dp</dimen>
+
+  <dimen name="audio_record_button_size">84dp</dimen>
+  <dimen name="audio_record_state_icon_size">28dp</dimen>
+  <dimen name="min_chat_audio_width">85dp</dimen>
+  <dimen name="chat_emoji_content_plr">10dp</dimen>
+  <dimen name="chat_emoji_icon_plr">60dp</dimen>
+  <dimen name="edit_layout_height">50dp</dimen>
+  <dimen name="color_egg_item_size">38dp</dimen>
+  <dimen name="color_egg_small_item_size">26dp</dimen>
+  <dimen name="qos_item_text_size">9sp</dimen>
+  <dimen name="live_setting_popup_item_height">28dp</dimen>
+  <dimen name="live_setting_popup_item_mb">14dp</dimen>
+  <dimen name="live_select_cover_item_m">1.5dp</dimen>
+
+  <!-- seek forward/backward -->
+  <dimen name="forward_width">117dp</dimen>
+  <dimen name="forward_height">62dp</dimen>
+  <dimen name="his_live_chat_recycler_view_bottom_padding">36dp</dimen>
+
+  <dimen name="texas_operation_view_width">52dp</dimen>
+  <dimen name="texas_operation_view_height">34dp</dimen>
+  <dimen name="texas_operation_text_font">12sp</dimen>
+  <dimen name="texas_operation_view_margin_left">24dp</dimen>
+  <dimen name="texas_operation_view_margin_right">2dp</dimen>
+
+  <dimen name="texas_operation_player_view_width">56dp</dimen>
+  <dimen name="texas_operation_player_view_height">28dp</dimen>
+  <dimen name="texas_operation_player_view_margin_left">12dp</dimen>
+  <dimen name="gift_repeat_mr">102dp</dimen>
+  <dimen name="gift_repeat_progress_title_img_width">56dp</dimen>
+  <dimen name="repeat_level_icon_view_width">22dp</dimen>
+  <dimen name="repeat_level_tag_width">9dp</dimen>
+  <dimen name="repeat_level_animation_width">37dp</dimen>
+  <dimen name="repeat_level_animation_height">25dp</dimen>
+  <dimen name="repeat_level_animation_mr">-8dp</dimen>
+  <dimen name="present_experience_change_view_height">25dp</dimen>
+  <dimen name="present_experience_change_view_text_size">16sp</dimen>
+  <dimen name="present_double_experience_change_view_text_size">24sp</dimen>
+  <dimen name="draw_guess_subject_name_big_size">42sp</dimen>
+  <dimen name="draw_guess_subject_name_mid_size">30sp</dimen>
+  <dimen name="draw_guess_subject_name_small_size">18sp</dimen>
+  <dimen name="player_draw_guess_subject_name_size">30sp</dimen>
+  <dimen name="player_draw_guess_title_size">16sp</dimen>
+  <dimen name="viewer_draw_guess_image_height">302dp</dimen>
+
+  <dimen name="game_item_in_live_width">112dp</dimen>
+  <dimen name="game_item_in_live_height">130dp</dimen>
+  <dimen name="game_item_in_icon_size">84dp</dimen>
+  <dimen name="canvas_view_default_paint_size">5sp</dimen>
+  <dimen name="live_viewer_list_item_vip_size">15dp</dimen>
+  <dimen name="subtitle">12sp</dimen>
+  <dimen name="task_button_text">11sp</dimen>
+  <dimen name="water_mark_width">72dp</dimen>
+  <dimen name="water_mark_height">30dp</dimen>
+  <dimen name="muscleman_menu_icon_size">35dp</dimen>
+  <dimen name="muscleman_drag_view_size">45dp</dimen>
+
+  <dimen name="sign_box_count_dow_time_num_size">16sp</dimen>
+
+  <dimen name="link_margin_top">109.3dp</dimen>
+  <dimen name="normal_link_margin_top">109.3dp</dimen>
+  <dimen name="danmaku_height">180dp</dimen>
+  <dimen name="vip_icon_width">29dp</dimen>
+  <dimen name="vip_icon_height">29dp</dimen>
+  <dimen name="live_dialog_kick_width">43dp</dimen>
+  <dimen name="live_dialog_kick_height">19dp</dimen>
+  <dimen name="live_dialog_admin_width">60dp</dimen>
+  <dimen name="live_dialog_view_width">100dp</dimen>
+  <dimen name="live_end_viewer_has_game_data_mt">23dp</dimen>
+  <dimen name="live_end_viewer_data_mt">48dp</dimen>
+  <dimen name="random_join_live_button_height">47dp</dimen>
+  <dimen name="right_arrow_icon_width">7dp</dimen>
+  <dimen name="right_arrow_icon_height">12dp</dimen>
+  <dimen name="level_center_width">34dp</dimen>
+  <dimen name="sound_item_icon_width">84dp</dimen>
+  <dimen name="sound_item_icon_height">84dp</dimen>
+
+  <dimen name="live_overlay_height">350dp</dimen>
+  <dimen name="present_experience_change_view_normal_ml">130dp</dimen>
+  <dimen name="present_experience_change_view_double_ml">100dp</dimen>
+  <dimen name="game_common_icon_size">88dp</dimen>
+  <dimen name="constellation_select_size">16dp</dimen>
+  <dimen name="game_rules_live_card_size">145dp</dimen>
+  <dimen name="feed_bottom_des_height">42dp</dimen>
+
+  <dimen name="tab_size">14dp</dimen>
+  <dimen name="main_tab_size">16dp</dimen>
+  <dimen name="pre_live_progress_under_line_size">5dp</dimen>
+  <dimen name="private_live_info_avatar_size">75dp</dimen>
+
+  <dimen name="login_cell_width">154dp</dimen>
+  <dimen name="login_cell_height">205dp</dimen>
+  <dimen name="login_cell_negative_left_width">-54dp</dimen>
+  <dimen name="login_cell_negative_width">-50dp</dimen>
+  <dimen name="login_cell_negative_height">-150dp</dimen>
+
+  <dimen name="title_bar_height">48dp</dimen>
+  <dimen name="small_title_bar_height">40dp</dimen>
+
+  <dimen name="game_bird_bet_dialog_height">130dp</dimen>
+  <dimen name="game_bird_enter_dialog_height">160dp</dimen>
+  <dimen name="game_bird_enter_dialog_width">180dp</dimen>
+
+  <dimen name="thisHugeTitle">16.7sp</dimen>
+  <dimen name="small_thin_subtitle">11sp</dimen>
+  <dimen name="profileInfoNumber">14.88sp</dimen>
+  <dimen name="live_dimd_blance_layout_height">25dp</dimen>
+  <dimen name="live_theme_detail_game_image_width">100dp</dimen>
+  <dimen name="hugeGeorgia_text">33.4dp</dimen>
+  <dimen name="bigestGeorgia_text">26dp</dimen>
+  <dimen name="BigestAvatarSize">93dp</dimen>
+
+  <dimen name="live_comment_edit_height">42dp</dimen>
+  <dimen name="live_comment_other_content_height">180dp</dimen>
+  <dimen name="avatar_page_item_height">55.8dp</dimen>
+  <dimen name="nearby_num_layout_mlr">15dp</dimen>
+  <dimen name="nearby_card_item_width">140dp</dimen>
+  <dimen name="nearby_select_item_size">19dp</dimen>
+  <dimen name="nearby_scroll_bar_size">2dp</dimen>
+  <dimen name="nearby_thumb_bar_size">40dp</dimen>
+  <dimen name="nearby_card_width">149dp</dimen>
+  <dimen name="thinBiggestTitle">14.88sp</dimen>
+  <dimen name="live_statistics_date_height">32.56dp</dimen>
+  <dimen name="live_statistics_view_height">71.6dp</dimen>
+  <dimen name="recent_live_item_tiny_margin">11dp</dimen>
+  <dimen name="recent_live_item_tiny_top_margin">3dp</dimen>
+  <dimen name="big_title_font_size_15">14sp</dimen>
+  <dimen name="normal_card_radius">10dp</dimen>
+  <dimen name="hot_banner_height">75dp</dimen>
+  <dimen name="home_tab_text_size">8.5sp</dimen>
+  <dimen name="unread_view_size">18.8dp</dimen>
+  <dimen name="systemMessageTitleFont">14sp</dimen>
+  <dimen name="systemMessageFont">12sp</dimen>
+  <dimen name="systemMessageTimeFont">12sp</dimen>
+  <dimen name="setting_header_title">14sp</dimen>
+
+  <!--新签到野-->
+  <dimen name="sign_box_page_margin">-40dp</dimen>
+  <dimen name="sign_box_pager_margin_size">60dp</dimen>
+  <dimen name="sign_box_progress_bar_padding">2dp</dimen>
+
+  <!--直播间评论区字号-->
+  <dimen name="live_comment_size_player">14.88sp</dimen>
+  <dimen name="live_comment_size_audience">13sp</dimen>
+
+  <dimen name="music_love_title_font_size">12sp</dimen>
+  <dimen name="music_love_sub_title_font_size">12sp</dimen>
+  <dimen name="music_love_people_num_font_size">9sp</dimen>
+  <dimen name="music_love_title_margin_size">5dp</dimen>
+
+  <!--首页和个人主页功能按钮字号-->
+  <dimen name="banner_title_size">10sp</dimen>
+  <dimen name="water_top">60dp</dimen>
+  <dimen name="game_water_left">100dp</dimen>
+  <dimen name="game_water_top">80dp</dimen>
+  <dimen name="game_timer_width">10dp</dimen>
+  <!-- Default screen margins, per the Android Design guidelines. -->
+  <dimen name="activity_horizontal_margin">16dp</dimen>
+  <dimen name="activity_vertical_margin">16dp</dimen>
+  <dimen name="fab_margin">16dp</dimen>
+  <dimen name="appbar_padding_top">8dp</dimen>
+
+  <!--Test-->
+
+</resources>
