@@ -2,7 +2,7 @@ package com.chenbing.iceweather.Views.BaseView;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.View;
 
 /**
@@ -12,12 +12,18 @@ import android.view.View;
  * Notes:
  */
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     view.setClickable(true);
   }
+
+  abstract protected void initData();
+
+  abstract protected void initView();
+
+  abstract protected void addListener();
 
 }

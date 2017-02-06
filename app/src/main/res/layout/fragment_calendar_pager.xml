@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:tools="http://schemas.android.com/tools">
+  <TextView
+    android:id="@+id/header"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:gravity="center"
+    android:textSize="20sp"
+    tools:text="2017年1月1日"
+    android:background="@color/opacity_7_5_white"
+    android:layout_marginBottom="2dp"
+
+    />
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/header"
+    >
+
+  </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

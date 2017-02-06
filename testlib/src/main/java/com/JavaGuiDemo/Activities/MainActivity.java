@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
     rootContainer.add(showInfo);
 
     prefixEdit = createPrefixEdit();
-    rootContainer.addAll(prefixEdit);
+    rootContainer.add(prefixEdit);
   }
 
   private void addListener() {

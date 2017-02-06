@@ -70,6 +70,8 @@
     </activity>
     <activity android:name=".Views.TaskActivity_C">
     </activity>
+    <activity android:name=".Views.CalendarActivity">
+    </activity>
   </application>
 
 </manifest>

@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity implements LocationListener {
   private final List<Navigator> navigators = new ArrayList<>();
   private Bitmap mBitmap;
   private float blurRadius = 1f;
-  private RenderScriptGaussianBlur blur;
+  private RenderScriptGaussianBlur blurRender;
   private CompositeDisposable disposable = new CompositeDisposable();
 
   @Override
@@ -89,10 +89,38 @@ public class MainActivity extends BaseActivity implements LocationListener {
   protected void initData() {
     initActivities();
 
-    blur = new RenderScriptGaussianBlur(this);
-    mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test);
-    mBitmap = BitmapUtils.changeBitmapSize(mBitmap, 300, 300);
-    LogUtils.e("" + mBitmap);
+    blurRender = new RenderScriptGaussianBlur(this);
+    getBitmapAndDisplay();
+  }
+
+  private void getBitmapAndDisplay() {
+    Disposable d = Observable.create(new ObservableOnSubscribe<Bitmap>() {
+      @Override
+      public void subscribe(ObservableEmitter<Bitmap> e) throws Exception {
+        mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test);
+        mBitmap = BitmapUtils.changeBitmapSize(mBitmap, 300, 300);
+        e.onNext(mBitmap);
+        e.onComplete();
+      }
+    }).subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribeWith(new DisposableObserver<Bitmap>() {
+      @Override
+      public void onNext(Bitmap bitmap) {
+        iv.setImageBitmap(bitmap);
+      }
+
+      @Override
+      public void onError(Throwable e) {
+
+      }
+
+      @Override
+      public void onComplete() {
+
+      }
+    });
+    disposable.add(d);
   }
 
   private void initActivities() {
@@ -139,6 +167,11 @@ public class MainActivity extends BaseActivity implements LocationListener {
 
     addActivityToNavigator(TaskActivity_A.class.getName(),
       "测试Activity栈");
+
+    addActivityToNavigator(CalendarActivity.class.getName(),
+      "日历Activity");
+
+
 
 
   }
@@ -205,7 +238,7 @@ public class MainActivity extends BaseActivity implements LocationListener {
 
   private void listenBtn1() {
     btn1.setOnClickListener((view) -> {
-      getSupportFragmentManager().beginTransaction()
+      getFragmentManager().beginTransaction()
           .replace(R.id.fragmentContainer, OneFragment.getInstance())
           .addToBackStack(null)
           .commit();
@@ -215,20 +248,21 @@ public class MainActivity extends BaseActivity implements LocationListener {
 
   private void listenBtn2() {
     btn2.setOnClickListener(v -> {
-      if (blurRadius <= 25) {
+      if (mBitmap != null && blurRadius <= 25) {
         Disposable d = Observable.create(new ObservableOnSubscribe<Bitmap>() {
           @Override
           public void subscribe(ObservableEmitter<Bitmap> e) throws Exception {
             LogUtils.e("当前blurRadius = " + blurRadius);
-            Bitmap bitmap = blur.blur(blurRadius, mBitmap);
+            Bitmap bitmap = blurRender.blur(blurRadius, mBitmap);
             blurRadius++;
             if (blurRadius == 25){
               blurRadius = 1;
             }
             e.onNext(bitmap);
+            e.onComplete();
           }
         })
-            .subscribeOn(Schedulers.io())
+            .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(new DisposableObserver<Bitmap>() {
               @Override

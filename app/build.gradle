@@ -18,6 +18,15 @@ android {
         versionCode 1
         versionName "1.1"
         multiDexEnabled = true
+
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
     }
 
     signingConfigs { //配置签名文件，可以有多个

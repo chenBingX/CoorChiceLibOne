@@ -65,13 +65,13 @@ public class OneFragment extends BaseFragment {
     LogUtils.e(getView().toString());
   }
 
-  private void initData() {
+  protected void initData() {
     for (int i = 0; i < 10; i++) {
       datas.add(String.format("这是第%d条", i));
     }
   }
 
-  private void initView() {
+  protected void initView() {
     recyclerView.setLayoutManager(
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -79,7 +79,7 @@ public class OneFragment extends BaseFragment {
     recyclerView.setAdapter(adapter);
   }
 
-  private void addListener() {
+  protected void addListener() {
     tv.setOnClickListener(v -> {
       LogUtils.e("tv被电击！");
     });

@@ -56,6 +56,22 @@
   <!--Pink-->
   <color name="pink">	#FFC0CB</color>
 
+  <!--gray-->
+  <color name="gray">#BEBEBE</color>
+  <color name="mid_gray">#999999</color>
+  <color name="opacity_7_5_mid_gray">#bf999999</color>
+  <color name="opacity_8_mid_gray">#cc999999</color>
+  <color name="mid_white">#33ffffff</color>
+  <color name="gray_d9">#d9d9d9</color>
+  <color name="gray_4c">#4c4c4c</color>
+  <color name="opacity_7_5_gray_4c">#bf4c4c4c</color>
+  <color name="opacity_8_gray_4c">#cc4c4c4c</color>
+  <color name="opacity_9_gray_4c">#d24c4c4c</color>
+  <color name="opacity_9_5_gray_4c">#F24c4c4c</color>
+  <color name="opacity_9_8_gray_4c">#F94c4c4e</color>
+  <color name="gray_ba">#AFB1B0</color>
+  <color name="gray_f2">#f2f2f2</color>
+
 
 
 </resources>
