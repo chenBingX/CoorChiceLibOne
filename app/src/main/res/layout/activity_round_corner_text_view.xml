@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/activity_draw2"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="16dp"
+  tools:context="com.chenbing.coorchicelibone.Views.RoundCornerTextViewActivity">
+
+  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+    android:id="@+id/rctv_1"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:gravity="center"
+    android:text="圆角矩形"
+    app:corner="20dp"
+    app:solid="@color/opacity_5_red"
+    />
+
+  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+    android:id="@+id/rctv_3"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_alignParentTop="true"
+    android:layout_marginLeft="10dp"
+    android:layout_toEndOf="@+id/rctv_2"
+    app:corner="50dp"
+    app:solid="@color/opacity_7_yellow"/>
+
+  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+    android:id="@+id/rctv_2"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_alignParentTop="true"
+    android:layout_marginLeft="10dp"
+    android:layout_toEndOf="@+id/rctv_1"
+    android:gravity="center"
+    android:text="边框"
+    app:solid="@color/pink"
+    app:stroke_color="@color/black"
+    app:stroke_width="10dp"/>
+
+
+</RelativeLayout>

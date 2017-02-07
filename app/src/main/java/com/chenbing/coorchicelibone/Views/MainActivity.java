@@ -93,6 +93,59 @@ public class MainActivity extends BaseActivity implements LocationListener {
     getBitmapAndDisplay();
   }
 
+  private void initActivities() {
+    addActivityToNavigator(TableActivity.class.getName(), getString(R.string.name_draw_activity));
+
+    addActivityToNavigator(SideSlipListActivity.class.getName(),
+      getString(R.string.name_side_slip_list_activity));
+
+    addActivityToNavigator(DrawTextActivity.class.getName(),
+      getString(R.string.name_draw_text_activity));
+
+    addActivityToNavigator(HeaderFooterRecyclerViewActivity.class.getName(),
+      getString(R.string.header_footer_activity));
+
+    addActivityToNavigator(CrackPasswordActivity.class.getName(),
+      getString(R.string.track_password));
+
+    addActivityToNavigator(CustomLayoutManagerActivity.class.getName(),
+      getString(R.string.custom_layout_manager));
+
+    addActivityToNavigator(DraggerRecyclerViewActivity.class.getName(),
+      getString(R.string.dragger_rv));
+
+    addActivityToNavigator(WindowActivity.class.getName(),
+      getString(R.string.window_demo));
+
+    addActivityToNavigator(TableActivity.class.getName(),
+      getString(R.string.table_activity));
+
+    addActivityToNavigator(WebActivity.class.getName(),
+      getString(R.string.web_view));
+
+    addActivityToNavigator(HorizontalPinterestActivity.class.getName(),
+      getString(R.string.horizontal_pinterest_activity));
+
+    addActivityToNavigator(TabActivity.class.getName(),
+      "官方TabActivity");
+
+    addActivityToNavigator(RxJavaActivity.class.getName(),
+      "RxJavaActivity");
+
+    addActivityToNavigator(RoundCornerTextViewActivity.class.getName(),
+      "圆角TextView");
+
+    addActivityToNavigator(TaskActivity_A.class.getName(),
+      "测试Activity栈");
+
+    addActivityToNavigator(CalendarActivity.class.getName(),
+      "日历Activity");
+
+
+
+
+  }
+
   private void getBitmapAndDisplay() {
     Disposable d = Observable.create(new ObservableOnSubscribe<Bitmap>() {
       @Override
@@ -121,59 +174,6 @@ public class MainActivity extends BaseActivity implements LocationListener {
       }
     });
     disposable.add(d);
-  }
-
-  private void initActivities() {
-    addActivityToNavigator(TableActivity.class.getName(), getString(R.string.name_draw_activity));
-
-    addActivityToNavigator(SideSlipListActivity.class.getName(),
-        getString(R.string.name_side_slip_list_activity));
-
-    addActivityToNavigator(DrawTextActivity.class.getName(),
-        getString(R.string.name_draw_text_activity));
-
-    addActivityToNavigator(HeaderFooterRecyclerViewActivity.class.getName(),
-        getString(R.string.header_footer_activity));
-
-    addActivityToNavigator(CrackPasswordActivity.class.getName(),
-        getString(R.string.track_password));
-
-    addActivityToNavigator(CustomLayoutManagerActivity.class.getName(),
-      getString(R.string.custom_layout_manager));
-
-    addActivityToNavigator(DraggerRecyclerViewActivity.class.getName(),
-      getString(R.string.dragger_rv));
-
-    addActivityToNavigator(WindowActivity.class.getName(),
-      getString(R.string.window_demo));
-
-    addActivityToNavigator(TableActivity.class.getName(),
-        getString(R.string.table_activity));
-
-    addActivityToNavigator(WebActivity.class.getName(),
-        getString(R.string.web_view));
-
-    addActivityToNavigator(HorizontalPinterestActivity.class.getName(),
-        getString(R.string.horizontal_pinterest_activity));
-
-    addActivityToNavigator(TabActivity.class.getName(),
-        "官方TabActivity");
-
-    addActivityToNavigator(RxJavaActivity.class.getName(),
-        "RxJavaActivity");
-
-    addActivityToNavigator(DrawActivity.class.getName(),
-      "各种自定义View");
-
-    addActivityToNavigator(TaskActivity_A.class.getName(),
-      "测试Activity栈");
-
-    addActivityToNavigator(CalendarActivity.class.getName(),
-      "日历Activity");
-
-
-
-
   }
 
   private void addActivityToNavigator(String activityName, String dispalyName) {

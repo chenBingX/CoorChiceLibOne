@@ -60,7 +60,7 @@
     </activity>
     <activity android:name="com.chenbing.coorchicelibone.Views.RxJavaActivity">
     </activity>
-    <activity android:name="com.chenbing.coorchicelibone.Views.DrawActivity">
+    <activity android:name="com.chenbing.coorchicelibone.Views.RoundCornerTextViewActivity">
     </activity>
     <activity
       android:name="com.chenbing.coorchicelibone.Views.TaskActivity_A"

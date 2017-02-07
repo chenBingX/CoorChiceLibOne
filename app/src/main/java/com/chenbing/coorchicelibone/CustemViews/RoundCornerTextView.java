@@ -76,7 +76,7 @@ public class RoundCornerTextView extends TextView {
           getContext().obtainStyledAttributes(attrs, R.styleable.RoundCornerTextView);
       corner = typedArray.getDimension(R.styleable.RoundCornerTextView_corner, DEFAULT_CORNER);
       solid = typedArray.getColor(R.styleable.RoundCornerTextView_solid, DEFAULT_SOLID);
-      strokeWidth = typedArray.getFloat(R.styleable.RoundCornerTextView_stroke_width,
+      strokeWidth = typedArray.getDimension(R.styleable.RoundCornerTextView_stroke_width,
           DEFAULT_STROKE_WIDTH);
       strokeColor =
           typedArray.getColor(R.styleable.RoundCornerTextView_stroke_color, DEFAULT_STROKE_COLOR);
@@ -113,7 +113,8 @@ public class RoundCornerTextView extends TextView {
     if (strokeWidth > 0) {
       initPaint();
       RectF rectF =
-          new RectF(strokeWidth, strokeWidth, width - 2 * strokeWidth, height - 2 * strokeWidth);
+//          new RectF(strokeWidth, strokeWidth, width - 2 * strokeWidth, height - 2 * strokeWidth);
+          new RectF(0, 0, width, height);
       paint.setStyle(Paint.Style.STROKE);
       paint.setColor(strokeColor);
       paint.setStrokeWidth(strokeWidth);
