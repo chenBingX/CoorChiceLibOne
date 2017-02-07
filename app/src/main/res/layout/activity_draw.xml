@@ -10,7 +10,7 @@
   android:paddingTop="@dimen/activity_vertical_margin"
   android:background="@color/opacity_5_red"
 
-  tools:context="com.chenbing.iceweather.Views.TableActivity">
+  tools:context="com.chenbing.iceweather.com.chenbing.coorchicelibone.Views.TableActivity">
 
   <ScrollView
     android:layout_width="500dp"

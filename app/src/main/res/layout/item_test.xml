@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.chenbing.iceweather.CustemViews.HSlideListView.SlideView
+<com.chenbing.coorchicelibone.CustemViews.HSlideListView.SlideView
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/slide_view"
@@ -21,4 +21,4 @@
     />
 
 
-</com.chenbing.iceweather.CustemViews.HSlideListView.SlideView>
+</com.chenbing.coorchicelibone.CustemViews.HSlideListView.SlideView>

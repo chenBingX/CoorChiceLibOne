@@ -6,10 +6,10 @@ import java.lang.reflect.Field;
 
 import org.junit.Test;
 
-import com.chenbing.iceweather.Datas.Hero;
-import com.chenbing.iceweather.Datas.Weapon;
-import com.chenbing.iceweather.Datas.WeaponHook;
-import com.chenbing.iceweather.Utils.ReflectUtils;
+import com.chenbing.coorchicelibone.Datas.Hero;
+import com.chenbing.coorchicelibone.Datas.Weapon;
+import com.chenbing.coorchicelibone.Datas.WeaponHook;
+import com.chenbing.coorchicelibone.Utils.ReflectUtils;
 
 /**
  * Project Name:IceWeather

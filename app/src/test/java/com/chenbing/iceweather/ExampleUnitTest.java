@@ -2,8 +2,6 @@ package com.chenbing.iceweather;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
@@ -14,8 +12,8 @@ import java.util.Locale;
 
 import org.junit.Test;
 
-import com.chenbing.iceweather.Utils.CustomClassLoader;
-import com.chenbing.iceweather.Utils.ReflectUtils;
+import com.chenbing.coorchicelibone.Utils.CustomClassLoader;
+import com.chenbing.coorchicelibone.Utils.ReflectUtils;
 
 /**
  * To work on unit tests, switch the Test Artifact in the Build Variants view.

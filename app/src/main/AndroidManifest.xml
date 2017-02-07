@@ -18,59 +18,59 @@
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
   <application
-    android:name=".IceApplication"
+    android:name="com.chenbing.coorchicelibone.IceApplication"
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name=".Views.MainActivity">
+    <activity android:name="com.chenbing.coorchicelibone.Views.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name=".Views.TableActivity">
+    <activity android:name="com.chenbing.coorchicelibone.Views.TableActivity">
     </activity>
-    <activity android:name=".Views.SideSlipListActivity">
+    <activity android:name="com.chenbing.coorchicelibone.Views.SideSlipListActivity">
     </activity>
     <activity
-      android:name=".Views.DrawTextActivity"
+      android:name="com.chenbing.coorchicelibone.Views.DrawTextActivity"
       android:windowSoftInputMode="adjustResize">
     </activity>
-    <activity android:name=".Views.HeaderFooterRecyclerViewActivity">
+    <activity android:name="com.chenbing.coorchicelibone.Views.HeaderFooterRecyclerViewActivity">
     </activity>
-    <activity android:name=".Views.CrackPasswordActivity">
+    <activity android:name="com.chenbing.coorchicelibone.Views.CrackPasswordActivity">
     </activity>
-    <activity android:name=".Views.CustomLayoutManagerActivity">
+    <activity android:name="com.chenbing.coorchicelibone.Views.CustomLayoutManagerActivity">
     </activity>
-    <activity android:name=".Views.DraggerRecyclerViewActivity">
+    <activity android:name="com.chenbing.coorchicelibone.Views.DraggerRecyclerViewActivity">
     </activity>
-    <activity android:name=".Views.WindowActivity">
+    <activity android:name="com.chenbing.coorchicelibone.Views.WindowActivity">
     </activity>
-    <activity android:name=".Views.WebActivity">
+    <activity android:name="com.chenbing.coorchicelibone.Views.WebActivity">
     </activity>
-    <activity android:name=".Views.HorizontalPinterestActivity">
+    <activity android:name="com.chenbing.coorchicelibone.Views.HorizontalPinterestActivity">
     </activity>
     <activity
-      android:name=".Views.TabActivity"
+      android:name="com.chenbing.coorchicelibone.Views.TabActivity"
       android:label="@string/title_activity_tab"
       android:theme="@style/AppTheme">
     </activity>
-    <activity android:name=".Views.RxJavaActivity">
+    <activity android:name="com.chenbing.coorchicelibone.Views.RxJavaActivity">
     </activity>
-    <activity android:name=".Views.DrawActivity">
+    <activity android:name="com.chenbing.coorchicelibone.Views.DrawActivity">
     </activity>
     <activity
-      android:name=".Views.TaskActivity_A"
+      android:name="com.chenbing.coorchicelibone.Views.TaskActivity_A"
       android:launchMode="singleTask">
     </activity>
-    <activity android:name=".Views.TaskActivity_B">
+    <activity android:name="com.chenbing.coorchicelibone.Views.TaskActivity_B">
     </activity>
-    <activity android:name=".Views.TaskActivity_C">
+    <activity android:name="com.chenbing.coorchicelibone.Views.TaskActivity_C">
     </activity>
-    <activity android:name=".Views.CalendarActivity">
+    <activity android:name="com.chenbing.coorchicelibone.Views.CalendarActivity">
     </activity>
   </application>
 

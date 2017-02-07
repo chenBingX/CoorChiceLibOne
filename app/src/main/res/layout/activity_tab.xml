@@ -6,7 +6,7 @@
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent"
                                                  android:fitsSystemWindows="true"
-                                                 tools:context="com.chenbing.iceweather.Views.TabActivity">
+                                                 tools:context="com.chenbing.iceweather.com.chenbing.coorchicelibone.Views.TabActivity">
 
   <android.support.design.widget.AppBarLayout
     android:id="@+id/appbar"

@@ -5,7 +5,7 @@
   android:id="@+id/activity_web"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.chenbing.iceweather.Views.WebActivity">
+  tools:context="com.chenbing.iceweather.com.chenbing.coorchicelibone.Views.WebActivity">
 
   <WebView android:id="@+id/web_view"
     android:layout_width="match_parent"

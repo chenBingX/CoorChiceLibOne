@@ -1,5 +1,7 @@
 package com.chenbing.iceweather.Utils;
 
+import com.chenbing.coorchicelibone.Utils.FileUtils;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +21,7 @@ public class FileUtilsTest {
 
   @Test
   public void testGetSDCard() throws Exception {
-    assertEquals("",FileUtils.GetSDCard());
+    assertEquals("", FileUtils.GetSDCard());
   }
 
 }

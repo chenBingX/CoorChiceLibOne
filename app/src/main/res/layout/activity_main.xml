@@ -8,10 +8,10 @@
   android:paddingLeft="@dimen/activity_horizontal_margin"
   android:paddingRight="@dimen/activity_horizontal_margin"
   android:paddingTop="@dimen/activity_vertical_margin"
-  tools:context=".Views.MainActivity"
+  tools:context="com.chenbing.coorchicelibone.Views.MainActivity"
   android:background="@color/opacity_7_yellow">
 
-  <com.chenbing.iceweather.CustemViews.Titanic.TitanicTextView
+  <com.chenbing.coorchicelibone.CustemViews.Titanic.TitanicTextView
     android:id="@+id/titanic_options"
     android:layout_centerVertical="true"
     android:layout_centerHorizontal="true"
