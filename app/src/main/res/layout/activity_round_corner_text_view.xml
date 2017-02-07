@@ -7,40 +7,129 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:padding="16dp"
+  android:background="@color/white"
   tools:context="com.chenbing.coorchicelibone.Views.RoundCornerTextViewActivity">
 
   <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
     android:id="@+id/rctv_1"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
     android:gravity="center"
     android:text="圆角矩形"
-    app:corner="20dp"
-    app:solid="@color/opacity_5_red"
+    android:textSize="8sp"
+    app:corner="5dp"
+    app:solid="@color/red"
     />
 
-  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
-    android:id="@+id/rctv_3"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:layout_alignParentTop="true"
-    android:layout_marginLeft="10dp"
-    android:layout_toEndOf="@+id/rctv_2"
-    app:corner="50dp"
-    app:solid="@color/opacity_7_yellow"/>
 
   <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
     android:id="@+id/rctv_2"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:layout_alignParentTop="true"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
     android:layout_marginLeft="10dp"
     android:layout_toEndOf="@+id/rctv_1"
     android:gravity="center"
     android:text="边框"
+    android:textSize="8sp"
     app:solid="@color/pink"
+    app:stroke_color="@color/opacity_7_yellow"
+    app:stroke_width="5dp"
+    />
+
+  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+    android:id="@+id/rctv_3"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginLeft="10dp"
+    android:layout_toEndOf="@+id/rctv_2"
+    android:gravity="center"
+    android:text="圆角边框"
+    android:textSize="8sp"
+    app:solid="@color/pink"
+    app:stroke_color="@color/opacity_1_black"
+    app:stroke_width="5dp"
+    app:corner="5dp"
+    />
+
+  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+    android:id="@+id/rctv_4"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginLeft="10dp"
+    android:layout_toEndOf="@+id/rctv_3"
+    android:text="圆形"
+    android:textSize="8sp"
+    android:gravity="center"
+    app:corner="25dp"
+    app:solid="@color/blue"/>
+
+  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+    android:id="@+id/rctv_5"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginTop="10dp"
+    android:layout_below="@+id/rctv_1"
+    android:text="边框圆形"
+    android:textSize="8sp"
+    android:gravity="center"
+    app:corner="25dp"
+    app:solid="@color/blue"
+    app:stroke_color="@color/opacity_5_red"
+    app:stroke_width="5dp"
+    />
+
+  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+    android:id="@+id/rctv_6"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_toRightOf="@+id/rctv_5"
+    android:layout_below="@+id/rctv_2"
+    android:text="圆环"
+    android:textSize="8sp"
+    android:gravity="center"
+    app:corner="25dp"
+    app:solid="@color/transparent"
     app:stroke_color="@color/black"
-    app:stroke_width="10dp"/>
+    app:stroke_width="2dp"
+    />
+
+  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+    android:id="@+id/rctv_7"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_toRightOf="@+id/rctv_6"
+    android:layout_below="@+id/rctv_3"
+    android:text="状态图"
+    android:textSize="8sp"
+    android:textColor="@color/black"
+    android:gravity="bottom|center"
+    app:corner="5dp"
+    app:solid="@color/opacity_5_red"
+    app:state_drawable="@drawable/vector_emoji_1"
+    app:isShowState="true"
+    app:state_drawable_mode="center"
+    />
+
+  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+    android:id="@+id/rctv_8"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_toRightOf="@+id/rctv_7"
+    android:layout_below="@+id/rctv_4"
+    android:text="自动调整文字大小（默认）"
+    android:textSize="8sp"
+    android:gravity="center"
+    android:textColor="@color/black"
+    app:corner="5dp"
+    app:solid="@color/opacity_5_red"
+    app:autoAdjust="true"
+    />
 
 
 </RelativeLayout>

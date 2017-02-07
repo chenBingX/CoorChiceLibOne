@@ -11,8 +11,8 @@
   <string name="custom_layout_manager">自定义LayoutManager</string>
   <string name="dragger_rv">可拖拽RecyclerView</string>
   <string name="window_demo">Window的Demo</string>
-  <string name="main_button1">Button1</string>
-  <string name="main_button2">Button2</string>
+  <string name="main_button1">遍历更新</string>
+  <string name="main_button2">Blur</string>
   <string name="main_button3">Button3</string>
   <string name="table_activity">绘制Activity-有个表格</string>
   <string name="web_view">WebView</string>

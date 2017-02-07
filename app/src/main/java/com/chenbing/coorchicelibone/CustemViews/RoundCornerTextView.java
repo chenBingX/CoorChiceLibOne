@@ -16,30 +16,33 @@ import android.widget.TextView;
 
 
 /**
- * Project Name:kratos
+ * Project Name:
  * Author:CoorChice
  * Date:2016/12/27
  * Notes:
  */
 
 public class RoundCornerTextView extends TextView {
-  private static final float DEFAULT_CORNER = 10f;
+  private static final float DEFAULT_CORNER = 0f;
   private static final int DEFAULT_SOLID = Color.WHITE;
   private static final float DEFAULT_STROKE_WIDTH = 0f;
   private static final int DEFAULT_STROKE_COLOR = Color.BLACK;
+  private static final int DEFAULT_STATE_DRAWABLE_MODE = 4;
+
   private float corner;
   private int solid;
   private float strokeWidth;
   private int strokeColor;
+  private int stateDrawableMode;
+  private boolean isShowState;
 
   private Paint paint;
   private int width;
   private int height;
   private Drawable drawable;
-  private boolean isShowState;
   private float density;
-  private boolean autoAdjustSize;
-  private TextSizeAdjuster textSizeAdjuster;
+  private boolean autoAdjust;
+  private TextAdjuster textAdjuster;
 
   public RoundCornerTextView(Context context) {
     super(context);
@@ -82,7 +85,9 @@ public class RoundCornerTextView extends TextView {
           typedArray.getColor(R.styleable.RoundCornerTextView_stroke_color, DEFAULT_STROKE_COLOR);
       drawable = typedArray.getDrawable(R.styleable.RoundCornerTextView_state_drawable);
       isShowState = typedArray.getBoolean(R.styleable.RoundCornerTextView_isShowState, false);
-      autoAdjustSize = typedArray.getBoolean(R.styleable.RoundCornerTextView_autoAdjustSize, false);
+      stateDrawableMode = typedArray.getInteger(R.styleable.RoundCornerTextView_state_drawable_mode,
+          DEFAULT_STATE_DRAWABLE_MODE);
+      autoAdjust = typedArray.getBoolean(R.styleable.RoundCornerTextView_autoAdjust, false);
       typedArray.recycle();
     }
   }
@@ -105,7 +110,7 @@ public class RoundCornerTextView extends TextView {
     drawStrokeLine(canvas);
     drawSolid(canvas);
     drawStateDrawable(canvas);
-    adjustTextSize();
+    adjustText();
     super.onDraw(canvas);
   }
 
@@ -113,37 +118,113 @@ public class RoundCornerTextView extends TextView {
     if (strokeWidth > 0) {
       initPaint();
       RectF rectF =
-//          new RectF(strokeWidth, strokeWidth, width - 2 * strokeWidth, height - 2 * strokeWidth);
-          new RectF(0, 0, width, height);
+          new RectF(strokeWidth / 2, strokeWidth / 2, width - strokeWidth / 2,
+              height - strokeWidth / 2);
+      // new RectF(0, 0, width, height);
       paint.setStyle(Paint.Style.STROKE);
       paint.setColor(strokeColor);
       paint.setStrokeWidth(strokeWidth);
+      if (corner != 0) {
+        paint.setStrokeJoin(Paint.Join.ROUND);
+      }
       canvas.drawRoundRect(rectF, corner, corner, paint);
     }
   }
 
   private void drawSolid(Canvas canvas) {
     initPaint();
-    RectF rectF = new RectF(strokeWidth * 1f, strokeWidth * 1f, width - 2 * strokeWidth,
-        height - 2 * strokeWidth);
+    RectF rectF = new RectF(strokeWidth / 1, strokeWidth / 1, width - strokeWidth / 1,
+        height - strokeWidth / 1);
     paint.setStyle(Paint.Style.FILL);
     paint.setColor(solid);
-    canvas.drawRoundRect(rectF, corner, corner, paint);
+    float cornerCoefficient = corner / (width - strokeWidth);
+    float fitCorner = rectF.width() * cornerCoefficient;
+    canvas.drawRoundRect(rectF, fitCorner, fitCorner, paint);
   }
 
   private void drawStateDrawable(Canvas canvas) {
     if (drawable != null && isShowState) {
-      drawable.setBounds(0, 0, width, height);
+      float[] drawableBounds = getDrawableBounds();
+      drawable.setBounds((int) drawableBounds[0], (int) drawableBounds[1], (int) drawableBounds[2],
+          (int) drawableBounds[3]);
       drawable.draw(canvas);
     }
   }
 
-  private void adjustTextSize() {
-    if (autoAdjustSize) {
-      if (textSizeAdjuster == null) {
-        adjustTextSizeByDefault();
+  private float[] getDrawableBounds() {
+    float[] drawableBounds = new float[4];
+    switch (stateDrawableMode) {
+      case 0: // left
+        drawableBounds[0] = 0;
+        drawableBounds[1] = height * (1f / 4f);
+        drawableBounds[2] = width * (1f / 2f);
+        drawableBounds[3] = height * (3f / 4f);
+        break;
+      case 1: // top
+        drawableBounds[0] = width * (1f / 4f);
+        drawableBounds[1] = 0;
+        drawableBounds[2] = width * (3f / 4f);
+        drawableBounds[3] = height * (1f / 2f);
+        break;
+      case 2: // right
+        drawableBounds[0] = width * (1f / 2f);
+        drawableBounds[1] = height * (1f / 4f);
+        drawableBounds[2] = width;
+        drawableBounds[3] = height * (3f / 4f);
+        break;
+      case 3: // bottom
+        drawableBounds[0] = width * (1f / 4f);
+        drawableBounds[1] = height * (1f / 2f);
+        drawableBounds[2] = width * (3f / 4f);
+        drawableBounds[3] = height;
+        break;
+      case 4: // center
+        drawableBounds[0] = width * (1f / 4f);
+        drawableBounds[1] = height * (1f / 4f);
+        drawableBounds[2] = width * (3f / 4f);
+        drawableBounds[3] = height * (3f / 4f);
+        break;
+      case 5: // fill
+        drawableBounds[0] = 0;
+        drawableBounds[1] = 0;
+        drawableBounds[2] = width;
+        drawableBounds[3] = height;
+        break;
+      case 6: // leftTop
+        drawableBounds[0] = 0;
+        drawableBounds[1] = 0;
+        drawableBounds[2] = width * (1f / 2f);
+        drawableBounds[3] = height * (1f / 2f);
+        break;
+      case 7: // rightTop
+        drawableBounds[0] = width * (1f / 2f);
+        drawableBounds[1] = 0;
+        drawableBounds[2] = width;
+        drawableBounds[3] = height * (1f / 2f);
+        break;
+      case 8: // leftBottom
+        drawableBounds[0] = 0;
+        drawableBounds[1] = height * (1f / 2f);
+        drawableBounds[2] = width * (1f / 2f);
+        drawableBounds[3] = height;
+        break;
+      case 9: // rightBottom
+        drawableBounds[0] = width * (1f / 2f);
+        drawableBounds[1] = height * (1f / 2f);
+        drawableBounds[2] = width;
+        drawableBounds[3] = height;
+        break;
+    }
+
+    return drawableBounds;
+  }
+
+  private void adjustText() {
+    if (autoAdjust) {
+      if (textAdjuster == null) {
+        adjustTextByDefault();
       } else {
-        textSizeAdjuster.adjustTextSize(this);
+        textAdjuster.adjust(this);
       }
     }
   }
@@ -151,7 +232,7 @@ public class RoundCornerTextView extends TextView {
   /**
    * 根据产品需求确定的值
    */
-  private void adjustTextSizeByDefault() {
+  private void adjustTextByDefault() {
     int length = length();
     float scale = width / (116.28f * density);
     float[] textSizes = {
@@ -220,6 +301,7 @@ public class RoundCornerTextView extends TextView {
 
   public void setStrokeWidth(float strokeWidth) {
     this.strokeWidth = strokeWidth;
+
     postInvalidate();
   }
 
@@ -250,11 +332,21 @@ public class RoundCornerTextView extends TextView {
     postInvalidate();
   }
 
-  public void setTextSizeAdjuster(TextSizeAdjuster textSizeAdjuster) {
-    this.textSizeAdjuster = textSizeAdjuster;
+  public int getStateDrawableMode() {
+    return stateDrawableMode;
   }
 
-  public interface TextSizeAdjuster {
-    void adjustTextSize(TextView v);
+  public void setStateDrawableMode(int stateDrawableMode) {
+    this.stateDrawableMode = stateDrawableMode;
+    postInvalidate();
+  }
+
+  public void setTextAdjuster(TextAdjuster textAdjuster) {
+    this.textAdjuster = textAdjuster;
+    postInvalidate();
+  }
+
+  public static interface TextAdjuster {
+    void adjust(TextView v);
   }
 }

@@ -21,6 +21,7 @@
   <color name="opacity_9_white">#e6ffffff</color>
 
   <!--red-->
+  <color name="red">#FF0A11</color>
   <color name="opacity_5_red">#80FF0A11</color>
 
   <!--black-->
@@ -71,6 +72,11 @@
   <color name="opacity_9_8_gray_4c">#F94c4c4e</color>
   <color name="gray_ba">#AFB1B0</color>
   <color name="gray_f2">#f2f2f2</color>
+
+  <!--blue-->
+  <color name="opacity_9_blue">#d215bdf4</color>
+  <color name="main_blue">#15bdf4</color>
+  <color name="blue">#19bbf7</color>
 
 
 

@@ -211,8 +211,6 @@ public class MainActivity extends BaseActivity implements LocationListener {
     // ToastUtil.showShortToast("定位失败...");
     // }
 
-
-    btn2.setText("Blur");
     iv.setImageBitmap(mBitmap);
   }
 
