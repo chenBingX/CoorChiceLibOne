@@ -5,7 +5,7 @@
   android:id="@+id/activity_rx_java"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.chenbing.iceweather.com.chenbing.coorchicelibone.Views.RxJavaActivity">
+  tools:context="com.chenbing.coorchicelibone.Views.RxJavaActivity">
 
   <Button
     android:id="@+id/btn_start"

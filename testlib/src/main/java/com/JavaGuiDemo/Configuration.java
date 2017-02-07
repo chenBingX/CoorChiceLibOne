@@ -1,6 +1,5 @@
 package com.JavaGuiDemo;
 
-import com.JavaGuiDemo.Activities.DemoActivity;
 import com.JavaGuiDemo.Activities.DrawActivity;
 import com.example.Activity;
 import com.example.ConfigurationImpl;

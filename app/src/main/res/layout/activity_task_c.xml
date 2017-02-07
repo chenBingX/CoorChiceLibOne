@@ -9,7 +9,7 @@
   android:paddingLeft="@dimen/activity_horizontal_margin"
   android:paddingRight="@dimen/activity_horizontal_margin"
   android:paddingTop="@dimen/activity_vertical_margin"
-  tools:context="com.chenbing.iceweather.com.chenbing.coorchicelibone.Views.TaskActivity_C">
+  tools:context="com.chenbing.coorchicelibone.Views.TaskActivity_C">
   <Button android:id="@+id/btn_1"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"

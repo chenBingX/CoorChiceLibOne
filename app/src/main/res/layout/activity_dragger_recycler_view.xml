@@ -5,7 +5,7 @@
   android:id="@+id/activity_dragger_recycler_view"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.chenbing.iceweather.com.chenbing.coorchicelibone.Views.DraggerRecyclerViewActivity">
+  tools:context="com.chenbing.coorchicelibone.Views.DraggerRecyclerViewActivity">
 <android.support.v7.widget.RecyclerView
   android:id="@+id/rv_dragger_list"
   android:layout_width="match_parent"

@@ -4,7 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.chenbing.iceweather.com.chenbing.coorchicelibone.Views.SideSlipListActivity">
+  tools:context="com.chenbing.coorchicelibone.Views.SideSlipListActivity">
 
   <com.chenbing.coorchicelibone.CustemViews.HSlideListView.CustomListView
     android:id="@+id/lv"
