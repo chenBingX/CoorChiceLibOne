@@ -163,5 +163,26 @@
     app:autoAdjust="true"
     />
 
+  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    app:corner="25dp"
+    app:solid="@color/transparent"
+    app:stroke_color="@color/black"
+    app:stroke_width="2dp"
+
+    app:state_drawable="@drawable/vector_emoji_1"
+    app:state_drawable_mode="center"
+    app:isShowState="true"
+
+    app:text_stroke="true"
+    app:text_stroke_color="@color/black"
+    app:text_stroke_width="1dp"
+    app:text_fill_color="@color/blue"
+
+    app:autoAdjust="true"
+    />
+
 
 </RelativeLayout>
