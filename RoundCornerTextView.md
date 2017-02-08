@@ -16,22 +16,22 @@
     android:layout_width="50dp"
     android:layout_height="50dp"
     
-    app:corner="25dp"  //设置圆角。会同时作用于填充和边框(如果边框存在的话)。如果要设置为圆形，只需要把该值设置为宽或长的1/2即可。                            
-    app:solid="@color/red"  //设置填充颜色
+    app:corner="25dp"               //设置圆角。会同时作用于填充和边框(如果边框存在的话)。如果要设置为圆形，只需要把该值设置为宽或长的1/2即可。
+    app:solid="@color/red"          //设置填充颜色
     app:stroke_color="@color/black"  //设置边框颜色
-    app:stroke_width="2dp" //设置边框的宽度。
+    app:stroke_width="2dp"          //设置边框的宽度。
 
-    app:state_drawable="@drawable/vector_emoji_1"  //放置一个drawable在背景上。默认居中显示。
-    app:state_drawable_mode="center" //设置drawable的显示模式。可选值如下：
+    app:state_drawable="@drawable/vector_emoji_1"           //放置一个drawable在背景上。默认居中显示。
+    app:state_drawable_mode="center"            //设置drawable的显示模式。可选值如下：
     // left、top、right、bottom、center(默认值)、leftTop、rightTop、leftBottom、rightBottom、fill(充满整个RoundCornerTextView)
-    app:isShowState="true" // boolean类型。是否显示drawable。这在控制状态时十分有用。
+    app:isShowState="true"          // boolean类型。是否显示drawable。这在控制状态时十分有用。
 
-    app:text_stroke="true" // boolean类型。是否启用文字描边模式。注意，启用这个模式之后通过setTextColor()设置的颜色将会被覆盖。
-    app:text_stroke_color="@color/black" // 文字的描边颜色。默认为Color.BLACK。
-    app:text_stroke_width="1dp" // 文字描边的宽度。
-    app:text_fill_color="@color/blue" // 文字填充的颜色。默认为Color.BLACK。
+    app:text_stroke="true"          // boolean类型。是否启用文字描边模式。注意，启用这个模式之后通过setTextColor()设置的颜色将会被覆盖。
+    app:text_stroke_color="@color/black"            // 文字的描边颜色。默认为Color.BLACK。
+    app:text_stroke_width="1dp"             // 文字描边的宽度。
+    app:text_fill_color="@color/blue"           // 文字填充的颜色。默认为Color.BLACK。
 
-    app:autoAdjust="true" // boolean类型。是否启用自动调整功能。具体调整什么，需要在Java中为RoundCornerTextView实现一个TextAdjuster。
+    app:autoAdjust="true"           // boolean类型。是否启用自动调整功能。具体调整什么，需要在Java中为RoundCornerTextView实现一个TextAdjuster。
     //当你启用这个功能而没有实现自己的TextAdjuster时，RoundCornerTextView会启用默认的TextAdjuster。它会按照一定的规则调整文字大小。
     />
 
