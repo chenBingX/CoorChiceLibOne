@@ -332,6 +332,50 @@ public class RoundCornerTextView extends TextView {
     postInvalidate();
   }
 
+  public TextAdjuster getTextAdjuster() {
+    return textAdjuster;
+  }
+
+  public boolean isTextStroke() {
+    return textStroke;
+  }
+
+  public void setTextStroke(boolean textStroke) {
+    this.textStroke = textStroke;
+    postInvalidate();
+
+  }
+
+  public int getTextStrokeColor() {
+    return textStrokeColor;
+  }
+
+  public void setTextStrokeColor(int textStrokeColor) {
+    this.textStrokeColor = textStrokeColor;
+    postInvalidate();
+
+  }
+
+  public int getTextFillColor() {
+    return textFillColor;
+  }
+
+  public void setTextFillColor(int textFillColor) {
+    this.textFillColor = textFillColor;
+    postInvalidate();
+
+  }
+
+  public float getTextStrokeWidth() {
+    return textStrokeWidth;
+  }
+
+  public void setTextStrokeWidth(float textStrokeWidth) {
+    this.textStrokeWidth = textStrokeWidth;
+    postInvalidate();
+
+  }
+
   public static interface TextAdjuster {
     void adjust(TextView v);
   }
