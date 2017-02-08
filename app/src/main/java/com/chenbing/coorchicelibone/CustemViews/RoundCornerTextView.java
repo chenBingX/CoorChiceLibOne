@@ -3,6 +3,7 @@ package com.chenbing.coorchicelibone.CustemViews;
 import com.chenbing.iceweather.R;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -120,7 +121,6 @@ public class RoundCornerTextView extends TextView {
       RectF rectF =
           new RectF(strokeWidth / 2, strokeWidth / 2, width - strokeWidth / 2,
               height - strokeWidth / 2);
-      // new RectF(0, 0, width, height);
       paint.setStyle(Paint.Style.STROKE);
       paint.setColor(strokeColor);
       paint.setStrokeWidth(strokeWidth);
@@ -222,57 +222,9 @@ public class RoundCornerTextView extends TextView {
   private void adjustText() {
     if (autoAdjust) {
       if (textAdjuster == null) {
-        adjustTextByDefault();
-      } else {
-        textAdjuster.adjust(this);
+        textAdjuster = new DefaultTextAdjuster();
       }
-    }
-  }
-
-  /**
-   * 根据产品需求确定的值
-   */
-  private void adjustTextByDefault() {
-    int length = length();
-    float scale = width / (116.28f * density);
-    float[] textSizes = {
-        37.21f, 37.21f, 24.81f, 27.9f, 24.81f,
-        22.36f, 18.6f,
-        18.6f
-    };
-    switch (length) {
-      case 1:
-        setTextSize(textSizes[0] * scale);
-        break;
-      case 2:
-        setTextSize(textSizes[1] * scale);
-        break;
-      case 3:
-        setTextSize(textSizes[2] * scale);
-        break;
-      case 4:
-        setTextSize(textSizes[3] * scale);
-        break;
-      case 5:
-      case 6:
-        setTextSize(textSizes[4] * scale);
-        break;
-      case 7:
-      case 8:
-      case 9:
-        setTextSize(textSizes[5] * scale);
-        break;
-      case 10:
-      case 11:
-      case 12:
-        setTextSize(textSizes[6] * scale);
-        break;
-      case 13:
-      case 14:
-      case 15:
-      case 16:
-        setTextSize(textSizes[7] * scale);
-        break;
+      textAdjuster.adjust(this);
     }
   }
 
@@ -348,5 +300,54 @@ public class RoundCornerTextView extends TextView {
 
   public static interface TextAdjuster {
     void adjust(TextView v);
+  }
+
+  public static class DefaultTextAdjuster implements TextAdjuster{
+
+    @Override
+    public void adjust(TextView v) {
+      int length = v.length();
+      float scale = v.getWidth() / (116.28f * v.getResources().getDisplayMetrics().density);
+      float[] textSizes = {
+        37.21f, 37.21f, 24.81f, 27.9f, 24.81f,
+        22.36f, 18.6f,
+        18.6f
+      };
+      switch (length) {
+        case 1:
+          v.setTextSize(textSizes[0] * scale);
+          break;
+        case 2:
+          v.setTextSize(textSizes[1] * scale);
+          break;
+        case 3:
+          v.setTextSize(textSizes[2] * scale);
+          break;
+        case 4:
+          v.setTextSize(textSizes[3] * scale);
+          break;
+        case 5:
+        case 6:
+          v.setTextSize(textSizes[4] * scale);
+          break;
+        case 7:
+        case 8:
+        case 9:
+          v.setTextSize(textSizes[5] * scale);
+          break;
+        case 10:
+        case 11:
+        case 12:
+          v.setTextSize(textSizes[6] * scale);
+          break;
+        case 13:
+        case 14:
+        case 15:
+        case 16:
+          v.setTextSize(textSizes[7] * scale);
+          break;
+      }
+    }
+
   }
 }
