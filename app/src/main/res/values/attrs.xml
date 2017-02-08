@@ -10,7 +10,7 @@
     <attr name="endColor" format="reference|color"/>
   </declare-styleable>
 
-  <!--圆角TextView-->
+  <!--RoundCornerTextView-->
   <declare-styleable name="RoundCornerTextView">
     <attr name="corner" format="dimension"/>
     <attr name="solid" format="reference|color"/>
