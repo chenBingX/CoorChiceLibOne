@@ -3,7 +3,6 @@ package com.chenbing.coorchicelibone.CustemViews;
 import com.chenbing.iceweather.R;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -30,6 +29,11 @@ public class RoundCornerTextView extends TextView {
   private static final float DEFAULT_STROKE_WIDTH = 0f;
   private static final int DEFAULT_STROKE_COLOR = Color.BLACK;
   private static final int DEFAULT_STATE_DRAWABLE_MODE = 4;
+  private static final int DEFAULT_TEXT_STROKE_COLOR = Color.BLACK;
+  private static final int DEFAULT_TEXT_FILL_COLOR = Color.BLACK;
+  private static final float DEFAULT_TEXT_STROKE_WIDTH = 0f;
+
+
 
   private float corner;
   private int solid;
@@ -45,6 +49,10 @@ public class RoundCornerTextView extends TextView {
   private float density;
   private boolean autoAdjust;
   private TextAdjuster textAdjuster;
+  private boolean textStroke;
+  private int textStrokeColor;
+  private int textFillColor;
+  private float textStrokeWidth;
 
   public RoundCornerTextView(Context context) {
     super(context);
@@ -89,6 +97,13 @@ public class RoundCornerTextView extends TextView {
       isShowState = typedArray.getBoolean(R.styleable.RoundCornerTextView_isShowState, false);
       stateDrawableMode = typedArray.getInteger(R.styleable.RoundCornerTextView_state_drawable_mode,
           DEFAULT_STATE_DRAWABLE_MODE);
+      textStroke = typedArray.getBoolean(R.styleable.RoundCornerTextView_text_stroke, false);
+      textStrokeColor = typedArray.getColor(R.styleable.RoundCornerTextView_text_stroke_color,
+          DEFAULT_TEXT_STROKE_COLOR);
+      textFillColor = typedArray.getColor(R.styleable.RoundCornerTextView_text_fill_color,
+          DEFAULT_TEXT_FILL_COLOR);
+      textStrokeWidth = typedArray.getDimension(R.styleable.RoundCornerTextView_text_stroke_width,
+          DEFAULT_TEXT_STROKE_WIDTH);
       autoAdjust = typedArray.getBoolean(R.styleable.RoundCornerTextView_autoAdjust, false);
       typedArray.recycle();
     }
@@ -114,17 +129,18 @@ public class RoundCornerTextView extends TextView {
     drawStateDrawable(canvas);
     adjustText();
 
-    getPaint().setStyle(Paint.Style.STROKE);
-    setTextColor(Color.RED);
-    getPaint().setFakeBoldText(true);
-    getPaint().setStrokeWidth(0.1f);
-    getPaint().setStrokeJoin(Paint.Join.ROUND);
-    getPaint().setStrokeCap(Paint.Cap.ROUND);
-    super.onDraw(canvas);
+    if (textStroke){
+      getPaint().setStyle(Paint.Style.STROKE);
+      setTextColor(textStrokeColor);
+      getPaint().setFakeBoldText(true);
+      getPaint().setStrokeWidth(textStrokeWidth);
+      super.onDraw(canvas);
 
-    getPaint().setStyle(Paint.Style.FILL);
-    getPaint().setFakeBoldText(false);
-    setTextColor(Color.TRANSPARENT);
+      getPaint().setStyle(Paint.Style.FILL);
+      getPaint().setFakeBoldText(false);
+      setTextColor(textFillColor);
+    }
+
     super.onDraw(canvas);
   }
 
