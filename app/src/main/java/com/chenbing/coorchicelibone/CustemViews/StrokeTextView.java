@@ -6,9 +6,12 @@ import java.lang.reflect.Field;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -39,6 +42,13 @@ public class StrokeTextView extends TextView {
     init(context, attrs, defStyle);
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+  public StrokeTextView(Context context, AttributeSet attrs, int defStyleAttr,
+                             int defStyleRes) {
+    super(context, attrs, defStyleAttr, defStyleRes);
+    init(context, attrs, defStyleRes);
+  }
+
   public StrokeTextView(Context context, int textColor, int strokeColor) {
     super(context);
     this.textPaint = getPaint();
@@ -49,14 +59,13 @@ public class StrokeTextView extends TextView {
 
   private void init(Context context, AttributeSet attrs, int defStyle) {
     textPaint = getPaint();
-    TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.StrokedTextView,
-        defStyle, 0);
-    textColor = typedArray.getColor(R.styleable.StrokedTextView_strokeTextColor, 0xFFFFFFFF);
-    strokeColor = typedArray.getColor(R.styleable.StrokedTextView_strokeViewColor, 0xFF000000);
+    TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.StrokedTextView);
+    textColor = typedArray.getColor(R.styleable.StrokedTextView_strokeTextColor, Color.BLACK);
+    strokeColor = typedArray.getColor(R.styleable.StrokedTextView_strokeViewColor, Color.BLACK);
     strokeWidth = typedArray.getFloat(R.styleable.StrokedTextView_strokeOutlineWidth, 0.0f);
     gradient = typedArray.getBoolean(R.styleable.StrokedTextView_gradient, false);
-    startColor = typedArray.getColor(R.styleable.StrokedTextView_startColor, 0xFFFFFFFF);
-    endColor = typedArray.getColor(R.styleable.StrokedTextView_endColor, 0xFFFFFFFF);
+    startColor = typedArray.getColor(R.styleable.StrokedTextView_startColor, Color.BLACK);
+    endColor = typedArray.getColor(R.styleable.StrokedTextView_endColor, Color.BLACK);
     typedArray.recycle();
   }
 

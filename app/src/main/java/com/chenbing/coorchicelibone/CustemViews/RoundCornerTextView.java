@@ -16,6 +16,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 
+
 /**
  * Project Name:
  * Author:CoorChice
@@ -112,6 +113,18 @@ public class RoundCornerTextView extends TextView {
     drawSolid(canvas);
     drawStateDrawable(canvas);
     adjustText();
+
+    getPaint().setStyle(Paint.Style.STROKE);
+    setTextColor(Color.RED);
+    getPaint().setFakeBoldText(true);
+    getPaint().setStrokeWidth(0.1f);
+    getPaint().setStrokeJoin(Paint.Join.ROUND);
+    getPaint().setStrokeCap(Paint.Cap.ROUND);
+    super.onDraw(canvas);
+
+    getPaint().setStyle(Paint.Style.FILL);
+    getPaint().setFakeBoldText(false);
+    setTextColor(Color.TRANSPARENT);
     super.onDraw(canvas);
   }
 
@@ -135,7 +148,12 @@ public class RoundCornerTextView extends TextView {
     initPaint();
     RectF rectF = new RectF(strokeWidth / 1, strokeWidth / 1, width - strokeWidth / 1,
         height - strokeWidth / 1);
-    paint.setStyle(Paint.Style.FILL);
+    if (strokeWidth > 1 * density){
+      paint.setStyle(Paint.Style.FILL_AND_STROKE);
+      paint.setStrokeWidth(3);
+    } else {
+      paint.setStyle(Paint.Style.FILL);
+    }
     paint.setColor(solid);
     float cornerCoefficient = corner / (width - strokeWidth);
     float fitCorner = rectF.width() * cornerCoefficient;

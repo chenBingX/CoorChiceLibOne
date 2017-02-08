@@ -2,13 +2,9 @@
 <resources>
 
   <declare-styleable name="StrokedTextView">
-    <!-- The color of the stroke outline -->
     <attr name="strokeViewColor" format="reference|color"/>
-    <!-- The color of the text -->
     <attr name="strokeTextColor" format="reference|color"/>
-    <!-- The width of the stroke -->
     <attr name="strokeOutlineWidth" format="reference|float"/>
-
     <attr name="gradient" format="reference|boolean"/>
     <attr name="startColor" format="reference|color"/>
     <attr name="endColor" format="reference|color"/>

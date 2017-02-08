@@ -75,7 +75,7 @@
     app:corner="25dp"
     app:solid="@color/blue"
     app:stroke_color="@color/opacity_5_red"
-    app:stroke_width="5dp"
+    app:stroke_width="1dp"
     />
 
   <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
@@ -87,7 +87,7 @@
     android:layout_toRightOf="@+id/rctv_5"
     android:layout_below="@+id/rctv_2"
     android:text="圆环"
-    android:textSize="8sp"
+    android:textSize="20sp"
     android:gravity="center"
     app:corner="25dp"
     app:solid="@color/transparent"
