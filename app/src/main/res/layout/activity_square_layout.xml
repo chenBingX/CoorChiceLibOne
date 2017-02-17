@@ -21,15 +21,15 @@
       android:layout_width="match_parent"
       android:layout_height="200dp"/>
     <ImageView
-      android:background="@drawable/img_4572"
+      android:background="@drawable/img1"
       android:layout_width="match_parent"
       android:layout_height="200dp"/>
     <ImageView
-      android:background="@drawable/img_4573"
+      android:background="@drawable/img2"
       android:layout_width="match_parent"
       android:layout_height="200dp"/>
     <ImageView
-      android:background="@drawable/img_4574"
+      android:background="@drawable/img3"
       android:layout_width="match_parent"
       android:layout_height="200dp"/>
 
