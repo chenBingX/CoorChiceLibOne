@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Camera;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -141,7 +142,11 @@ public class MainActivity extends BaseActivity implements LocationListener {
     addActivityToNavigator(CalendarActivity.class.getName(),
       "日历Activity");
 
+    addActivityToNavigator(ThreadActivity.class.getName(),
+      "Thread实验");
 
+    addActivityToNavigator(CameraActivity.class.getName(),
+      "3D测试");
 
 
   }

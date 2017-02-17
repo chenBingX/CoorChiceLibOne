@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/activity_camera"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="com.chenbing.coorchicelibone.Views.CameraActivity">
+
+  <Button
+    android:id="@+id/reset"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="10dp"
+    android:text="重置"
+    />
+
+  <com.chenbing.coorchicelibone.CustemViews.CameraTest
+    android:id="@+id/draw_3d"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:layout_centerHorizontal="true"
+    android:background="@color/black"
+    android:layout_below="@+id/reset"
+    android:layout_marginTop="10dp"
+    />
+
+  <!--第一排-->
+  <LinearLayout
+    android:id="@+id/container_1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/draw_3d"
+    android:layout_margin="5dp"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="26dp"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:text="rotateX"
+      />
+
+    <Button
+      android:id="@+id/x_add"
+      android:layout_width="0dp"
+      android:layout_height="26dp"
+      android:layout_marginLeft="10dp"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:text="加"
+      android:textSize="6sp"
+
+      />
+
+    <Button
+      android:id="@+id/x_subtract"
+      android:layout_width="0dp"
+      android:layout_height="26dp"
+      android:layout_marginLeft="10dp"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:text="减"
+      android:textSize="6sp"
+
+      />
+
+  </LinearLayout>
+
+  <!--第二排-->
+  <LinearLayout
+    android:id="@+id/container_2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/container_1"
+    android:layout_margin="10dp"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="26dp"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:text="rotateY"
+      />
+
+    <Button
+      android:id="@+id/y_add"
+      android:layout_width="0dp"
+      android:layout_height="26dp"
+      android:layout_marginLeft="10dp"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:text="加"
+      android:textSize="6sp"
+      />
+
+    <Button
+      android:id="@+id/y_subtract"
+      android:layout_width="0dp"
+      android:layout_height="26dp"
+      android:layout_marginLeft="10dp"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:text="减"
+      android:textSize="6sp"
+      />
+
+  </LinearLayout>
+
+  <!--第三排-->
+  <LinearLayout
+    android:id="@+id/container_3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/container_2"
+    android:layout_margin="10dp"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="26dp"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:text="rotateZ"
+      />
+
+    <Button
+      android:id="@+id/z_add"
+      android:layout_width="0dp"
+      android:layout_height="26dp"
+      android:layout_marginLeft="10dp"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:text="加"
+      android:textSize="6sp"
+      />
+
+    <Button
+      android:id="@+id/z_subtract"
+      android:layout_width="0dp"
+      android:layout_height="26dp"
+      android:layout_marginLeft="10dp"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:text="减"
+      android:textSize="6sp"
+      />
+
+  </LinearLayout>
+
+  <!--第四排-->
+  <LinearLayout
+    android:id="@+id/container_4"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/container_3"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="26dp"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:text="translateZ"
+      />
+
+    <Button
+      android:id="@+id/z_translate_add"
+      android:layout_width="0dp"
+      android:layout_height="26dp"
+      android:layout_marginLeft="10dp"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:text="加"
+      android:textSize="6sp"
+      />
+
+    <Button
+      android:id="@+id/z_translate_subtract"
+      android:layout_width="0dp"
+      android:layout_height="26dp"
+      android:layout_marginLeft="10dp"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:text="减"
+      android:textSize="6sp"
+      />
+
+  </LinearLayout>
+
+  <Button
+    android:id="@+id/bottom_btn"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="SquareActivity"
+    android:textAllCaps="false"
+    android:background="@color/main_blue"
+    android:layout_alignParentBottom="true"
+    />
+</RelativeLayout>

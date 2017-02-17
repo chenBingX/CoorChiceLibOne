@@ -72,6 +72,12 @@
     </activity>
     <activity android:name="com.chenbing.coorchicelibone.Views.CalendarActivity">
     </activity>
+    <activity android:name="com.chenbing.coorchicelibone.Views.ThreadActivity">
+    </activity>
+    <activity android:name="com.chenbing.coorchicelibone.Views.CameraActivity">
+    </activity>
+    <activity android:name="com.chenbing.coorchicelibone.Views.SquareLayoutActivity">
+    </activity>
   </application>
 
 </manifest>
