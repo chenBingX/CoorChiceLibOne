@@ -17,19 +17,19 @@
     android:layout_centerVertical="true"
     android:layout_centerHorizontal="true">
     <ImageView
-      android:background="@drawable/p10"
+      android:background="@drawable/test"
       android:layout_width="match_parent"
       android:layout_height="200dp"/>
     <ImageView
-      android:background="@drawable/p14"
+      android:background="@drawable/img_4572"
       android:layout_width="match_parent"
       android:layout_height="200dp"/>
     <ImageView
-      android:background="@drawable/p12"
+      android:background="@drawable/img_4573"
       android:layout_width="match_parent"
       android:layout_height="200dp"/>
     <ImageView
-      android:background="@drawable/p11"
+      android:background="@drawable/img_4574"
       android:layout_width="match_parent"
       android:layout_height="200dp"/>
 

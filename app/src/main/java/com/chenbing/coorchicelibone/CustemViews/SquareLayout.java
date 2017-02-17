@@ -7,7 +7,6 @@ import android.graphics.Matrix;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,16 +89,12 @@ public class SquareLayout extends ViewGroup {
     int currentTop = 0;
     for (int i = 0; i < childCount; i++) {
       currentTop = height * i;
+      long drawingTime = getDrawingTime();
       View childView = getChildAt(i);
       // 屏幕中不显示的部分不进行绘制
-      if (getScrollY() + height < currentTop) {
+      if (getScrollY() + height < currentTop || currentTop < getScrollY() - height) {
         continue;
       }
-      if (currentTop < getScrollY() - height) {
-        continue;
-      }
-
-      long drawingTime = getDrawingTime();
 
       float centerX = width / 2;
       float centerY = (getScrollY() > currentTop) ? currentTop + height : currentTop;
@@ -113,10 +108,12 @@ public class SquareLayout extends ViewGroup {
       camera.rotateX(degree);
       camera.getMatrix(matrix);
       camera.restore();
+
       matrix.preTranslate(-centerX, -centerY);
       matrix.postTranslate(centerX, centerY);
       canvas.concat(matrix);
       drawChild(canvas, childView, drawingTime);
+
       canvas.restore();
     }
   }
