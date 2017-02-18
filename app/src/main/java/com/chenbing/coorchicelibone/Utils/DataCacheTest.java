@@ -9,20 +9,20 @@ import android.app.Activity;
  * Notes:
  */
 
-public class DataCache {
+public class DataCacheTest {
 
   private Activity activity;
 
-  private DataCache() {
+  private DataCacheTest() {
 
   }
 
-  public static DataCache getInstance() {
+  public static DataCacheTest getInstance() {
     return DataCacheHolder.instance;
   }
 
   private static class DataCacheHolder {
-    private static final DataCache instance = new DataCache();
+    private static final DataCacheTest instance = new DataCacheTest();
   }
 
   public void setActivity(Activity activity){

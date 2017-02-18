@@ -1,6 +1,6 @@
 package com.chenbing.coorchicelibone.Views;
 
-import com.chenbing.coorchicelibone.Utils.DataCache;
+import com.chenbing.coorchicelibone.Utils.DataCacheTest;
 import com.chenbing.iceweather.R;
 import com.chenbing.coorchicelibone.Utils.LogUtils;
 import com.chenbing.coorchicelibone.Views.BaseView.BaseActivity;
@@ -24,10 +24,10 @@ public class TaskActivity_A extends BaseActivity {
     initData();
     initView();
     addListener();
-    if (DataCache.getInstance().getActivity() == null){
-      DataCache.getInstance().setActivity(this);
+    if (DataCacheTest.getInstance().getActivity() == null){
+      DataCacheTest.getInstance().setActivity(this);
     } else {
-      LogUtils.e(String.format("DataCache: TaskActivity_A: %s, TaskId = %s", DataCache.getInstance().getActivity().toString(), this.getTaskId() + ""));
+      LogUtils.e(String.format("DataCacheTest: TaskActivity_A: %s, TaskId = %s", DataCacheTest.getInstance().getActivity().toString(), this.getTaskId() + ""));
 
     }
     LogUtils.e(String.format("TaskActivity_A: %s, TaskId = %s", this.toString(), this.getTaskId() + ""));
@@ -56,7 +56,7 @@ public class TaskActivity_A extends BaseActivity {
   protected void onDestroy() {
     super.onDestroy();
     LogUtils.e("TaskActivity_A - > onDestroy");
-    DataCache.getInstance().setActivity(null);
+    DataCacheTest.getInstance().setActivity(null);
   }
 
   @Override
