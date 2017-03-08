@@ -33,8 +33,6 @@ public class RoundCornerTextView extends TextView {
   private static final int DEFAULT_TEXT_FILL_COLOR = Color.BLACK;
   private static final float DEFAULT_TEXT_STROKE_WIDTH = 0f;
 
-
-
   private float corner;
   private int solid;
   private float strokeWidth;
