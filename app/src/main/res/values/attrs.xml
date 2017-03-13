@@ -13,6 +13,10 @@
   <!--RoundCornerTextView-->
   <declare-styleable name="RoundCornerTextView">
     <attr name="corner" format="dimension"/>
+    <attr name="left_top_corner" format="boolean"/>
+    <attr name="right_top_corner" format="boolean"/>
+    <attr name="left_bottom_corner" format="boolean"/>
+    <attr name="right_bottom_corner" format="boolean"/>
     <attr name="solid" format="reference|color"/>
     <attr name="stroke_width" format="dimension"/>
     <attr name="stroke_color" format="reference|color"/>

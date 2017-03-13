@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -34,6 +35,10 @@ public class RoundCornerTextView extends TextView {
   private static final float DEFAULT_TEXT_STROKE_WIDTH = 0f;
 
   private float corner;
+  private boolean leftTopCorner;
+  private boolean rightTopCorner;
+  private boolean leftBottomCorner;
+  private boolean rightBottomCorner;
   private int solid;
   private float strokeWidth;
   private int strokeColor;
@@ -86,6 +91,13 @@ public class RoundCornerTextView extends TextView {
       TypedArray typedArray =
           getContext().obtainStyledAttributes(attrs, R.styleable.RoundCornerTextView);
       corner = typedArray.getDimension(R.styleable.RoundCornerTextView_corner, DEFAULT_CORNER);
+      leftTopCorner = typedArray.getBoolean(R.styleable.RoundCornerTextView_left_top_corner, false);
+      rightTopCorner =
+          typedArray.getBoolean(R.styleable.RoundCornerTextView_right_top_corner, false);
+      leftBottomCorner =
+          typedArray.getBoolean(R.styleable.RoundCornerTextView_left_bottom_corner, false);
+      rightBottomCorner =
+          typedArray.getBoolean(R.styleable.RoundCornerTextView_right_bottom_corner, false);
       solid = typedArray.getColor(R.styleable.RoundCornerTextView_solid, DEFAULT_SOLID);
       strokeWidth = typedArray.getDimension(R.styleable.RoundCornerTextView_stroke_width,
           DEFAULT_STROKE_WIDTH);
@@ -144,34 +156,73 @@ public class RoundCornerTextView extends TextView {
 
   private void drawStrokeLine(Canvas canvas) {
     if (strokeWidth > 0) {
+      Path path = new Path();
+      RectF rectF = new RectF(strokeWidth / 2, strokeWidth / 2, width - strokeWidth / 2,
+          height - strokeWidth / 2);
+      float[] corners = getCorners(corner);
+      path.addRoundRect(rectF, corners, Path.Direction.CW);
+
       initPaint();
-      RectF rectF =
-          new RectF(strokeWidth / 2, strokeWidth / 2, width - strokeWidth / 2,
-              height - strokeWidth / 2);
       paint.setStyle(Paint.Style.STROKE);
       paint.setColor(strokeColor);
       paint.setStrokeWidth(strokeWidth);
-      if (corner != 0) {
-        paint.setStrokeJoin(Paint.Join.ROUND);
-      }
-      canvas.drawRoundRect(rectF, corner, corner, paint);
+      canvas.drawPath(path, paint);
     }
   }
 
   private void drawSolid(Canvas canvas) {
+    Path path = new Path();
+    RectF rectF = new RectF(strokeWidth, strokeWidth, width - strokeWidth,
+        height - strokeWidth);
+    float[] corners = getCorners(corner - strokeWidth / 2);
+    path.addRoundRect(rectF, corners, Path.Direction.CW);
+
     initPaint();
-    RectF rectF = new RectF(strokeWidth / 1, strokeWidth / 1, width - strokeWidth / 1,
-        height - strokeWidth / 1);
-    if (strokeWidth > 1 * density){
-      paint.setStyle(Paint.Style.FILL_AND_STROKE);
-      paint.setStrokeWidth(3);
-    } else {
-      paint.setStyle(Paint.Style.FILL);
-    }
+    paint.setStyle(Paint.Style.FILL);
     paint.setColor(solid);
-    float cornerCoefficient = corner / (width - strokeWidth);
-    float fitCorner = rectF.width() * cornerCoefficient;
-    canvas.drawRoundRect(rectF, fitCorner, fitCorner, paint);
+    canvas.drawPath(path, paint);
+  }
+
+  private float[] getCorners(float corner) {
+    float leftTopCorner[] = {0, 0};
+    float rightTopCorner[] = {0, 0};
+    float leftBottomCorner[] = {0, 0};
+    float rightBottomCorner[] = {0, 0};
+    if (this.leftTopCorner || this.rightTopCorner || this.leftBottomCorner
+        || this.rightBottomCorner) {
+      if (this.leftTopCorner) {
+        leftTopCorner[0] = corner;
+        leftTopCorner[1] = corner;
+      }
+      if (this.rightTopCorner) {
+        rightTopCorner[0] = corner;
+        rightTopCorner[1] = corner;
+      }
+      if (this.leftBottomCorner) {
+        leftBottomCorner[0] = corner;
+        leftBottomCorner[1] = corner;
+      }
+      if (this.rightBottomCorner) {
+        rightBottomCorner[0] = corner;
+        rightBottomCorner[1] = corner;
+      }
+    } else {
+      leftTopCorner[0] = corner;
+      leftTopCorner[1] = corner;
+      rightTopCorner[0] = corner;
+      rightTopCorner[1] = corner;
+      leftBottomCorner[0] = corner;
+      leftBottomCorner[1] = corner;
+      rightBottomCorner[0] = corner;
+      rightBottomCorner[1] = corner;
+    }
+    return new float[] {
+        leftTopCorner[0], leftTopCorner[1],
+        rightTopCorner[0], rightTopCorner[1],
+        rightBottomCorner[0], rightBottomCorner[1],
+        leftBottomCorner[0], leftBottomCorner[1]
+
+    };
   }
 
   private void drawStateDrawable(Canvas canvas) {
@@ -372,6 +423,47 @@ public class RoundCornerTextView extends TextView {
     this.textStrokeWidth = textStrokeWidth;
     postInvalidate();
 
+  }
+
+  public boolean isAutoAdjust() {
+    return autoAdjust;
+  }
+
+  public void setAutoAdjust(boolean autoAdjust) {
+    this.autoAdjust = autoAdjust;
+  }
+
+  public boolean isLeftTopCorner() {
+
+    return leftTopCorner;
+  }
+
+  public void setLeftTopCorner(boolean leftTopCorner) {
+    this.leftTopCorner = leftTopCorner;
+  }
+
+  public boolean isRightTopCorner() {
+    return rightTopCorner;
+  }
+
+  public void setRightTopCorner(boolean rightTopCorner) {
+    this.rightTopCorner = rightTopCorner;
+  }
+
+  public boolean isLeftBottomCorner() {
+    return leftBottomCorner;
+  }
+
+  public void setLeftBottomCorner(boolean leftBottomCorner) {
+    this.leftBottomCorner = leftBottomCorner;
+  }
+
+  public boolean isRightBottomCorner() {
+    return rightBottomCorner;
+  }
+
+  public void setRightBottomCorner(boolean rightBottomCorner) {
+    this.rightBottomCorner = rightBottomCorner;
   }
 
   public static interface TextAdjuster {
