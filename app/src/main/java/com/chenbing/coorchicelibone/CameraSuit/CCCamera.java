@@ -15,6 +15,8 @@ public interface CCCamera {
 
   void switchCamera() throws IOException;
 
+  void updateParameters();
+
   void takePicture();
 
   void startRecording(String savePath, String name) throws IOException;

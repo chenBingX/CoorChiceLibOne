@@ -3,6 +3,8 @@ package com.chenbing.coorchicelibone.Views;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.chenbing.coorchicelibone.CameraSuit.CCCamera;
 import com.chenbing.coorchicelibone.CameraSuit.Camera1;
@@ -14,9 +16,14 @@ import com.chenbing.coorchicelibone.Utils.ToastUtil;
 import com.chenbing.coorchicelibone.Views.BaseView.BaseActivity;
 import com.chenbing.iceweather.R;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.hardware.Camera;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
@@ -26,18 +33,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Callback {
+  private static final int PERMISSION_REQUEST_CODE = 100;
+
   @BindView(R.id.btn_change_lens)
   Button btnChangeLens;
   @BindView(R.id.surface_view)
   SurfaceView surfaceView;
   @BindView(R.id.btn_Pic)
   Button btnPic;
+
   @BindView(R.id.btn_video)
   Button btnVideo;
-
   private SurfaceHolder surfaceHolder;
   private boolean isRecording = false;
   private CCCamera camera;
+  private List<String> permissions = new ArrayList<>();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +55,17 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     setContentView(R.layout.activity_camera_demo);
     ButterKnife.bind(this);
+    if (Build.VERSION.SDK_INT >= 23) {
+      checkPermissionAndRequest();
+    } else {
+      init();
+    }
+  }
+
+  private void init() {
     initData();
     initView();
     addListener();
-
   }
 
   @Override
@@ -57,6 +74,37 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
       initSurfaceView();
       initCamera();
     }
+  }
+
+  @RequiresApi(api = Build.VERSION_CODES.M)
+  private void checkPermissionAndRequest() {
+    if (isNeedRequestPermission()) {
+      // 发起请求权限
+      requestPermissions(permissions.toArray(new String[permissions.size()]),
+          PERMISSION_REQUEST_CODE);
+    } else {
+      init();
+    }
+  }
+
+  @RequiresApi(api = Build.VERSION_CODES.M)
+  private boolean isNeedRequestPermission() {
+    boolean camera;
+    boolean recordAudio;
+    if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+      permissions.add(Manifest.permission.CAMERA);
+      camera = false;
+    } else {
+      camera = true;
+    }
+    if (checkSelfPermission(
+        Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+      permissions.add(Manifest.permission.RECORD_AUDIO);
+      recordAudio = false;
+    } else {
+      recordAudio = true;
+    }
+    return !(camera && recordAudio);
   }
 
   private void initCamera() {
@@ -84,6 +132,7 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
     // 设置对焦模式
     camera.setContentRotation(90);
     // 设置真实画面方向
+    camera.updateParameters();
   }
 
   @Override
@@ -231,8 +280,32 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    camera.stopPreview();
-    camera.release();
-    camera = null;
+    if (camera != null){
+      camera.stopPreview();
+      camera.release();
+      camera = null;
+    }
+  }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+      @NonNull int[] grantResults) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    switch (requestCode) {
+      // requestCode即所声明的权限获取码，在checkSelfPermission时传入
+      case PERMISSION_REQUEST_CODE:
+        for (int result : grantResults) {
+          if (result != PackageManager.PERMISSION_GRANTED) {
+            // 请一定要对权限被拒绝的情况进行处理
+            ToastUtil.showShortToast("需要的权限被拒绝！");
+            finish();
+            return;
+          }
+        }
+        init();
+        break;
+      default:
+        break;
+    }
   }
 }

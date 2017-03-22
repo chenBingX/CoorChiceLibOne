@@ -41,7 +41,7 @@ public class Camera1 implements CCCamera {
       throw new IllegalArgumentException("SurfaceHolder can't be null!");
     }
     this.holder = holder;
-    instance = Camera.open(curCameraId);
+    instance = Camera.open();
   }
 
   @Override
@@ -196,7 +196,7 @@ public class Camera1 implements CCCamera {
           String.format("CameraDemo Size.with = %d, Size.height = %d", size.width, size.height);
       LogUtils.e(format);
       // 寻找选择和预览界面相近的大小
-      if (previewWidth > size.width && previewWidth > size.height) {
+      if (previewWidth > size.width && previewHeight > size.height) {
         bestWidth = size.width;
         bestHeight = size.height;
       }
@@ -212,6 +212,11 @@ public class Camera1 implements CCCamera {
   @Override
   public void setFocusMode(String focusMode) {
     this.focusMode = focusMode;
+  }
+
+  @Override
+  public void updateParameters(){
+    configParameters();
   }
 
   public void setOnPreTakePictureListener(OnPreTakePictureListener onPreTakePictureListener) {
