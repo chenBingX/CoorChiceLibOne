@@ -148,6 +148,9 @@ public class MainActivity extends BaseActivity implements LocationListener {
     addActivityToNavigator(CameraActivity.class.getName(),
       "3D测试");
 
+    addActivityToNavigator(CameraDemoActivity.class.getName(),
+      "CameraDemo");
+
 
   }
 

@@ -16,6 +16,10 @@
   <uses-permission android:name="android.permission.DIAGNOSTIC"/>
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+  <uses-permission android:name="android.permission.CAMERA"/>
+  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+  <uses-feature android:name="android.hardware.camera"/>
 
   <application
     android:name="com.chenbing.coorchicelibone.IceApplication"
@@ -24,7 +28,10 @@
     android:label="@string/app_name"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name="com.chenbing.coorchicelibone.Views.MainActivity">
+    <activity
+      android:name="com.chenbing.coorchicelibone.Views.MainActivity"
+      android:screenOrientation="portrait"
+      >
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
@@ -79,6 +86,11 @@
     <activity android:name="com.chenbing.coorchicelibone.Views.SquareLayoutActivity">
     </activity>
     <activity android:name="com.chenbing.coorchicelibone.Views.AnalyzeViewFrameworkActivity">
+    </activity>
+    <activity
+      android:name="com.chenbing.coorchicelibone.Views.CameraDemoActivity"
+      android:screenOrientation="portrait"
+      >
     </activity>
   </application>
 

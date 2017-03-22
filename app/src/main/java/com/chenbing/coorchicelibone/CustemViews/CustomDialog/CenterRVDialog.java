@@ -1,5 +1,7 @@
 package com.chenbing.coorchicelibone.CustemViews.CustomDialog;
 
+import com.chenbing.coorchicelibone.Utils.AppUtils;
+import com.chenbing.coorchicelibone.Utils.DisplayUtils;
 import com.chenbing.iceweather.R;
 
 import android.app.Dialog;
@@ -43,7 +45,7 @@ public class CenterRVDialog extends Dialog {
     window.getDecorView().setPadding(0, 0, 0, 0);
     WindowManager.LayoutParams layoutParams = window.getAttributes();
     layoutParams.gravity = Gravity.CENTER;
-    layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+    layoutParams.height = (int) ((float)DisplayUtils.getScreenHeight() * (2f/3f));
     this.onWindowAttributesChanged(layoutParams); //通知Window参数改变
   }
 

@@ -5,7 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content">
 
-<TextView
+  <TextView
     android:id="@+id/tv_page_name"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,11 +14,11 @@
     android:gravity="center"
     android:padding="@dimen/padding_s"
     android:background="@drawable/opacity_1_black_round_shape"
-    android:shadowColor="@color/opacity_7_yellow"
+    android:shadowColor="@color/opacity_8_black"
     android:shadowDx="0.1"
     android:shadowDy="0.1"
     android:shadowRadius="5"
-    android:textColor="@color/opacity_5_black"
+    android:textColor="@color/white"
     />
 
 </RelativeLayout>

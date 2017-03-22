@@ -24,6 +24,7 @@ public class FileUtils {
       GetSDCard() + "/ice/";
   private static final String APP_CACHE_DIR = APP_FILE_DIR + "cache/";
   private static final String APP_PHOTO_DIR = APP_FILE_DIR + "photo/";
+  private static final String APP_VIDEO_DIR = APP_FILE_DIR + "video/";
   private static final String APP_OBJECT_DIR = APP_CACHE_DIR + "object/";
   private static final String APP_CRASH_DIR = APP_FILE_DIR + "crash/";
 
@@ -49,6 +50,14 @@ public class FileUtils {
       file.mkdirs();
     }
     return APP_PHOTO_DIR;
+  }
+
+  public static final String GetAppVideoDir() {
+    File file = new File(APP_VIDEO_DIR);
+    if (!file.exists()) {
+      file.mkdirs();
+    }
+    return APP_VIDEO_DIR;
   }
 
   public static final String GetAppObjectDir() {
