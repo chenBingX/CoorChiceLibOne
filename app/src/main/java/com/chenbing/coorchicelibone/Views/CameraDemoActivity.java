@@ -24,10 +24,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,13 +45,17 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
   SurfaceView surfaceView;
   @BindView(R.id.btn_Pic)
   Button btnPic;
+  @BindView(R.id.focus_square)
+  TextView focusSquare;
 
   @BindView(R.id.btn_video)
   Button btnVideo;
+
   private SurfaceHolder surfaceHolder;
   private boolean isRecording = false;
   private CCCamera camera;
   private List<String> permissions = new ArrayList<>();
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -59,20 +67,6 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
       checkPermissionAndRequest();
     } else {
       init();
-    }
-  }
-
-  private void init() {
-    initData();
-    initView();
-    addListener();
-  }
-
-  @Override
-  protected void initData() {
-    if (CameraUtils.cameraEnable() && camera == null) {
-      initSurfaceView();
-      initCamera();
     }
   }
 
@@ -107,6 +101,20 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
     return !(camera && recordAudio);
   }
 
+  private void init() {
+    initData();
+    initView();
+    addListener();
+  }
+
+  @Override
+  protected void initData() {
+    if (CameraUtils.cameraEnable() && camera == null) {
+      initSurfaceView();
+      initCamera();
+    }
+  }
+
   private void initCamera() {
     camera = new Camera1(surfaceHolder);
     configCamera();
@@ -126,7 +134,7 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
   private void configCamera() {
     camera.setDisplayOrientation(90);
     // 设置预览画面方向
-    camera.setPreviewSize(DisplayUtils.dipToPx(300), DisplayUtils.dipToPx(300));
+    camera.setPreviewSize(DisplayUtils.getScreenWidth(), DisplayUtils.getScreenWidth());
     // 设置预览画面大小
     camera.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
     // 设置对焦模式
@@ -148,27 +156,10 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
       LogUtils.e("CameraDemo--setOnPreTakePictureListener");
     });
 
-    camera.setOnResultListener(data -> {
-      String s = FileUtils.GetAppPhotoDir();
-      LogUtils.e("s：" + s);
-      try {
-        File file = new File(s, System.currentTimeMillis() + ".jpg");
-        FileOutputStream fos = new FileOutputStream(file);
-        fos.write(data);
-        fos.flush();
-        fos.close();
-        ToastUtil.showLongToast("保存到：" + file.getAbsolutePath());
-        LogUtils.e("保存到：" + file.getAbsolutePath());
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+    camera.setOnGetPictureDataListener(this::onGetPictureData);
 
-      try {
-        camera.stopPreview();
-        camera.startPreview();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+    camera.setOnFocusListener(() -> {
+      focusSquare.setVisibility(View.GONE);
     });
 
     btnPic.setOnClickListener(v -> {
@@ -176,19 +167,7 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
     });
 
     btnVideo.setOnClickListener(v -> {
-      if (!isRecording) {
-        btnVideo.setText("Video Stop");
-        isRecording = true;
-        try {
-          camera.startRecording(FileUtils.GetAppVideoDir(), System.currentTimeMillis() + ".mp4");
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      } else {
-        btnVideo.setText("Video Start");
-        isRecording = false;
-        camera.stopRecording();
-      }
+      onBtnVideoClick();
     });
 
     btnChangeLens.setOnClickListener(v -> {
@@ -230,6 +209,47 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
     // }
     // }
     // }.enable();
+  }
+
+  private void onGetPictureData(byte[] data) {
+    String s = FileUtils.GetAppPhotoDir();
+    LogUtils.e("s：" + s);
+    try {
+      File file = new File(s, System.currentTimeMillis() + ".jpg");
+      FileOutputStream fos = new FileOutputStream(file);
+      fos.write(data);
+      fos.flush();
+      fos.close();
+      ToastUtil.showLongToast("保存到：" + file.getAbsolutePath());
+      LogUtils.e("保存到：" + file.getAbsolutePath());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    try {
+      camera.stopPreview();
+      camera.startPreview();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void onBtnVideoClick() {
+    if (!isRecording) {
+      btnVideo.setText("Video Stop");
+      camera.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+      camera.updateParameters();
+      isRecording = true;
+      try {
+        camera.startRecording(FileUtils.GetAppVideoDir(), System.currentTimeMillis() + ".mp4");
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    } else {
+      btnVideo.setText("Video Start");
+      isRecording = false;
+      camera.stopRecording();
+    }
   }
 
 
@@ -307,5 +327,21 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
       default:
         break;
     }
+  }
+
+  @Override
+  public boolean onTouchEvent(MotionEvent event) {
+    if (camera != null) {
+      int width = DisplayUtils.dipToPx(50);
+      int height = width;
+      camera.focusTouchArea(event.getX(), event.getY(), width);
+      ViewGroup.MarginLayoutParams lp =
+          (ViewGroup.MarginLayoutParams) focusSquare.getLayoutParams();
+      lp.leftMargin = (int) (event.getX() - width / 2);
+      lp.topMargin = (int) (event.getY() - height / 2);
+      focusSquare.setLayoutParams(lp);
+      focusSquare.setVisibility(View.VISIBLE);
+    }
+    return super.onTouchEvent(event);
   }
 }

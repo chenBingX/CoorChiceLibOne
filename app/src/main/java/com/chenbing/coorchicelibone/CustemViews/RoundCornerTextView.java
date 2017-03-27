@@ -16,12 +16,15 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 
-
 /**
  * Project Name:
  * Author:CoorChice
  * Date:2016/12/27
  * Notes:
+ * V1.1.0 - 改变背景和边框的绘制方式，能够更佳精确的绘制。
+ *        - 状态图支持设置位置。
+ * V1.2.0 - 更改TextAdjuster为Adjuster，使它在绘制文字前夕的调整功能更加广泛。
+ *        - 通过Adjuster可以便捷的实现动效。fps为16。
  */
 
 public class RoundCornerTextView extends TextView {
@@ -51,11 +54,13 @@ public class RoundCornerTextView extends TextView {
   private Drawable drawable;
   private float density;
   private boolean autoAdjust;
-  private TextAdjuster textAdjuster;
+  private Adjuster adjuster;
   private boolean textStroke;
   private int textStrokeColor;
   private int textFillColor;
   private float textStrokeWidth;
+  private boolean runnable = false;
+  private Thread animThread;
 
   public RoundCornerTextView(Context context) {
     super(context);
@@ -137,20 +142,17 @@ public class RoundCornerTextView extends TextView {
     drawStrokeLine(canvas);
     drawSolid(canvas);
     drawStateDrawable(canvas);
-    adjustText();
-
+    adjust(canvas);
     if (textStroke){
       getPaint().setStyle(Paint.Style.STROKE);
       setTextColor(textStrokeColor);
       getPaint().setFakeBoldText(true);
       getPaint().setStrokeWidth(textStrokeWidth);
       super.onDraw(canvas);
-
       getPaint().setStyle(Paint.Style.FILL);
       getPaint().setFakeBoldText(false);
       setTextColor(textFillColor);
     }
-
     super.onDraw(canvas);
   }
 
@@ -302,12 +304,12 @@ public class RoundCornerTextView extends TextView {
     return drawableBounds;
   }
 
-  private void adjustText() {
+  private void adjust(Canvas canvas) {
     if (autoAdjust) {
-      if (textAdjuster == null) {
-        textAdjuster = new DefaultTextAdjuster();
+      if (adjuster == null) {
+        adjuster = new DefaultAdjuster();
       }
-      textAdjuster.adjust(this);
+      adjuster.adjust(this, canvas);
     }
   }
 
@@ -376,13 +378,13 @@ public class RoundCornerTextView extends TextView {
     postInvalidate();
   }
 
-  public void setTextAdjuster(TextAdjuster textAdjuster) {
-    this.textAdjuster = textAdjuster;
+  public void setAdjuster(Adjuster adjuster) {
+    this.adjuster = adjuster;
     postInvalidate();
   }
 
-  public TextAdjuster getTextAdjuster() {
-    return textAdjuster;
+  public Adjuster getAdjuster() {
+    return adjuster;
   }
 
   public boolean isTextStroke() {
@@ -466,14 +468,50 @@ public class RoundCornerTextView extends TextView {
     this.rightBottomCorner = rightBottomCorner;
   }
 
-  public static interface TextAdjuster {
-    void adjust(TextView v);
+
+  public void startAnim() {
+    if (animThread == null) {
+      runnable = true;
+      animThread = new Thread(() -> {
+        while (runnable) {
+          post(this::postInvalidate);
+          try {
+            Thread.sleep(16);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+            runnable = false;
+          }
+        }
+      });
+      animThread.start();
+    } else {
+      if (!animThread.isAlive()) {
+        animThread = null;
+      } else {
+        stopAnim();
+        startAnim();
+      }
+    }
   }
 
-  public static class DefaultTextAdjuster implements TextAdjuster{
+  public void stopAnim() {
+    runnable = false;
+  }
+
+  @Override
+  protected void finalize() throws Throwable {
+    stopAnim();
+    super.finalize();
+  }
+
+  public static interface Adjuster {
+    void adjust(TextView v, Canvas canvas);
+  }
+
+  public static class DefaultAdjuster implements Adjuster {
 
     @Override
-    public void adjust(TextView v) {
+    public void adjust(TextView v, Canvas canvas) {
       int length = v.length();
       float scale = v.getWidth() / (116.28f * v.getResources().getDisplayMetrics().density);
       float[] textSizes = {

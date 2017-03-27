@@ -148,28 +148,6 @@
     />
 
   <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    app:corner="25dp"
-    app:solid="@color/transparent"
-    app:stroke_color="@color/black"
-    app:stroke_width="5dp"
-
-    app:state_drawable="@drawable/vector_emoji_1"
-    app:state_drawable_mode="center"
-    app:isShowState="true"
-
-    app:text_stroke="true"
-    app:text_stroke_color="@color/black"
-    app:text_stroke_width="1dp"
-    app:text_fill_color="@color/blue"
-
-    app:autoAdjust="true"
-    tools:visibility="gone"
-    />
-
-  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
     android:id="@+id/rctv_8"
     android:layout_width="50dp"
     android:layout_height="50dp"
@@ -188,5 +166,20 @@
     android:layout_alignTop="@+id/rctv_7"
     android:layout_alignStart="@+id/rctv_4"/>
 
+  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+    android:id="@+id/rctv_11"
+    android:layout_width="wrap_content"
+    android:layout_height="18dp"
+    android:gravity="center_vertical"
+    android:paddingLeft="14.3dp"
+    android:paddingRight="@dimen/smallest_margin_size"
+    android:textColor="@color/opacity_8_black"
+    android:textSize="@dimen/small_title_size"
+    app:corner="9dp"
+    app:solid="@color/yellow"
+    android:text="视屏连麦"
+    android:layout_alignTop="@+id/rctv_10"
+    android:layout_alignStart="@+id/rctv_3"
+    />
 
 </RelativeLayout>

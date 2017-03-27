@@ -39,13 +39,21 @@ public interface CCCamera {
 
   void setOnPreTakePictureListener(OnPreTakePictureListener onPreTakePictureListener);
 
-  void setOnResultListener(OnResultListener onResultListener);
+  void setOnGetPictureDataListener(OnGetPictureDataListener onGetPictureDataListener);
+
+  void setOnFocusListener(OnFocusListener onFocusListener);
+
+  void focusTouchArea(float x, float y, float focusAreaSize);
 
   public static interface OnPreTakePictureListener {
     void onPreTakePicture();
   }
 
-  public static interface OnResultListener {
+  public static interface OnGetPictureDataListener {
     void onResult(byte[] data);
+  }
+
+  public static interface OnFocusListener{
+    void onFocus();
   }
 }
