@@ -7,7 +7,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:padding="16dp"
-  android:background="@color/white"
+  android:background="@color/gray"
   tools:context="com.chenbing.coorchicelibone.Views.RoundCornerTextViewActivity">
 
   <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
@@ -171,13 +171,13 @@
     android:layout_width="wrap_content"
     android:layout_height="18dp"
     android:gravity="center_vertical"
-    android:paddingLeft="14.3dp"
+    android:paddingLeft="@dimen/smallest_margin_size"
     android:paddingRight="@dimen/smallest_margin_size"
     android:textColor="@color/opacity_8_black"
     android:textSize="@dimen/small_title_size"
     app:corner="9dp"
-    app:solid="@color/yellow"
-    android:text="视屏连麦"
+    app:solid="@color/pink"
+    android:text="dadadadadadad"
     android:layout_alignTop="@+id/rctv_10"
     android:layout_alignStart="@+id/rctv_3"
     />

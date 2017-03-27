@@ -25,6 +25,7 @@ import android.widget.TextView;
  *        - 状态图支持设置位置。
  * V1.2.0 - 更改TextAdjuster为Adjuster，使它在绘制文字前夕的调整功能更加广泛。
  *        - 通过Adjuster可以便捷的实现动效。fps为16。
+ * V1.2.0 - 优化动画执行效率.
  */
 
 public class RoundCornerTextView extends TextView {
@@ -38,10 +39,10 @@ public class RoundCornerTextView extends TextView {
   private static final float DEFAULT_TEXT_STROKE_WIDTH = 0f;
 
   private float corner;
-  private boolean leftTopCorner;
-  private boolean rightTopCorner;
-  private boolean leftBottomCorner;
-  private boolean rightBottomCorner;
+  private boolean leftTopCornerEnable;
+  private boolean rightTopCornerEnable;
+  private boolean leftBottomCornerEnable;
+  private boolean rightBottomCornerEnable;
   private int solid;
   private float strokeWidth;
   private int strokeColor;
@@ -61,6 +62,17 @@ public class RoundCornerTextView extends TextView {
   private float textStrokeWidth;
   private boolean runnable = false;
   private Thread animThread;
+  private Path strokeWidthPath;
+  private Path solidPath;
+  private RectF strokeLineRectF;
+  private RectF solidRectF;
+  private float leftTopCorner[] = new float[2];
+  private float rightTopCorner[] = new float[2];
+  private float leftBottomCorner[] = new float[2];
+  private float rightBottomCorner[] = new float[2];
+  private float corners[] = new float[8];
+  private float[] drawableBounds = new float[4];
+
 
   public RoundCornerTextView(Context context) {
     super(context);
@@ -96,12 +108,13 @@ public class RoundCornerTextView extends TextView {
       TypedArray typedArray =
           getContext().obtainStyledAttributes(attrs, R.styleable.RoundCornerTextView);
       corner = typedArray.getDimension(R.styleable.RoundCornerTextView_corner, DEFAULT_CORNER);
-      leftTopCorner = typedArray.getBoolean(R.styleable.RoundCornerTextView_left_top_corner, false);
-      rightTopCorner =
+      leftTopCornerEnable =
+          typedArray.getBoolean(R.styleable.RoundCornerTextView_left_top_corner, false);
+      rightTopCornerEnable =
           typedArray.getBoolean(R.styleable.RoundCornerTextView_right_top_corner, false);
-      leftBottomCorner =
+      leftBottomCornerEnable =
           typedArray.getBoolean(R.styleable.RoundCornerTextView_left_bottom_corner, false);
-      rightBottomCorner =
+      rightBottomCornerEnable =
           typedArray.getBoolean(R.styleable.RoundCornerTextView_right_bottom_corner, false);
       solid = typedArray.getColor(R.styleable.RoundCornerTextView_solid, DEFAULT_SOLID);
       strokeWidth = typedArray.getDimension(R.styleable.RoundCornerTextView_stroke_width,
@@ -158,53 +171,73 @@ public class RoundCornerTextView extends TextView {
 
   private void drawStrokeLine(Canvas canvas) {
     if (strokeWidth > 0) {
-      Path path = new Path();
-      RectF rectF = new RectF(strokeWidth / 2, strokeWidth / 2, width - strokeWidth / 2,
+      if (strokeWidthPath == null) {
+        strokeWidthPath = new Path();
+      } else {
+        strokeWidthPath.reset();
+      }
+      if (strokeLineRectF == null) {
+        strokeLineRectF = new RectF();
+      } else {
+        strokeLineRectF.setEmpty();
+      }
+      strokeLineRectF.set(strokeWidth / 2, strokeWidth / 2, width - strokeWidth / 2,
           height - strokeWidth / 2);
-      float[] corners = getCorners(corner);
-      path.addRoundRect(rectF, corners, Path.Direction.CW);
-
+      getCorners(corner);
+      strokeWidthPath.addRoundRect(strokeLineRectF, corners, Path.Direction.CW);
       initPaint();
       paint.setStyle(Paint.Style.STROKE);
       paint.setColor(strokeColor);
       paint.setStrokeWidth(strokeWidth);
-      canvas.drawPath(path, paint);
+      canvas.drawPath(strokeWidthPath, paint);
     }
   }
 
   private void drawSolid(Canvas canvas) {
-    Path path = new Path();
-    RectF rectF = new RectF(strokeWidth, strokeWidth, width - strokeWidth,
-        height - strokeWidth);
-    float[] corners = getCorners(corner - strokeWidth / 2);
-    path.addRoundRect(rectF, corners, Path.Direction.CW);
+    if (solidPath == null) {
+      solidPath = new Path();
+    } else {
+      solidPath.reset();
+    }
+    if (solidRectF == null) {
+      solidRectF = new RectF();
+    } else {
+      solidRectF.setEmpty();
+    }
+    solidRectF.set(strokeWidth, strokeWidth, width - strokeWidth, height - strokeWidth);
+    getCorners(corner - strokeWidth / 2);
+    solidPath.addRoundRect(solidRectF, corners, Path.Direction.CW);
 
     initPaint();
     paint.setStyle(Paint.Style.FILL);
     paint.setColor(solid);
-    canvas.drawPath(path, paint);
+    canvas.drawPath(solidPath, paint);
   }
 
   private float[] getCorners(float corner) {
-    float leftTopCorner[] = {0, 0};
-    float rightTopCorner[] = {0, 0};
-    float leftBottomCorner[] = {0, 0};
-    float rightBottomCorner[] = {0, 0};
-    if (this.leftTopCorner || this.rightTopCorner || this.leftBottomCorner
-        || this.rightBottomCorner) {
-      if (this.leftTopCorner) {
+    leftTopCorner[0] = 0;
+    leftTopCorner[1] = 0;
+    rightTopCorner[0] = 0;
+    rightTopCorner[1] = 0;
+    leftBottomCorner[0] = 0;
+    leftBottomCorner[1] = 0;
+    rightBottomCorner[0] = 0;
+    rightBottomCorner[1] = 0;
+    if (this.leftTopCornerEnable || this.rightTopCornerEnable || this.leftBottomCornerEnable
+        || this.rightBottomCornerEnable) {
+      if (this.leftTopCornerEnable) {
         leftTopCorner[0] = corner;
         leftTopCorner[1] = corner;
       }
-      if (this.rightTopCorner) {
+      if (this.rightTopCornerEnable) {
         rightTopCorner[0] = corner;
         rightTopCorner[1] = corner;
       }
-      if (this.leftBottomCorner) {
+      if (this.leftBottomCornerEnable) {
         leftBottomCorner[0] = corner;
         leftBottomCorner[1] = corner;
       }
-      if (this.rightBottomCorner) {
+      if (this.rightBottomCornerEnable) {
         rightBottomCorner[0] = corner;
         rightBottomCorner[1] = corner;
       }
@@ -218,18 +251,20 @@ public class RoundCornerTextView extends TextView {
       rightBottomCorner[0] = corner;
       rightBottomCorner[1] = corner;
     }
-    return new float[] {
-        leftTopCorner[0], leftTopCorner[1],
-        rightTopCorner[0], rightTopCorner[1],
-        rightBottomCorner[0], rightBottomCorner[1],
-        leftBottomCorner[0], leftBottomCorner[1]
-
-    };
+    corners[0] = leftTopCorner[0];
+    corners[1] = leftTopCorner[1];
+    corners[2] = rightTopCorner[0];
+    corners[3] = rightTopCorner[1];
+    corners[4] = rightBottomCorner[0];
+    corners[5] = rightBottomCorner[1];
+    corners[6] = leftBottomCorner[0];
+    corners[7] = leftBottomCorner[1];
+    return corners;
   }
 
   private void drawStateDrawable(Canvas canvas) {
     if (drawable != null && isShowState) {
-      float[] drawableBounds = getDrawableBounds();
+      getDrawableBounds();
       drawable.setBounds((int) drawableBounds[0], (int) drawableBounds[1], (int) drawableBounds[2],
           (int) drawableBounds[3]);
       drawable.draw(canvas);
@@ -237,7 +272,9 @@ public class RoundCornerTextView extends TextView {
   }
 
   private float[] getDrawableBounds() {
-    float[] drawableBounds = new float[4];
+    for (int i = 0; i < drawableBounds.length; i++) {
+      drawableBounds[i] = 0;
+    }
     switch (stateDrawableMode) {
       case 0: // left
         drawableBounds[0] = 0;
@@ -435,37 +472,37 @@ public class RoundCornerTextView extends TextView {
     this.autoAdjust = autoAdjust;
   }
 
-  public boolean isLeftTopCorner() {
+  public boolean isLeftTopCornerEnable() {
 
-    return leftTopCorner;
+    return leftTopCornerEnable;
   }
 
-  public void setLeftTopCorner(boolean leftTopCorner) {
-    this.leftTopCorner = leftTopCorner;
+  public void setLeftTopCornerEnable(boolean leftTopCornerEnable) {
+    this.leftTopCornerEnable = leftTopCornerEnable;
   }
 
-  public boolean isRightTopCorner() {
-    return rightTopCorner;
+  public boolean isRightTopCornerEnable() {
+    return rightTopCornerEnable;
   }
 
-  public void setRightTopCorner(boolean rightTopCorner) {
-    this.rightTopCorner = rightTopCorner;
+  public void setRightTopCornerEnable(boolean rightTopCornerEnable) {
+    this.rightTopCornerEnable = rightTopCornerEnable;
   }
 
-  public boolean isLeftBottomCorner() {
-    return leftBottomCorner;
+  public boolean isLeftBottomCornerEnable() {
+    return leftBottomCornerEnable;
   }
 
-  public void setLeftBottomCorner(boolean leftBottomCorner) {
-    this.leftBottomCorner = leftBottomCorner;
+  public void setLeftBottomCornerEnable(boolean leftBottomCornerEnable) {
+    this.leftBottomCornerEnable = leftBottomCornerEnable;
   }
 
-  public boolean isRightBottomCorner() {
-    return rightBottomCorner;
+  public boolean isRightBottomCornerEnable() {
+    return rightBottomCornerEnable;
   }
 
-  public void setRightBottomCorner(boolean rightBottomCorner) {
-    this.rightBottomCorner = rightBottomCorner;
+  public void setRightBottomCornerEnable(boolean rightBottomCornerEnable) {
+    this.rightBottomCornerEnable = rightBottomCornerEnable;
   }
 
 

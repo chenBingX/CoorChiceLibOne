@@ -25,9 +25,11 @@ public class RoundCornerTextViewActivity extends AppCompatActivity {
     ButterKnife.bind(this);
 
     tv11.setAdjuster(new RoundCornerTextView.Adjuster() {
-      float startLocation = -99999f;
-      Paint paint = new Paint();
-
+      private float totalWidth = 25f;
+      private float startLocation = -99999f;
+      private Paint paint = new Paint();
+      private Path firstLinePath = new Path();
+      private Path secondLinePath = new Path();
       @Override
       public void adjust(TextView v, Canvas canvas) {
         int width = v.getWidth();
@@ -36,12 +38,12 @@ public class RoundCornerTextViewActivity extends AppCompatActivity {
         if (startLocation == -99999f) {
           startLocation = (float) (Math.random() * width);
         }
-        if (startLocation < -(width / 3)) {
+        if (startLocation < -(totalWidth * density + height * Math.tan(60))) {
           startLocation = width;
         }
-        int firstLineWidth = (int) (40 * density / 5 * 3);
+        int firstLineWidth = (int) (totalWidth * density / 5 * 3);
         startLocation = ((float) (startLocation - 0.5 * density));
-        Path firstLinePath = new Path();
+        firstLinePath.reset();
         firstLinePath.moveTo(startLocation, height);
         firstLinePath.lineTo(startLocation + firstLineWidth, height);
         firstLinePath.lineTo((float) (startLocation + firstLineWidth + height * Math.tan(60)), 0);
@@ -49,11 +51,11 @@ public class RoundCornerTextViewActivity extends AppCompatActivity {
         firstLinePath.close();
         paint.setAntiAlias(true);
         paint.setDither(true);
-        paint.setColor(getResources().getColor(R.color.white));
+        paint.setColor(getResources().getColor(R.color.black));
         paint.setStyle(Paint.Style.FILL);
         canvas.drawPath(firstLinePath, paint);
-        int secondLineWidth = (int) (40 * density / 5);
-        Path secondLinePath = new Path();
+        int secondLineWidth = (int) (totalWidth * density / 5);
+        secondLinePath.reset();
         secondLinePath.moveTo(startLocation + secondLineWidth * 4, height);
         secondLinePath.lineTo(startLocation + secondLineWidth * 4 + secondLineWidth, height);
         secondLinePath.lineTo(
@@ -67,6 +69,5 @@ public class RoundCornerTextViewActivity extends AppCompatActivity {
     });
     tv11.setAutoAdjust(true);
     tv11.startAnim();
-
   }
 }
