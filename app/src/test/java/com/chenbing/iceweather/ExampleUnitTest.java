@@ -79,12 +79,12 @@ public class ExampleUnitTest {
   public void testVisitorTime() {
     String visitorTime = "";
     long currentTime = System.currentTimeMillis();
-    long visitTime = 1489939210000l;
+    long visitTime = 1490237079000l;
     long interval = currentTime - visitTime;
     Date visitDate = new Date(visitTime);
     Calendar visitCa = Calendar.getInstance();
     visitCa.setTime(visitDate);
-    visitCa.set(Calendar.HOUR, 12);
+    visitCa.set(Calendar.HOUR, 0);
     visitCa.set(Calendar.MINUTE, 0);
     visitCa.set(Calendar.SECOND, 0);
     // 表示访问时间与访问当天0点的时差
@@ -145,7 +145,9 @@ public class ExampleUnitTest {
         && visitTime < (theDayBeforeYesterday.getTime() + 24 * aHour)) {
       visitorTime = "前天来过";
     } else if (visitTime >= sevenDaysAgo.getTime() && visitTime < threeDaysAgo.getTime()) {
-      visitorTime = String.format("%d天前来过", interval / (24 * aHour) + offsetDay);
+      visitorTime = String.format("%d天前来过", interval % (24 * aHour) <= 12 * aHour
+          ? interval / (24 * aHour)
+          : interval / (24 * aHour) + 1);
     } else if (visitTime >= fourteenDaysAgo.getTime() && visitTime < sevenDaysAgo.getTime()) {
       visitorTime = "上周来过";
     } else if (visitTime >= twenty_oneDaysAgo.getTime()
@@ -158,6 +160,6 @@ public class ExampleUnitTest {
     } else if (visitTime < sixtyDaysAgo.getTime()) {
       visitorTime = "很久以前来过";
     }
-    assertEquals("", visitorTime);
+    assertEquals("" + (interval % (24 * aHour)), visitorTime);
   }
 }

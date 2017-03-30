@@ -25,7 +25,8 @@ import android.widget.TextView;
  *        - 状态图支持设置位置。
  * V1.2.0 - 更改TextAdjuster为Adjuster，使它在绘制文字前夕的调整功能更加广泛。
  *        - 通过Adjuster可以便捷的实现动效。fps为16。
- * V1.2.0 - 优化动画执行效率.
+ * V1.2.1 - 优化动画执行效率.
+ * V1.2.2 - 状态图支持设置大小和位置。
  */
 
 public class RoundCornerTextView extends TextView {
@@ -61,6 +62,7 @@ public class RoundCornerTextView extends TextView {
   private int textFillColor;
   private float textStrokeWidth;
   private boolean runnable = false;
+  private boolean needRun = false;
   private Thread animThread;
   private Path strokeWidthPath;
   private Path solidPath;
@@ -72,6 +74,10 @@ public class RoundCornerTextView extends TextView {
   private float rightBottomCorner[] = new float[2];
   private float corners[] = new float[8];
   private float[] drawableBounds = new float[4];
+  private float drawableWidth;
+  private float drawableHeight;
+  private float drawablePaddingLeft;
+  private float drawablePaddingTop;
 
 
   public RoundCornerTextView(Context context) {
@@ -122,6 +128,14 @@ public class RoundCornerTextView extends TextView {
       strokeColor =
           typedArray.getColor(R.styleable.RoundCornerTextView_stroke_color, DEFAULT_STROKE_COLOR);
       drawable = typedArray.getDrawable(R.styleable.RoundCornerTextView_state_drawable);
+      drawableWidth =
+          typedArray.getDimension(R.styleable.RoundCornerTextView_state_drawable_width, 0);
+      drawableHeight =
+          typedArray.getDimension(R.styleable.RoundCornerTextView_state_drawable_height, 0);
+      drawablePaddingLeft =
+          typedArray.getDimension(R.styleable.RoundCornerTextView_state_drawable_padding_left, 0);
+      drawablePaddingTop =
+          typedArray.getDimension(R.styleable.RoundCornerTextView_state_drawable_padding_top, 0);
       isShowState = typedArray.getBoolean(R.styleable.RoundCornerTextView_isShowState, false);
       stateDrawableMode = typedArray.getInteger(R.styleable.RoundCornerTextView_state_drawable_mode,
           DEFAULT_STATE_DRAWABLE_MODE);
@@ -507,8 +521,11 @@ public class RoundCornerTextView extends TextView {
 
 
   public void startAnim() {
+    needRun = true;
+    runnable = false;
     if (animThread == null) {
       runnable = true;
+      needRun = true;
       animThread = new Thread(() -> {
         while (runnable) {
           post(this::postInvalidate);
@@ -519,25 +536,23 @@ public class RoundCornerTextView extends TextView {
             runnable = false;
           }
         }
+        animThread = null;
+        if (needRun) {
+          startAnim();
+        }
       });
       animThread.start();
-    } else {
-      if (!animThread.isAlive()) {
-        animThread = null;
-      } else {
-        stopAnim();
-        startAnim();
-      }
     }
   }
 
   public void stopAnim() {
     runnable = false;
+    needRun = false;
   }
 
   @Override
   protected void finalize() throws Throwable {
-    stopAnim();
+    runnable = false;
     super.finalize();
   }
 

@@ -78,6 +78,12 @@
   <color name="main_blue">#15bdf4</color>
   <color name="blue">#19bbf7</color>
 
+  <!--purple-->
+  <color name="purple">#6844d3</color>
+
+  <color name="opacity_9_a233be">#ccA233BE</color>
+  <color name="a233be">#A233BE</color>
+
 
 
 </resources>
