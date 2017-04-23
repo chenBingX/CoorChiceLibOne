@@ -1,11 +1,14 @@
 package com.chenbing.iceweather.Utils;
 
-import com.chenbing.coorchicelibone.Utils.FileUtils;
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import com.chenbing.coorchicelibone.Utils.FileUtils;
 
 /**
  * Project Name:IceWeather
@@ -22,6 +25,19 @@ public class FileUtilsTest {
   @Test
   public void testGetSDCard() throws Exception {
     assertEquals("", FileUtils.GetSDCard());
+  }
+
+  @Test
+  public void testFor() throws Exception {
+    List<String> data = new ArrayList<>();
+    for (int i = 0; i < 10; i++) {
+      data.add(i, "第" + i + "个");
+    }
+
+    for (String temp : data) {
+      System.out.println(temp);
+//      assertEquals("temp", temp);
+    }
   }
 
 }

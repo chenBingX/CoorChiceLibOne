@@ -5,18 +5,18 @@ import java.util.List;
 
 import com.chenbing.coorchicelibone.AdaptersAndItemViews.Adapters.NavigatorAdapter;
 import com.chenbing.coorchicelibone.CustemViews.CustomDialog.CenterRVDialog;
+import com.chenbing.coorchicelibone.CustemViews.Titanic.Titanic;
 import com.chenbing.coorchicelibone.CustemViews.Titanic.TitanicTextView;
 import com.chenbing.coorchicelibone.Datas.Navigator;
+import com.chenbing.coorchicelibone.Utils.AppUtils;
 import com.chenbing.coorchicelibone.Utils.BitmapUtils;
 import com.chenbing.coorchicelibone.Utils.DisplayUtils;
+import com.chenbing.coorchicelibone.Utils.LogUtils;
 import com.chenbing.coorchicelibone.Utils.RenderScriptGaussianBlur;
 import com.chenbing.coorchicelibone.Views.BaseView.BaseActivity;
 import com.chenbing.coorchicelibone.Views.fragments.OneFragment;
 import com.chenbing.iceweather.R;
 import com.chenbing.iceweather.SsoAuth;
-import com.chenbing.coorchicelibone.CustemViews.Titanic.Titanic;
-import com.chenbing.coorchicelibone.Utils.AppUtils;
-import com.chenbing.coorchicelibone.Utils.LogUtils;
 
 import android.app.Dialog;
 import android.content.ComponentName;
@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Camera;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -127,30 +126,26 @@ public class MainActivity extends BaseActivity implements LocationListener {
     addActivityToNavigator(HorizontalPinterestActivity.class.getName(),
       getString(R.string.horizontal_pinterest_activity));
 
-    addActivityToNavigator(TabActivity.class.getName(),
-      "官方TabActivity");
+    addActivityToNavigator(TabActivity.class.getName(), "官方TabActivity");
 
-    addActivityToNavigator(RxJavaActivity.class.getName(),
-      "RxJavaActivity");
+    addActivityToNavigator(RxJavaActivity.class.getName(), "RxJavaActivity");
 
-    addActivityToNavigator(RoundCornerTextViewActivity.class.getName(),
-      "圆角TextView");
+    addActivityToNavigator(RoundCornerTextViewActivity.class.getName(), "圆角TextView");
 
-    addActivityToNavigator(TaskActivity_A.class.getName(),
-      "测试Activity栈");
+    addActivityToNavigator(TaskActivity_A.class.getName(), "测试Activity栈");
 
-    addActivityToNavigator(CalendarActivity.class.getName(),
-      "日历Activity");
+    addActivityToNavigator(CalendarActivity.class.getName(), "日历Activity");
 
-    addActivityToNavigator(ThreadActivity.class.getName(),
-      "Thread实验");
+    addActivityToNavigator(ThreadActivity.class.getName(), "Thread实验");
 
-    addActivityToNavigator(CameraActivity.class.getName(),
-      "3D测试");
+    addActivityToNavigator(CameraActivity.class.getName(), "3D测试");
 
-    addActivityToNavigator(CameraDemoActivity.class.getName(),
-      "CameraDemo");
+    addActivityToNavigator(CameraDemoActivity.class.getName(), "CameraDemo");
 
+    addActivityToNavigator(AnalyzeViewFrameworkActivity.class.getName(),
+        "AnalyzeViewFrameworkActivity");
+
+    addActivityToNavigator(PorterDuffXDemoActivity.class.getName(), "PorterDuffXDemo");
 
   }
 

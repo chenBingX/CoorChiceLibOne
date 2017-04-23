@@ -94,11 +94,13 @@ dependencies {
     compile 'cn.edu.hfut.dmic.webcollector:WebCollector:2.09'
     compile 'io.reactivex.rxjava2:rxjava:2.0.3'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.github.chenBingX:SuperTextView:v1.0'
 }
 
 allprojects {
     repositories {
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 

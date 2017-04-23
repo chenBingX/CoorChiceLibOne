@@ -1,8 +1,8 @@
 package com.chenbing.coorchicelibone.Views;
 
-import com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView;
 import com.chenbing.coorchicelibone.Utils.DisplayUtils;
 import com.chenbing.iceweather.R;
+import com.coorchice.library.SuperTextView;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -12,14 +12,15 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
+
 public class RoundCornerTextViewActivity extends AppCompatActivity {
   @BindView(R.id.rctv_11)
-  RoundCornerTextView tv11;
+  SuperTextView tv11;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class RoundCornerTextViewActivity extends AppCompatActivity {
     setContentView(R.layout.activity_round_corner_text_view);
     ButterKnife.bind(this);
 
-    tv11.setAdjuster(new RoundCornerTextView.Adjuster() {
+    tv11.setAdjuster(new SuperTextView.Adjuster() {
       private PorterDuffXfermode xfermode = new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP);
       private float totalWidth = 25f;
       private float startLocation = -99999f;
@@ -38,7 +39,7 @@ public class RoundCornerTextViewActivity extends AppCompatActivity {
       float density = DisplayUtils.getDensity();
 
       @Override
-      public void adjust(TextView v, Canvas canvas) {
+      public void adjust(SuperTextView v, Canvas canvas) {
         int width = v.getWidth();
         int height = v.getHeight();
         if (startLocation == -99999f) {

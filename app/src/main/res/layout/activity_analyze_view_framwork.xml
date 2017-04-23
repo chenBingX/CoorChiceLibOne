@@ -11,4 +11,16 @@
   android:paddingTop="@dimen/activity_vertical_margin"
   tools:context="com.chenbing.coorchicelibone.Views.AnalyzeViewFrameworkActivity">
 
+  <com.chenbing.coorchicelibone.CustemViews.TouchEventTextView
+    android:id="@+id/tv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:text="Touch Me!"
+    android:textColor="@color/black"
+    android:textSize="50sp"
+    android:textStyle="bold"
+    android:enabled="true"
+    />
+
 </RelativeLayout>

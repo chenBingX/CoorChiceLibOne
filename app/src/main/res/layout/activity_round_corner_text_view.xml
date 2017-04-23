@@ -7,10 +7,10 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:padding="16dp"
-  android:background="@color/gray"
+  android:background="@color/white"
   tools:context="com.chenbing.coorchicelibone.Views.RoundCornerTextViewActivity">
 
-  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+  <com.coorchice.library.SuperTextView
     android:id="@+id/rctv_1"
     android:layout_width="50dp"
     android:layout_height="50dp"
@@ -22,7 +22,7 @@
     />
 
 
-  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+  <com.coorchice.library.SuperTextView
     android:id="@+id/rctv_2"
     android:layout_width="50dp"
     android:layout_height="50dp"
@@ -36,7 +36,7 @@
     app:stroke_width="5dp"
     />
 
-  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+  <com.coorchice.library.SuperTextView
     android:id="@+id/rctv_3"
     android:layout_width="50dp"
     android:layout_height="50dp"
@@ -51,7 +51,7 @@
     app:corner="5dp"
     />
 
-  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+  <com.coorchice.library.SuperTextView
     android:id="@+id/rctv_4"
     android:layout_width="50dp"
     android:layout_height="50dp"
@@ -63,7 +63,7 @@
     app:corner="25dp"
     app:solid="@color/blue"/>
 
-  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+  <com.coorchice.library.SuperTextView
     android:id="@+id/rctv_5"
     android:layout_width="50dp"
     android:layout_height="50dp"
@@ -78,7 +78,7 @@
     app:stroke_width="5dp"
     />
 
-  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+  <com.coorchice.library.SuperTextView
     android:id="@+id/rctv_6"
     android:layout_width="50dp"
     android:layout_height="50dp"
@@ -95,7 +95,7 @@
     app:stroke_width="2dp"
     />
 
-  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+  <com.coorchice.library.SuperTextView
     android:id="@+id/rctv_7"
     android:layout_width="50dp"
     android:layout_height="50dp"
@@ -115,7 +115,7 @@
 
     />
 
-  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+  <com.coorchice.library.SuperTextView
     android:id="@+id/rctv_9"
     android:layout_width="50dp"
     android:layout_height="50dp"
@@ -130,7 +130,7 @@
     app:autoAdjust="true"
     />
 
-  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+  <com.coorchice.library.SuperTextView
     android:id="@+id/rctv_10"
     android:layout_width="50dp"
     android:layout_height="50dp"
@@ -147,7 +147,7 @@
     app:autoAdjust="true"
     />
 
-  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+  <com.coorchice.library.SuperTextView
     android:id="@+id/rctv_8"
     android:layout_width="50dp"
     android:layout_height="50dp"
@@ -166,7 +166,7 @@
     android:layout_alignTop="@+id/rctv_7"
     android:layout_alignStart="@+id/rctv_4"/>
 
-  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
+  <com.coorchice.library.SuperTextView
     android:id="@+id/rctv_11"
     android:layout_width="wrap_content"
     android:layout_height="18dp"
