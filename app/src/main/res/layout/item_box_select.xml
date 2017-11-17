@@ -24,5 +24,6 @@
         android:layout_centerVertical="true"
         android:background="@drawable/checkbox_v1"
         android:button="@null"
+        android:clickable="false"
         />
 </RelativeLayout>

@@ -310,7 +310,7 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
                 if (magicData.isState() && type != null && type.isState()) {
                     type.setState(false);
                     Runnable notifyAdapterChange = (Runnable) type.getTag();
-                    if (notifyAdapterChange != null){
+                    if (notifyAdapterChange != null) {
                         notifyAdapterChange.run();
                     }
                 }
@@ -336,7 +336,7 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
                         if (type != null && type.isState()) {
                             type.setState(false);
                             Runnable notifyAdapterChange = (Runnable) type.getTag();
-                            if (notifyAdapterChange != null){
+                            if (notifyAdapterChange != null) {
                                 notifyAdapterChange.run();
                             }
                         }
@@ -374,12 +374,13 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
                         }
                     }
                 }
-                final MagicData<String> stateView = temp;
+                final MagicData<String> type = temp;
+                magicData.setTag(type);
                 String content = TextUtils.isEmpty(data.getContent()) ? "" : data.getContent();
                 TextView tvDes2 = itemView.findViewById(R.id.tv_des);
                 CheckBox cbBox2 = itemView.findViewById(R.id.cb_box);
 
-                if (stateView != null && stateView.getData().equals("航空公司")) {
+                if (type != null && type.getData().equals("航空公司")) {
                     ImageView ivIcon3 = itemView.findViewById(R.id.iv_icon);
                     String image = data.getImage();
                     if (!TextUtils.isEmpty(image)) {
@@ -412,10 +413,10 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
                     }
                     if (magicData.isState()) {
                         tvDes2.setTextColor(Color.parseColor("#ef9d09"));
-                        if (stateView != null && !stateView.isState()) {
-                            stateView.setState(true);
-                            Runnable notifyAdpterChange = (Runnable) stateView.getTag();
-                            if (notifyAdpterChange != null){
+                        if (type != null && !type.isState()) {
+                            type.setState(true);
+                            Runnable notifyAdpterChange = (Runnable) type.getTag();
+                            if (notifyAdpterChange != null) {
                                 notifyAdpterChange.run();
                             }
                         }
@@ -513,21 +514,37 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
                         MagicAdapter rvRightAdapter;
                         if (rvRight != null && (rvRightAdapter = (MagicAdapter) rvRight.getAdapter()) != null
                                 && rvRightAdapter.getDatas().contains(magicData)) {
+
                             List rvRightDatas = rvRightAdapter.getDatas();
                             int position = rvRightDatas.indexOf(magicData);
                             rvRightAdapter.notifyItemChanged(position);
-                        } else {
-                            String tag = (String) magicData.getTag();
-                            if (!TextUtils.isEmpty(tag)) {
-                                List<MagicData<FilterDetailData>> magicDatas = datasClone.get(tag);
-
+                        }
+                        MagicData<String> tag = (MagicData) magicData.getTag();
+                        if (tag != null) {
+                            List<MagicData<FilterDetailData>> magicDatas = datasClone.get(tag);
+                            boolean hasSelected = false;
+                            for (MagicData<FilterDetailData> temp : magicDatas) {
+                                if (!temp.getData().getContent().equals("不限") && temp.isState()){
+                                    hasSelected = true;
+                                    break;
+                                }
                             }
+                            if (!hasSelected && tag.isState()){
+                                tag.setState(false);
+                                Runnable notifyAdapterChanged = (Runnable) tag.getTag();
+                                if (notifyAdapterChanged != null){
+                                    notifyAdapterChanged.run();
+                                }
+                            }
+                            return;
                         }
                         if (magicData == cbLeft.getTag()) {
                             cbLeft.setChecked(false);
+                            return;
                         }
                         if (magicData == cbRight.getTag()) {
                             cbRight.setChecked(false);
+                            return;
                         }
 
                     }
@@ -615,6 +632,8 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
 
         rvLeft.setAdapter(new MagicAdapter<MagicData<String>>(getContext(), types, new AdapterRule<MagicData<String>>() {
             private boolean isFirst = true;
+            private MagicData curType;
+
 
             @Override
             public int layout(int position, List<MagicData<String>> t) {
@@ -647,11 +666,15 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
                         }
                     });
                 }
+                if (curType == magicData) {
+                    itemView.setBackgroundColor(Color.WHITE);
+                }
                 itemView.setOnClickListener(v -> {
                     int childCount = rvLeft.getChildCount();
                     for (int i = 0; i < childCount; i++) {
                         rvLeft.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
                     }
+                    curType = magicData;
                     itemView.setBackgroundColor(Color.WHITE);
                     showDetail(magicData);
                 });
