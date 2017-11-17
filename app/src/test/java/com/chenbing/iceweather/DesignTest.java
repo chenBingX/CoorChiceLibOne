@@ -3,6 +3,8 @@ package com.chenbing.iceweather;
 import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -38,5 +40,12 @@ public class DesignTest {
     } catch (IllegalAccessException e) {
       e.printStackTrace();
     }
+  }
+
+  @Test
+  public void test(){
+    List<Object> objectList = new ArrayList<>();
+    Object o = new Object();
+    objectList.remove(null);
   }
 }

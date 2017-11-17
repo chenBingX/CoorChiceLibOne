@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="43dp"
+    android:orientation="horizontal"
+    android:paddingRight="13dp">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:layout_centerVertical="true"
+        tools:src="@drawable/fca" />
+
+    <TextView
+        android:id="@+id/tv_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/iv_icon"
+        android:textColor="#333333"
+        android:textSize="15sp"
+        tools:text="东方航空" />
+
+    <CheckBox
+        android:id="@+id/cb_box"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/checkbox_v1"
+        android:button="@null" />
+
+    <TextView
+        android:id="@+id/tv_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textColor="#a5a5a5"
+        android:textSize="15sp"
+        android:visibility="gone"
+        android:layout_toLeftOf="@+id/cb_box"
+        android:layout_marginRight="14dp"
+        tools:text="廉价航空"
+        tools:visibility="visible" />
+</RelativeLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<FrameLayout -->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--&gt;-->
+    <com.chenbing.coorchicelibone.CustemViews.supertextview.SuperTextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/stv_condition"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="7dp"
+        android:paddingRight="24dp"
+        android:layout_marginTop="8.5dp"
+        tools:text="大型机场"
+        android:textColor="#3d3d3d"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:solid="#ffffff"
+        app:corner="5dp"
+        app:isShowState="true"
+        app:state_drawable="@drawable/trip_iv_close"
+        app:state_drawable_height="8dp"
+        app:state_drawable_mode="right"
+        app:state_drawable_padding_left="-7dp"
+        app:state_drawable_width="8dp"
+        />
+<!--</FrameLayout>-->

@@ -147,6 +147,8 @@ public class MainActivity extends BaseActivity implements LocationListener {
 
     addActivityToNavigator(PorterDuffXDemoActivity.class.getName(), "PorterDuffXDemo");
 
+    addActivityToNavigator(FlightFilterActivity.class.getName(), "FlightFilter");
+
   }
 
   private void getBitmapAndDisplay() {
