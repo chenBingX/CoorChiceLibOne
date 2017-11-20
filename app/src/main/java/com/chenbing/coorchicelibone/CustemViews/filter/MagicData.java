@@ -243,6 +243,7 @@ public class MagicData<T> implements Cloneable {
 
     /**
      * 用于获取MagicData中的data数据，会进行校验。
+     * 如果返回值不为null，表明MagicData和其data均不为null。
      *
      * @param magicData
      * @param <T>

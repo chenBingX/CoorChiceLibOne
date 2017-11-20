@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.chenbing.iceweather.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +15,7 @@ import java.util.List;
 
 public class MagicAdapter<T> extends RecyclerView.Adapter {
 
-    private AdapterRule<T> rule;
+    private IAdapterRule<T> rule;
     private List<T> datas = new ArrayList<T>();
     private LayoutInflater inflater;
     private Context context;
@@ -28,9 +26,9 @@ public class MagicAdapter<T> extends RecyclerView.Adapter {
         inflater = LayoutInflater.from(context);
     }
 
-    public MagicAdapter(Context context, List<T> datas, AdapterRule<T> rule) {
+    public MagicAdapter(Context context, List<T> datas, IAdapterRule<T> rule) {
         if (rule == null) {
-            throw new NullPointerException("AdapterRule can't be null!");
+            throw new NullPointerException("IAdapterRule can't be null!");
         }
         this.rule = rule;
         this.datas.clear();
@@ -43,7 +41,7 @@ public class MagicAdapter<T> extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         if (rule == null) {
-            throw new NullPointerException("You have to give a AdapterRule first!");
+            throw new NullPointerException("You have to give a IAdapterRule first!");
         }
 
         if (viewType != -1) {
@@ -58,7 +56,7 @@ public class MagicAdapter<T> extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         if (rule == null) {
-            throw new NullPointerException("You have to give a AdapterRule first!");
+            throw new NullPointerException("You have to give a IAdapterRule first!");
         }
 
         View itemView = holder.itemView;
@@ -68,6 +66,9 @@ public class MagicAdapter<T> extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
+        if (rule != null){
+            return rule.itemCount(datas);
+        }
         return datas.size();
     }
 
@@ -82,9 +83,9 @@ public class MagicAdapter<T> extends RecyclerView.Adapter {
 
     }
 
-    public MagicAdapter setRule(AdapterRule<T> rule) {
+    public MagicAdapter setRule(IAdapterRule<T> rule) {
         if (rule == null) {
-            throw new NullPointerException("AdapterRule can't be null!");
+            throw new NullPointerException("IAdapterRule can't be null!");
         }
         this.rule = rule;
         notifyDataSetChanged();
@@ -102,9 +103,9 @@ public class MagicAdapter<T> extends RecyclerView.Adapter {
         return datas;
     }
 
-    public MagicAdapter setDataAndRule(List<T> datas, AdapterRule<T> rule) {
+    public MagicAdapter setDataAndRule(List<T> datas, IAdapterRule<T> rule) {
         if (rule == null) {
-            throw new NullPointerException("AdapterRule can't be null!");
+            throw new NullPointerException("IAdapterRule can't be null!");
         }
         this.rule = rule;
         this.datas.clear();

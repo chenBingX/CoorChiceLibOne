@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chenbing.coorchicelibone.CustemViews.supertextview.SuperTextView;
@@ -53,6 +51,7 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
     private IFilter.OnClickListener onClickListener;
     private RecyclerView rvConditions;
     private CheckBox cbLeft, cbRight;
+    private MagicAdapter rvRightAdapter;
 
 
     public FlightFilter(Context context) {
@@ -78,152 +77,14 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
 
     private void init() {
 
-        if (isInEditMode() || BuildConfig.DEBUG) {
-            testDatas = new LinkedHashMap<>();
-
-            BindDataLogic<MagicData<FilterDetailData>> unlimitedLogic_1 = initUnlimitedLogic_1();
-            BindDataLogic<MagicData<FilterDetailData>> checkBoxLogic = getCheckBoxLogic();
-
-            // 初始化公用的Builder模版，用于创建统一的数据类型MagicData
-            MagicData.Builder rvLeftBuilder = MagicData.templateBuilder(R.layout.item_type);
-            MagicData.Builder textSelectBuilder = MagicData.templateBuilder(R.layout.item_text_select);
-            MagicData.Builder boxSelectBuilder = MagicData.templateBuilder(R.layout.item_box_select, checkBoxLogic);
-            MagicData.Builder boxSelectWithImageBuilder = MagicData.templateBuilder(R.layout.item_box_select_with_image, checkBoxLogic);
-
-
-            List<MagicData<FilterDetailData>> airline = new ArrayList<>();
-            airline.add(textSelectBuilder
-                    .setData(new FilterDetailData("不限", null))
-                    .setBindLogic(unlimitedLogic_1)
-                    .setState(true)
-                    .build());
-            airline.add(boxSelectWithImageBuilder
-                    .setData(new FilterDetailData("中国联航", "fkn"))
-                    .build());
-            airline.add(boxSelectWithImageBuilder
-                    .setData(new FilterDetailData("南方航空", "fnx"))
-                    .build());
-            airline.add(boxSelectWithImageBuilder
-                    .setData(new FilterDetailData("中国国航", "fca"))
-                    .build());
-            airline.add(boxSelectWithImageBuilder
-                    .setData(new FilterDetailData("东方航空", "fmu"))
-                    .build());
-            airline.add(boxSelectWithImageBuilder
-                    .setData(new FilterDetailData("上海航空", "ffm"))
-                    .build());
-            airline.add(boxSelectWithImageBuilder
-                    .setData(new FilterDetailData("深圳航空", "fvd"))
-                    .build());
-            airline.add(boxSelectWithImageBuilder
-                    .setData(new FilterDetailData("海南航空", "fcn"))
-                    .build());
-            airline.add(boxSelectWithImageBuilder
-                    .setData(new FilterDetailData("吉祥航空", "fho"))
-                    .build());
-            testDatas.put(rvLeftBuilder.setData("航空公司").build(), airline);
-
-
-            AdapterRule<MagicData<FilterDetailData>> rule1 = new AdapterRule<MagicData<FilterDetailData>>() {
-
-                @Override
-                public int layout(int position, List<MagicData<FilterDetailData>> data) {
-                    int layoutType = data.get(position).getType();
-                    if (layoutType == -99) {
-                        layoutType = R.layout.item_text_select;
-                    }
-                    return layoutType;
-                }
-
-                @Override
-                public void bindData(RecyclerView.Adapter adapter, View itemView, List<MagicData<FilterDetailData>> datas, int position) {
-                    final MagicData<FilterDetailData> magicData = datas.get(position);
-                    FilterDetailData data = null;
-                    if (magicData != null) {
-                        data = magicData.getData();
-                    }
-                    if (magicData != null && data != null) {
-                        if (magicData.getBindLogic() != null) {
-                            magicData.getBindLogic().bindData(rvRight, itemView, datas, position);
-                            return;
-                        }
-                    }
-
-                }
-            };
-
-            List<MagicData<FilterDetailData>> date = new ArrayList<>();
-            date.add(textSelectBuilder
-                    .setData(new FilterDetailData("不限", null))
-                    .setBindLogic(unlimitedLogic_1)
-                    .setState(true)
-                    .build());
-            date.add(boxSelectBuilder
-                    .setData(new FilterDetailData("00:00--06:00", null))
-                    .build());
-            date.add(boxSelectBuilder
-                    .setData(new FilterDetailData("06:00--12:00", null))
-                    .build());
-            date.add(boxSelectBuilder
-                    .setData(new FilterDetailData("12:00--18:00", null))
-                    .build());
-            date.add(boxSelectBuilder
-                    .setData(new FilterDetailData("18:00--24:00", null))
-                    .build());
-            testDatas.put(rvLeftBuilder.setData("起飞时段").build(), date);
-
-            List<MagicData<FilterDetailData>> airplaneType = new ArrayList<>();
-            airplaneType.add(textSelectBuilder
-                    .setData(new FilterDetailData("不限", null))
-                    .setBindLogic(unlimitedLogic_1)
-                    .setState(true)
-                    .build());
-            airplaneType.add(boxSelectBuilder
-                    .setData(new FilterDetailData("大型机", null))
-                    .build());
-            airplaneType.add(boxSelectBuilder
-                    .setData(new FilterDetailData("中型机", null))
-                    .build());
-            airplaneType.add(boxSelectBuilder
-                    .setData(new FilterDetailData("其他机型", null))
-                    .build());
-//            airplaneType.add(new MagicData<>(new FilterDetailData("大型机", null), false, R.layout.item_box_select));
-//            airplaneType.add(new MagicData<>(new FilterDetailData("中型机", null), false, R.layout.item_box_select));
-//            airplaneType.add(new MagicData<>(new FilterDetailData("小型机", null), false, R.layout.item_box_select));
-            testDatas.put(rvLeftBuilder.setData("机型").build(), airplaneType);
-
-            List<MagicData<FilterDetailData>> airport = new ArrayList<>();
-            airport.add(new MagicData<>(new FilterDetailData("不限", null), true, R.layout.item_text_select));
-            airport.add(new MagicData<>(new FilterDetailData("浦东国际机场", null), false, R.layout.item_text_select));
-            airport.add(new MagicData<>(new FilterDetailData("虹桥国际机场", null), false, R.layout.item_text_select));
-            airport.add(new MagicData<>(new FilterDetailData("南苑机场", null), false, R.layout.item_text_select));
-            airport.add(new MagicData<>(new FilterDetailData("首都国际机场", null), false, R.layout.item_text_select));
-            testDatas.put(rvLeftBuilder.setData("机场").build(), airport);
-
-            List<MagicData<FilterDetailData>> sitType = new ArrayList<>();
-            sitType.add(textSelectBuilder
-                    .setData(new FilterDetailData("不限", null))
-                    .setBindLogic(unlimitedLogic_1)
-                    .setState(true)
-                    .build());
-            sitType.add(boxSelectBuilder
-                    .setData(new FilterDetailData("经济舱", null))
-                    .build());
-            sitType.add(boxSelectBuilder
-                    .setData(new FilterDetailData("头等/商务舱", null))
-                    .build());
-            testDatas.put(rvLeftBuilder.setData("舱位").build(), sitType);
-
-
-        }
         dp = getResources().getDisplayMetrics().density;
-
         rootView = LayoutInflater.from(getContext()).inflate(R.layout.layout_filter, this, true);
-
         initConditionList();
         findViews();
         initViews();
+
         if (isInEditMode() || BuildConfig.DEBUG) {
+            testDatas = new TestDataCreator().createFlightFilterTestDatas(conditions);
             setDatas(testDatas);
         }
     }
@@ -278,166 +139,6 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
         };
     }
 
-    @NonNull
-    private BindDataLogic<MagicData<FilterDetailData>> initUnlimitedLogic_1() {
-        return new BindDataLogic<MagicData<FilterDetailData>>() {
-
-            @Override
-            public void bindData(final RecyclerView parent, View itemView, final List<MagicData<FilterDetailData>> datas, int position, Object... state) {
-                final MagicData<FilterDetailData> magicData = datas.get(position);
-                FilterDetailData data = MagicData.getData(magicData);
-                if (data == null) {
-                    return;
-                }
-                MagicData<String> temp = null;
-                if (state != null) {
-                    for (Object o : state) {
-                        if (o instanceof MagicData) {
-                            temp = (MagicData<String>) o;
-                            break;
-                        }
-                    }
-                }
-                final MagicData<String> type = temp;
-                String content = TextUtils.isEmpty(data.getContent()) ? "" : data.getContent();
-//                if (type != null) {
-//                    if (magicData.isState()) {
-//                        type.setVisibility(GONE);
-//                    } else if (type.getVisibility() == GONE && magicData.isState()) {
-//                        type.setVisibility(VISIBLE);
-//                    }
-//                }
-                if (magicData.isState() && type != null && type.isState()) {
-                    type.setState(false);
-                    Runnable notifyAdapterChange = (Runnable) type.getTag();
-                    if (notifyAdapterChange != null) {
-                        notifyAdapterChange.run();
-                    }
-                }
-                final TextView tvDes1 = itemView.findViewById(R.id.tv_des);
-                final ImageView ivSelect1 = itemView.findViewById(R.id.iv_select);
-                tvDes1.setText(content);
-                if (magicData.isState()) {
-                    tvDes1.setTextColor(Color.parseColor("#ef9d09"));
-                    ivSelect1.setVisibility(VISIBLE);
-                } else {
-                    tvDes1.setTextColor(Color.parseColor("#333333"));
-                    ivSelect1.setVisibility(GONE);
-                }
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (magicData.isState()) {
-                            return;
-                        }
-                        magicData.setState(true);
-                        tvDes1.setTextColor(Color.parseColor("#ef9d09"));
-                        ivSelect1.setVisibility(VISIBLE);
-                        if (type != null && type.isState()) {
-                            type.setState(false);
-                            Runnable notifyAdapterChange = (Runnable) type.getTag();
-                            if (notifyAdapterChange != null) {
-                                notifyAdapterChange.run();
-                            }
-                        }
-                        for (int i = 0; i < datas.size(); i++) {
-                            if (i != position) {
-                                final MagicData<FilterDetailData> magicData = datas.get(i);
-                                if (magicData != null && magicData.isState()) {
-                                    conditions.remove(magicData);
-                                    magicData.setState(false);
-                                    parent.getAdapter().notifyItemChanged(i);
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        };
-    }
-
-    @NonNull
-    private BindDataLogic<MagicData<FilterDetailData>> getCheckBoxLogic() {
-        return new BindDataLogic<MagicData<FilterDetailData>>() {
-            @Override
-            public void bindData(RecyclerView parent, View itemView, List<MagicData<FilterDetailData>> datas, int position, Object... state) {
-                final MagicData<FilterDetailData> magicData = datas.get(position);
-                FilterDetailData data = MagicData.getData(magicData);
-                if (data == null) {
-                    return;
-                }
-                MagicData<String> temp = null;
-                if (state != null) {
-                    for (Object o : state) {
-                        if (o instanceof MagicData) {
-                            temp = (MagicData<String>) o;
-                        }
-                    }
-                }
-                final MagicData<String> type = temp;
-                magicData.setTag(type);
-                String content = TextUtils.isEmpty(data.getContent()) ? "" : data.getContent();
-                TextView tvDes2 = itemView.findViewById(R.id.tv_des);
-                CheckBox cbBox2 = itemView.findViewById(R.id.cb_box);
-
-                if (type != null && type.getData().equals("航空公司")) {
-                    ImageView ivIcon3 = itemView.findViewById(R.id.iv_icon);
-                    String image = data.getImage();
-                    if (!TextUtils.isEmpty(image)) {
-                        ivIcon3.setImageResource(getResources().getIdentifier(image, "drawable", getContext().getPackageName()));
-                    }
-                }
-
-                tvDes2.setText(content);
-                if (magicData.isState()) {
-                    tvDes2.setTextColor(Color.parseColor("#ef9d09"));
-                } else {
-                    tvDes2.setTextColor(Color.parseColor("#333333"));
-                }
-                cbBox2.setChecked(magicData.isState());
-                itemView.setOnClickListener(v -> {
-                    magicData.setState(!magicData.isState());
-                    cbBox2.setChecked(magicData.isState());
-                    boolean haveSelected = false;
-                    int unlimitPosition = 0;
-                    for (int i = 0; i < datas.size(); i++) {
-                        MagicData<FilterDetailData> tempMagicData = datas.get(i);
-                        if (tempMagicData.getData().getContent().equals("不限") && tempMagicData.isState()) {
-                            tempMagicData.setState(false);
-                            rvRight.getAdapter().notifyItemChanged(i);
-                            unlimitPosition = i;
-                        } else if (tempMagicData.isState()) {
-                            haveSelected = true;
-                            break;
-                        }
-                    }
-                    if (magicData.isState()) {
-                        tvDes2.setTextColor(Color.parseColor("#ef9d09"));
-                        if (type != null && !type.isState()) {
-                            type.setState(true);
-                            Runnable notifyAdpterChange = (Runnable) type.getTag();
-                            if (notifyAdpterChange != null) {
-                                notifyAdpterChange.run();
-                            }
-                        }
-
-                        // 添加条件到条件列表中
-                        conditions.add(magicData);
-                    } else {
-                        // 从条件列表中移除条件
-                        conditions.remove(magicData);
-                        tvDes2.setTextColor(Color.parseColor("#333333"));
-                        if (!haveSelected) {
-                            MagicData<FilterDetailData> tempMagicData = datas.get(unlimitPosition);
-                            tempMagicData.setState(true);
-                            rvRight.getAdapter().notifyItemChanged(unlimitPosition);
-                        }
-                    }
-                });
-            }
-        };
-    }
-
     private void findViews() {
         tvCancel = rootView.findViewById(R.id.tv_cancel);
         tvResultNum = rootView.findViewById(R.id.tv_result_num);
@@ -476,7 +177,6 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
 
     private void initRvConditions() {
         rvConditions.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-//        rvConditions.setItemAnimator(new DefaultItemAnimator());
         rvConditions.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
@@ -511,33 +211,6 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
                         conditions.remove(magicData);
                         magicData.setState(false);
 
-                        MagicAdapter rvRightAdapter;
-                        if (rvRight != null && (rvRightAdapter = (MagicAdapter) rvRight.getAdapter()) != null
-                                && rvRightAdapter.getDatas().contains(magicData)) {
-
-                            List rvRightDatas = rvRightAdapter.getDatas();
-                            int position = rvRightDatas.indexOf(magicData);
-                            rvRightAdapter.notifyItemChanged(position);
-                        }
-                        MagicData<String> tag = (MagicData) magicData.getTag();
-                        if (tag != null) {
-                            List<MagicData<FilterDetailData>> magicDatas = datasClone.get(tag);
-                            boolean hasSelected = false;
-                            for (MagicData<FilterDetailData> temp : magicDatas) {
-                                if (!temp.getData().getContent().equals("不限") && temp.isState()){
-                                    hasSelected = true;
-                                    break;
-                                }
-                            }
-                            if (!hasSelected && tag.isState()){
-                                tag.setState(false);
-                                Runnable notifyAdapterChanged = (Runnable) tag.getTag();
-                                if (notifyAdapterChanged != null){
-                                    notifyAdapterChanged.run();
-                                }
-                            }
-                            return;
-                        }
                         if (magicData == cbLeft.getTag()) {
                             cbLeft.setChecked(false);
                             return;
@@ -547,6 +220,67 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
                             return;
                         }
 
+                        MagicAdapter rvRightAdapter;
+                        if (rvRight != null && (rvRightAdapter = (MagicAdapter) rvRight.getAdapter()) != null
+                                && rvRightAdapter.getDatas().contains(magicData)) {
+
+                            List rvRightDatas = rvRightAdapter.getDatas();
+                            int position = rvRightDatas.indexOf(magicData);
+                            rvRightAdapter.notifyItemChanged(position);
+                        }
+
+                        MagicData<String> tag = (MagicData) magicData.getTag();
+                        if (tag != null) {
+                            List<MagicData<FilterDetailData>> magicDatas = datasClone.get(tag);
+                            boolean hasSelected = false;
+                            int unlimitedPosition = -1;
+                            int unlimitedPosition2 = -1;
+                            for (int i = 0; i < magicDatas.size(); i++) {
+                                MagicData<FilterDetailData> tempMagicData = magicDatas.get(i);
+                                if (tempMagicData.getData().getContent().equals("不限")) {
+                                    String image = tempMagicData.getData().getImage();
+                                    if (!TextUtils.isEmpty(image)) {
+                                        if (unlimitedPosition == -1) {
+                                            unlimitedPosition = i;
+                                        } else if (unlimitedPosition2 == -1) {
+                                            unlimitedPosition2 = i;
+                                        }
+                                        if (image.equals(magicData.getData().getImage())) {
+                                            unlimitedPosition = i;
+                                        }
+                                    } else {
+                                        unlimitedPosition = i;
+                                    }
+
+                                } else if (tempMagicData.isState()) {
+                                    hasSelected = true;
+                                }
+                            }
+
+                            if (!hasSelected && tag.isState()) {
+                                tag.setState(false);
+                                Runnable notifyAdapterChanged = (Runnable) tag.getTag();
+                                if (notifyAdapterChanged != null) {
+                                    notifyAdapterChanged.run();
+                                }
+
+                                if (unlimitedPosition != -1) {
+                                    MagicData<FilterDetailData> tempMagicData = magicDatas.get(unlimitedPosition);
+                                    tempMagicData.setState(true);
+                                    if (rvRight != null && rvRight.getAdapter() != null) {
+                                        rvRight.getAdapter().notifyItemChanged(unlimitedPosition);
+                                    }
+                                }
+                            } else if (unlimitedPosition != -1 && unlimitedPosition2 != -1) {
+                                MagicData<FilterDetailData> tempMagicData = magicDatas.get(unlimitedPosition);
+                                tempMagicData.setState(true);
+                                if (rvRight != null && rvRight.getAdapter() != null) {
+                                    rvRight.getAdapter().notifyItemChanged(unlimitedPosition);
+                                }
+                            }
+
+
+                        }
                     }
                 });
             }
@@ -598,6 +332,9 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
 
     @Override
     public void setDatas(Map<MagicData<String>, List<MagicData<FilterDetailData>>> datas) {
+
+        Map<MagicData<String>, List<MagicData<FilterDetailData>>> packagingDatas = packagingData(datas);
+
         this.datas.clear();
         this.datas.putAll(datas);
         if (this.datas != null) {
@@ -618,6 +355,17 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
         }
 
         updateRV();
+
+    }
+
+    /**
+     * 将数据包装成统一格式。
+     *
+     * @param datas
+     * @return
+     */
+    private Map<MagicData<String>, List<MagicData<FilterDetailData>>> packagingData(Map<MagicData<String>, List<MagicData<FilterDetailData>>> datas) {
+        return null;
     }
 
     private void updateRV() {
@@ -668,6 +416,8 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
                 }
                 if (curType == magicData) {
                     itemView.setBackgroundColor(Color.WHITE);
+                } else {
+                    itemView.setBackgroundColor(Color.TRANSPARENT);
                 }
                 itemView.setOnClickListener(v -> {
                     int childCount = rvLeft.getChildCount();
@@ -686,181 +436,35 @@ public class FlightFilter extends FrameLayout implements IFilter<FilterDetailDat
         }));
     }
 
+    private MagicData<String> curType;
+
     private void showDetail(final MagicData<String> type) {
-        rvRight.setAdapter(new MagicAdapter<MagicData<FilterDetailData>>(getContext(), datasClone.get(type), new AdapterRule<MagicData<FilterDetailData>>() {
-            @Override
-            public int layout(int position, List<MagicData<FilterDetailData>> t) {
-                int layoutType = t.get(position).getType();
-                if (layoutType == -99) {
-                    layoutType = R.layout.item_text_select;
-                }
-                return layoutType;
-            }
-
-            @Override
-            public void bindData(RecyclerView.Adapter adapter, View itemView, List<MagicData<FilterDetailData>> datas, int position) {
-                final MagicData<FilterDetailData> magicData = datas.get(position);
-                FilterDetailData data = null;
-                if (magicData != null) {
-                    data = magicData.getData();
-                }
-                if (magicData != null && data != null) {
-                    if (magicData.getBindLogic() != null) {
-                        magicData.getBindLogic().bindData(rvRight, itemView, datas, position, type);
-                        return;
+        curType = type;
+        if (rvRightAdapter == null) {
+            rvRightAdapter = new MagicAdapter<>(getContext(), datasClone.get(type), new AdapterRule<MagicData<FilterDetailData>>() {
+                @Override
+                public int layout(int position, List<MagicData<FilterDetailData>> t) {
+                    int layoutType = t.get(position).getType();
+                    if (layoutType == -99) {
+                        layoutType = R.layout.item_text_select;
                     }
+                    return layoutType;
+                }
 
-                    String content = TextUtils.isEmpty(data.getContent()) ? "" : data.getContent();
-//                    if (data.getContent().equals("不限") && magicData.isState()) {
-//                        stvSelectState.setVisibility(GONE);
-//                    } else if (stvSelectState.getVisibility() == GONE && magicData.isState()) {
-//                        stvSelectState.setVisibility(VISIBLE);
-//                    }
-                    switch (magicData.getType()) {
-                        case R.layout.item_text_select:
-                            if (type.equals("舱位") && position == 0 && magicData.isState()) {
-//                                stvSelectState.setVisibility(GONE);
-                            }
-                            TextView tvDes1 = itemView.findViewById(R.id.tv_des);
-                            ImageView ivSelect1 = itemView.findViewById(R.id.iv_select);
-                            tvDes1.setText(content);
-                            if (magicData.isState()) {
-                                tvDes1.setTextColor(Color.parseColor("#ef9d09"));
-                                ivSelect1.setVisibility(VISIBLE);
-                            } else {
-                                tvDes1.setTextColor(Color.parseColor("#333333"));
-                                ivSelect1.setVisibility(GONE);
-                            }
-                            itemView.setOnClickListener(v -> {
-                                if (magicData.isState()) {
-
-                                } else {
-                                    magicData.setState(true);
-                                    tvDes1.setTextColor(Color.parseColor("#ef9d09"));
-                                    ivSelect1.setVisibility(VISIBLE);
-                                    if (!type.equals("舱位")) {
-//                                        checkSelect(datas, position, stvSelectState);
-                                    } else {
-//                                        if (position == 0) {
-//                                            stvSelectState.setVisibility(GONE);
-//                                        } else {
-//                                            stvSelectState.setVisibility(VISIBLE);
-//                                        }
-                                        for (int i = 0; i < datas.size(); i++) {
-                                            MagicData<FilterDetailData> temp = datas.get(i);
-                                            if (temp != magicData) {
-                                                temp.setState(false);
-                                                rvRight.getAdapter().notifyItemChanged(i);
-                                            }
-                                        }
-                                    }
-                                }
-                            });
-                            break;
-                        case R.layout.item_box_select:
-                            TextView tvDes2 = itemView.findViewById(R.id.tv_des);
-                            CheckBox cbBox2 = itemView.findViewById(R.id.cb_box);
-                            tvDes2.setText(content);
-                            if (magicData.isState()) {
-                                tvDes2.setTextColor(Color.parseColor("#ef9d09"));
-                            } else {
-                                tvDes2.setTextColor(Color.parseColor("#333333"));
-                            }
-                            cbBox2.setChecked(magicData.isState());
-                            FilterDetailData finalData1 = data;
-                            itemView.setOnClickListener(v -> {
-                                if (finalData1.getContent().equals("不限")) {
-                                    magicData.setState(true);
-                                    tvDes2.setTextColor(Color.parseColor("#ef9d09"));
-                                    cbBox2.setChecked(true);
-                                } else {
-                                    magicData.setState(!magicData.isState());
-                                    cbBox2.setChecked(magicData.isState());
-                                    if (magicData.isState()) {
-                                        tvDes2.setTextColor(Color.parseColor("#ef9d09"));
-                                    } else {
-                                        tvDes2.setTextColor(Color.parseColor("#333333"));
-                                    }
-                                }
-//                                checkSelect(datas, position, stvSelectState);
-                            });
-                            break;
-                        case R.layout.item_box_select_with_image:
-                            TextView tvDes3 = itemView.findViewById(R.id.tv_des);
-                            CheckBox cbBox3 = itemView.findViewById(R.id.cb_box);
-                            ImageView ivIcon3 = itemView.findViewById(R.id.iv_icon);
-                            tvDes3.setText(content);
-                            if (magicData.isState()) {
-                                tvDes3.setTextColor(Color.parseColor("#ef9d09"));
-                            } else {
-                                tvDes3.setTextColor(Color.parseColor("#333333"));
-                            }
-                            cbBox3.setChecked(magicData.isState());
-                            String image = data.getImage();
-                            if (!TextUtils.isEmpty(image)) {
-                                ivIcon3.setImageResource(getResources().getIdentifier(image, "drawable", getContext().getPackageName()));
-                            } else {
-                                ivIcon3.setImageResource(R.drawable.yellow_question);
-                            }
-                            FilterDetailData finalData = data;
-                            itemView.setOnClickListener(v -> {
-                                if (finalData.getContent().equals("不限")) {
-                                    magicData.setState(true);
-                                    tvDes3.setTextColor(Color.parseColor("#ef9d09"));
-                                    cbBox3.setChecked(true);
-                                } else {
-                                    magicData.setState(!magicData.isState());
-                                    cbBox3.setChecked(magicData.isState());
-                                    if (magicData.isState()) {
-                                        tvDes3.setTextColor(Color.parseColor("#ef9d09"));
-                                    } else {
-                                        tvDes3.setTextColor(Color.parseColor("#333333"));
-                                    }
-                                }
-//                                checkSelect(datas, position, stvSelectState);
-                            });
-                            break;
+                @Override
+                public void bindData(RecyclerView.Adapter adapter, View itemView, List<MagicData<FilterDetailData>> datas, int position) {
+                    final MagicData<FilterDetailData> magicData = datas.get(position);
+                    FilterDetailData data = MagicData.getData(magicData);
+                    if (data != null) {
+                        if (magicData.getBindLogic() != null) {
+                            magicData.getBindLogic().bindData(rvRight, itemView, datas, position, curType);
+                        }
                     }
-
-
                 }
-            }
-        }));
-    }
-
-    private void checkSelect(List<MagicData<FilterDetailData>> datas, int position, SuperTextView stvSelectState) {
-        MagicData<FilterDetailData> magicData = datas.get(position);
-        FilterDetailData data = magicData.getData();
-        if (data.getContent().equals("不限")) {
-            stvSelectState.setVisibility(GONE);
-            for (int i = 0; i < datas.size(); i++) {
-                MagicData<FilterDetailData> temp = datas.get(i);
-                if (!temp.getData().getContent().equals("不限")) {
-                    temp.setState(false);
-                    rvRight.getAdapter().notifyItemChanged(i);
-                }
-            }
+            });
+            rvRight.setAdapter(rvRightAdapter);
         } else {
-            stvSelectState.setVisibility(VISIBLE);
-            boolean haveSelected = false;
-            for (int i = 0; i < datas.size(); i++) {
-                MagicData<FilterDetailData> temp = datas.get(i);
-                if (temp.getData().getContent().equals("不限")) {
-                    temp.setState(false);
-                    rvRight.getAdapter().notifyItemChanged(i);
-                } else if (temp.isState()) {
-                    haveSelected = true;
-                }
-            }
-            if (!haveSelected) {
-                for (int i = 0; i < datas.size(); i++) {
-                    MagicData<FilterDetailData> temp = datas.get(i);
-                    if (temp.getData().getContent().equals("不限")) {
-                        temp.setState(true);
-                        rvRight.getAdapter().notifyItemChanged(i);
-                    }
-                }
-            }
+            rvRightAdapter.setDatas(datasClone.get(type));
         }
     }
 
