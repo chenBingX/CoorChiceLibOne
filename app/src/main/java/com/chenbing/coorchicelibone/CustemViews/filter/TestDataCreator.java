@@ -27,6 +27,7 @@ public class TestDataCreator {
         Map<MagicData<String>, List<MagicData<FilterDetailData>>> testDatas = new LinkedHashMap<>();
 
         BindDataLogic<MagicData<FilterDetailData>> unlimitedLogic_1 = initUnlimitedLogic_1(conditions);
+        BindDataLogic<MagicData<FilterDetailData>> textSelectLogic = initTextSelectLogic(conditions);
         BindDataLogic<MagicData<FilterDetailData>> checkBoxLogic = initCheckBoxLogic(conditions);
         BindDataLogic<MagicData<FilterDetailData>> airportLogic = initAirportLogic(conditions);
         BindDataLogic<MagicData<FilterDetailData>> airportCityLogic = initAirportCityLogic(conditions);
@@ -143,11 +144,13 @@ public class TestDataCreator {
                 .setBindLogic(unlimitedLogic_1)
                 .setState(true)
                 .build());
-        sitType.add(boxSelectBuilder
+        sitType.add(textSelectBuilder
                 .setData(new FilterDetailData("经济舱", null))
+                .setBindLogic(textSelectLogic)
                 .build());
-        sitType.add(boxSelectBuilder
+        sitType.add(textSelectBuilder
                 .setData(new FilterDetailData("头等/商务舱", null))
+                .setBindLogic(textSelectLogic)
                 .build());
         testDatas.put(rvLeftBuilder.setData("舱位").build(), sitType);
 
@@ -217,6 +220,75 @@ public class TestDataCreator {
                                     magicData.setState(false);
                                     parent.getAdapter().notifyItemChanged(i);
                                 }
+                            }
+                        }
+                    }
+                });
+            }
+        };
+    }
+
+    private BindDataLogic<MagicData<FilterDetailData>> initTextSelectLogic(final List<MagicData<FilterDetailData>> conditions){
+        return new BindDataLogic<MagicData<FilterDetailData>>(){
+
+            @Override
+            public void bindData(final RecyclerView parent, View itemView, final List<MagicData<FilterDetailData>> datas, int position, Object... state) {
+                final MagicData<FilterDetailData> magicData = datas.get(position);
+                final FilterDetailData data = MagicData.getData(magicData);
+                if (data == null) {
+                    return;
+                }
+                MagicData<String> temp = null;
+                if (state != null) {
+                    for (Object o : state) {
+                        if (o instanceof MagicData) {
+                            temp = (MagicData<String>) o;
+                            break;
+                        }
+                    }
+                }
+                final MagicData<String> type = temp;
+                magicData.setTag(type);
+                String content = TextUtils.isEmpty(data.getContent()) ? "" : data.getContent();
+
+                final TextView tvDes = (TextView) itemView.findViewById(R.id.tv_des);
+                final ImageView ivSelect = (ImageView) itemView.findViewById(R.id.iv_select);
+
+                tvDes.setText(content);
+                if (magicData.isState()) {
+                    tvDes.setTextColor(Color.parseColor("#ef9d09"));
+                    ivSelect.setVisibility(VISIBLE);
+                } else {
+                    tvDes.setTextColor(Color.parseColor("#333333"));
+                    ivSelect.setVisibility(GONE);
+                }
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (magicData.isState()){
+                            return;
+                        }
+                        magicData.setState(true);
+                        conditions.add(magicData);
+
+                        tvDes.setTextColor(Color.parseColor("#ef9d09"));
+                        ivSelect.setVisibility(VISIBLE);
+
+                        if (type != null && !type.isState()) {
+                            type.setState(true);
+                            Runnable notifyAdapterChange = (Runnable) type.getTag();
+                            if (notifyAdapterChange != null) {
+                                notifyAdapterChange.run();
+                            }
+                        }
+
+                        for (int i = 0; i < datas.size(); i++) {
+                            MagicData<FilterDetailData> tempMagicData = datas.get(i);
+                            if (tempMagicData != magicData && tempMagicData.isState()){
+                                tempMagicData.setState(false);
+                                parent.getAdapter().notifyItemChanged(i);
+                                conditions.remove(tempMagicData);
                             }
                         }
                     }

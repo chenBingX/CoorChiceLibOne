@@ -47,7 +47,7 @@ import java.util.List;
 
 public class SuperTextView extends TextView {
 
-  // Some Property Default Value
+  // Some Property Default Value.
   private static final float DEFAULT_CORNER = 0f;
   private static final int DEFAULT_SOLID = Color.TRANSPARENT;
   private static final float DEFAULT_STROKE_WIDTH = 0f;
@@ -80,7 +80,7 @@ public class SuperTextView extends TextView {
   private float density;
   private boolean autoAdjust;
   // private Adjuster adjuster;
-  private SuperTextView.Adjuster pressAdjuster;
+  private Adjuster pressAdjuster;
   private boolean textStroke;
   private int textStrokeColor;
   private int textFillColor;
@@ -121,8 +121,8 @@ public class SuperTextView extends TextView {
   private boolean drawableAsBackground;
   private BitmapShader drawableBackgroundShader;
 
-  private List<SuperTextView.Adjuster> adjusterList = new ArrayList<>();
-  private List<SuperTextView.Adjuster> touchAdjusters = new ArrayList<>();
+  private List<Adjuster> adjusterList = new ArrayList<>();
+  private List<Adjuster> touchAdjusters = new ArrayList<>();
   private Runnable handleAnim;
 
 
@@ -241,9 +241,9 @@ public class SuperTextView extends TextView {
     drawStrokeLine(canvas);
     drawSolid(canvas);
     checkPressColor(canvas);
-    isNeedToAdjust(canvas, SuperTextView.Adjuster.Opportunity.BEFORE_DRAWABLE);
+    isNeedToAdjust(canvas, Adjuster.Opportunity.BEFORE_DRAWABLE);
     drawStateDrawable(canvas);
-    isNeedToAdjust(canvas, SuperTextView.Adjuster.Opportunity.BEFORE_TEXT);
+    isNeedToAdjust(canvas, Adjuster.Opportunity.BEFORE_TEXT);
     if (textStroke) {
       getPaint().setStyle(Paint.Style.STROKE);
       setTextColor(textStrokeColor);
@@ -255,7 +255,7 @@ public class SuperTextView extends TextView {
       setTextColor(textFillColor);
     }
     super.onDraw(canvas);
-    isNeedToAdjust(canvas, SuperTextView.Adjuster.Opportunity.AT_LAST);
+    isNeedToAdjust(canvas, Adjuster.Opportunity.AT_LAST);
   }
 
   private void drawStrokeLine(Canvas canvas) {
@@ -368,7 +368,7 @@ public class SuperTextView extends TextView {
       if (pressAdjuster == null) {
         pressAdjuster = new PressAdjuster(pressBgColor)
                 .setPressTextColor(pressTextColor)
-                .setType(SuperTextView.Adjuster.TYPE_SYSTEM);
+                .setType(Adjuster.TYPE_SYSTEM);
         adjusterList.add(0, pressAdjuster);
         SYSTEM_ADJUSTER_SIZE++;
       }
@@ -446,9 +446,12 @@ public class SuperTextView extends TextView {
     }
 
     Shader shader = paint.getShader();
+    int color = paint.getColor();
+    paint.setColor(Color.WHITE);
     paint.setShader(drawableBackgroundShader);
     canvas.drawPath(solidPath, paint);
     paint.setShader(shader);
+    paint.setColor(color);
   }
 
   private Bitmap drawableToBitmap(Drawable drawable) {
@@ -487,7 +490,7 @@ public class SuperTextView extends TextView {
     }
     drawableWidth = (drawableWidth == 0 ? width / 2f : drawableWidth);
     drawableHeight = (drawableHeight == 0 ? height / 2f : drawableHeight);
-    switch (SuperTextView.DrawableMode.valueOf(stateDrawableMode)) {
+    switch (DrawableMode.valueOf(stateDrawableMode)) {
       case LEFT: // left
         drawableBounds[0] = 0 + drawablePaddingLeft;
         drawableBounds[1] = height / 2f - drawableHeight / 2f + drawablePaddingTop;
@@ -559,7 +562,7 @@ public class SuperTextView extends TextView {
     }
     drawable2Width = (drawable2Width == 0 ? width / 2f : drawable2Width);
     drawable2Height = (drawable2Height == 0 ? height / 2f : drawable2Height);
-    switch (SuperTextView.DrawableMode.valueOf(stateDrawable2Mode)) {
+    switch (DrawableMode.valueOf(stateDrawable2Mode)) {
       case LEFT: // left
         drawable2Bounds[0] = 0 + drawable2PaddingLeft;
         drawable2Bounds[1] = height / 2f - drawable2Height / 2f + drawable2PaddingTop;
@@ -626,12 +629,12 @@ public class SuperTextView extends TextView {
   }
 
 
-  private void isNeedToAdjust(Canvas canvas, SuperTextView.Adjuster.Opportunity currentOpportunity) {
+  private void isNeedToAdjust(Canvas canvas, Adjuster.Opportunity currentOpportunity) {
 
     for (int i = 0; i < adjusterList.size(); i++) {
-      SuperTextView.Adjuster adjuster = adjusterList.get(i);
+      Adjuster adjuster = adjusterList.get(i);
       if (currentOpportunity == adjuster.getOpportunity()) {
-        if (adjuster.getType() == SuperTextView.Adjuster.TYPE_SYSTEM) {
+        if (adjuster.getType() == Adjuster.TYPE_SYSTEM) {
           adjuster.adjust(this, canvas);
         } else if (autoAdjust) {
           adjuster.adjust(this, canvas);
@@ -715,27 +718,24 @@ public class SuperTextView extends TextView {
   }
 
   /**
-   * 该方法或许在后面版本会移除，请尽快使用{@link SuperTextView#addAdjuster(SuperTextView.Adjuster)}来添加一个Adjuster。
+   * 该方法或许在后面版本会移除，请尽快使用{@link SuperTextView#addAdjuster(Adjuster)}来添加一个Adjuster。
    *
-   * @param adjuster 添加一个Adjuster。{@link SuperTextView#addAdjuster(SuperTextView.Adjuster)}
+   * @param adjuster 添加一个Adjuster。{@link SuperTextView#addAdjuster(Adjuster)}
    *          注意最多支持添加3个Adjuster，否则新的Adjuster总是会覆盖最后一个Adjuster。
-   *          {@link SuperTextView.Adjuster}。会触发一次重绘。
+   *          {@link Adjuster}。会触发一次重绘。
    *
    * @return SuperTextView
    */
   @Deprecated
-  public SuperTextView setAdjuster(SuperTextView.Adjuster adjuster) {
+  public SuperTextView setAdjuster(Adjuster adjuster) {
 
     return addAdjuster(adjuster);
   }
 
   /**
-   * 该方法或许在后面版本会移除，请尽快使用{@link SuperTextView#addAdjuster(SuperTextView.Adjuster)}来添加一个Adjuster。
-   *
    * @return 获得最后一个Adjuster，如果存在的话。
    */
-  @Deprecated
-  public SuperTextView.Adjuster getAdjuster() {
+  public Adjuster getAdjuster() {
     if (adjusterList.size() > SYSTEM_ADJUSTER_SIZE) {
       return adjusterList.get(adjusterList.size() - 1);
     }
@@ -744,12 +744,12 @@ public class SuperTextView extends TextView {
 
   /**
    *
-   * @param adjuster 添加一个Adjuster。{@link SuperTextView#addAdjuster(SuperTextView.Adjuster)}
+   * @param adjuster 添加一个Adjuster。{@link SuperTextView#addAdjuster(Adjuster)}
    *          注意最多支持添加3个Adjuster，否则新的Adjuster总是会覆盖最后一个Adjuster。
-   *          {@link SuperTextView.Adjuster}。会触发一次重绘。
+   *          {@link Adjuster}。会触发一次重绘。
    * @return SuperTextView
    */
-  public SuperTextView addAdjuster(SuperTextView.Adjuster adjuster) {
+  public SuperTextView addAdjuster(Adjuster adjuster) {
     if (adjusterList.size() < SYSTEM_ADJUSTER_SIZE + ALLOW_CUSTOM_ADJUSTER_SIZE) {
       adjusterList.add(adjuster);
     } else {
@@ -766,10 +766,10 @@ public class SuperTextView extends TextView {
    * @param index 期望移除的Adjuster的index。
    * @return 被移除的Adjuster，如果参数错误返回null。
    */
-  public SuperTextView.Adjuster removeAdjuster(int index) {
+  public Adjuster removeAdjuster(int index) {
     int realIndex = SYSTEM_ADJUSTER_SIZE + index;
     if (realIndex > SYSTEM_ADJUSTER_SIZE - 1 && realIndex < adjusterList.size()) {
-      SuperTextView.Adjuster remove = adjusterList.remove(realIndex);
+      Adjuster remove = adjusterList.remove(realIndex);
       postInvalidate();
       return remove;
     }
@@ -782,7 +782,7 @@ public class SuperTextView extends TextView {
    * @param index 期望获得的Adjuster的index。
    * @return index对应的Adjuster，如果参数错误返回null。
    */
-  public SuperTextView.Adjuster getAdjuster(int index) {
+  public Adjuster getAdjuster(int index) {
     int realIndex = SYSTEM_ADJUSTER_SIZE + index;
     if (realIndex > SYSTEM_ADJUSTER_SIZE - 1 && realIndex < adjusterList.size()) {
       return adjusterList.remove(realIndex);
@@ -1070,21 +1070,21 @@ public class SuperTextView extends TextView {
   }
 
   /**
-   * @return 状态图显示模式。{@link SuperTextView.DrawableMode}
+   * @return 状态图显示模式。{@link DrawableMode}
    */
   public int getStateDrawableMode() {
     return stateDrawableMode;
   }
 
   /**
-   * @return 状态图2显示模式。{@link SuperTextView.DrawableMode}
+   * @return 状态图2显示模式。{@link DrawableMode}
    */
   public int getStateDrawable2Mode() {
     return stateDrawable2Mode;
   }
 
   /**
-   * @param stateDrawableMode 设置状态图显示模式。默认为{@link SuperTextView.DrawableMode#CENTER}。会触发一次重绘。
+   * @param stateDrawableMode 设置状态图显示模式。默认为{@link DrawableMode#CENTER}。会触发一次重绘。
    * @return SuperTextView
    */
   public SuperTextView setStateDrawableMode(int stateDrawableMode) {
@@ -1095,7 +1095,7 @@ public class SuperTextView extends TextView {
   }
 
   /**
-   * @param stateDrawableMode 设置状态图2显示模式。默认为{@link SuperTextView.DrawableMode#CENTER}。会触发一次重绘。
+   * @param stateDrawableMode 设置状态图2显示模式。默认为{@link DrawableMode#CENTER}。会触发一次重绘。
    * @return SuperTextView
    */
   public SuperTextView setStateDrawable2Mode(int stateDrawableMode) {
@@ -1319,6 +1319,43 @@ public class SuperTextView extends TextView {
   }
 
   /**
+   * 获得当前按压背景色。没有设置默认为Color.TRANSPARENT。
+   * @return
+   */
+  public int getPressBgColor() {
+    return pressBgColor;
+  }
+
+  /**
+   * 获得当前按压背景色。一旦设置，立即生效。
+   * 取消可以设置Color.TRANSPARENT。
+   *
+   * @param pressBgColor
+   */
+  public SuperTextView setPressBgColor(int pressBgColor) {
+    this.pressBgColor = pressBgColor;
+    return this;
+  }
+
+  /**
+   * 获得当前按压文字色。没有设置默认为-99。
+   * @return
+   */
+  public int getPressTextColor() {
+    return pressTextColor;
+  }
+
+  /**
+   * 获得当前按压文字色。一旦设置，立即生效。
+   * 取消可以设置-99。
+   * @param pressTextColor
+   */
+  public SuperTextView setPressTextColor(int pressTextColor) {
+    this.pressTextColor = pressTextColor;
+    return this;
+  }
+
+  /**
    * @return 帧率
    */
   public int getFrameRate() {
@@ -1409,9 +1446,9 @@ public class SuperTextView extends TextView {
     int actionMasked = action & MotionEvent.ACTION_MASK;
     if (actionMasked == MotionEvent.ACTION_DOWN) {
       for (int i = 0; i < adjusterList.size(); i++) {
-        SuperTextView.Adjuster adjuster = adjusterList.get(i);
+        Adjuster adjuster = adjusterList.get(i);
         if (adjuster.onTouch(this, event)) {
-          if (adjuster.type == SuperTextView.Adjuster.TYPE_SYSTEM || isAutoAdjust()) {
+          if (adjuster.type == Adjuster.TYPE_SYSTEM || isAutoAdjust()) {
             hasConsume = true;
             touchAdjusters.add(adjuster);
           }
@@ -1419,7 +1456,7 @@ public class SuperTextView extends TextView {
       }
     } else {
       for (int i = 0; i < touchAdjusters.size(); i++) {
-        SuperTextView.Adjuster adjuster = touchAdjusters.get(i);
+        Adjuster adjuster = touchAdjusters.get(i);
         adjuster.onTouch(this, event);
         hasConsume = true;
       }
@@ -1469,17 +1506,17 @@ public class SuperTextView extends TextView {
 
   /**
    * Adjuster被设计用来在SuperTextView的绘制过程中插入一些操作。
-   * 这具有非常重要的意义。比如，默认实现的{@link SuperTextView.DefaultAdjuster}能够动态的调整文字的大小。
+   * 这具有非常重要的意义。
    * 当然，你可以用它来实现各种各样的效果。
-   * 你可以指定Adjuster的作用层级，通过调用{@link SuperTextView.Adjuster#setOpportunity(SuperTextView.Adjuster.Opportunity)}，
-   * {@link SuperTextView.Adjuster.Opportunity}。默认为{@link SuperTextView.Adjuster.Opportunity#BEFORE_TEXT}。
+   * 你可以指定Adjuster的作用层级，通过调用{@link Adjuster#setOpportunity(Opportunity)}，
+   * {@link Opportunity}。默认为{@link Opportunity#BEFORE_TEXT}。
    */
   public static abstract class Adjuster {
     private static final int TYPE_SYSTEM = 0x001;
     private static final int TYPE_CUSTOM = 0x002;
 
 
-    private SuperTextView.Adjuster.Opportunity opportunity = SuperTextView.Adjuster.Opportunity.BEFORE_TEXT;
+    private Opportunity opportunity = Opportunity.BEFORE_TEXT;
     private int type = TYPE_CUSTOM;
 
     /**
@@ -1508,15 +1545,15 @@ public class SuperTextView extends TextView {
     /**
      * @return Adjuster的作用层级。
      */
-    public SuperTextView.Adjuster.Opportunity getOpportunity() {
+    public Opportunity getOpportunity() {
       return opportunity;
     }
 
     /**
-     * @param opportunity 设置Adjuster的作用层级。{@link SuperTextView.Adjuster.Opportunity}
+     * @param opportunity 设置Adjuster的作用层级。{@link Opportunity}
      * @return 返回Adjuster本身，方便调用。
      */
-    public SuperTextView.Adjuster setOpportunity(SuperTextView.Adjuster.Opportunity opportunity) {
+    public Adjuster setOpportunity(Opportunity opportunity) {
       this.opportunity = opportunity;
       return this;
     }
@@ -1524,7 +1561,7 @@ public class SuperTextView extends TextView {
     /**
      * @hide
      */
-    private SuperTextView.Adjuster setType(int type) {
+    private Adjuster setType(int type) {
       this.type = type;
       return this;
     }
@@ -1535,7 +1572,7 @@ public class SuperTextView extends TextView {
 
     /**
      * Adjuster贴心的设计了控制作用层级的功能。
-     * 你可以通过{@link SuperTextView.Adjuster#setOpportunity(SuperTextView.Adjuster.Opportunity)}来指定Adjuster的绘制层级。
+     * 你可以通过{@link Adjuster#setOpportunity(Opportunity)}来指定Adjuster的绘制层级。
      * 在SuperTextView中，绘制层级被从下到上分为：背景层、Drawable层、文字层3个层级。
      * 通过Opportunity来指定你的Adjuster想要插入到那个层级间。
      */
@@ -1557,7 +1594,7 @@ public class SuperTextView extends TextView {
 
   /**
    * 状态图的显示模式。SuperTextView定义了10中显示模式。它们控制着状态图的相对位置。
-   * 默认为居中，即{@link SuperTextView.DrawableMode#CENTER}。
+   * 默认为居中，即{@link DrawableMode#CENTER}。
    */
   public static enum DrawableMode {
     /**
@@ -1606,8 +1643,8 @@ public class SuperTextView extends TextView {
       this.code = code;
     }
 
-    public static SuperTextView.DrawableMode valueOf(int code) {
-      for (SuperTextView.DrawableMode mode : SuperTextView.DrawableMode.values()) {
+    public static DrawableMode valueOf(int code) {
+      for (DrawableMode mode : DrawableMode.values()) {
         if (mode.code == code) {
           return mode;
         }
@@ -1650,54 +1687,6 @@ public class SuperTextView extends TextView {
         }
       }
       return TOP_TO_BOTTOM;
-    }
-  }
-
-  public static class DefaultAdjuster extends SuperTextView.Adjuster {
-
-    @Override
-    public void adjust(SuperTextView v, Canvas canvas) {
-      int length = v.length();
-      float scale = v.getWidth() / (116.28f * v.getResources().getDisplayMetrics().density);
-      float[] textSizes = {
-              37.21f, 37.21f, 24.81f, 27.9f, 24.81f,
-              22.36f, 18.6f,
-              18.6f
-      };
-      switch (length) {
-        case 1:
-          v.setTextSize(textSizes[0] * scale);
-          break;
-        case 2:
-          v.setTextSize(textSizes[1] * scale);
-          break;
-        case 3:
-          v.setTextSize(textSizes[2] * scale);
-          break;
-        case 4:
-          v.setTextSize(textSizes[3] * scale);
-          break;
-        case 5:
-        case 6:
-          v.setTextSize(textSizes[4] * scale);
-          break;
-        case 7:
-        case 8:
-        case 9:
-          v.setTextSize(textSizes[5] * scale);
-          break;
-        case 10:
-        case 11:
-        case 12:
-          v.setTextSize(textSizes[6] * scale);
-          break;
-        case 13:
-        case 14:
-        case 15:
-        case 16:
-          v.setTextSize(textSizes[7] * scale);
-          break;
-      }
     }
   }
 }

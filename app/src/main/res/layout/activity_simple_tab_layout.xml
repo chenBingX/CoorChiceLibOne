@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    tools:context="com.chenbing.coorchicelibone.Views.SimpleTabLayoutActivity">
+
+    <com.chenbing.coorchicelibone.CustemViews.FliggySimpleTabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:tabSelectedColor="#ffc900"
+        app:tabUnselectedColor="#3d3d3d"
+        app:indicator="#ffc900"
+        />
+
+</LinearLayout>

@@ -1,5 +1,10 @@
 package com.chenbing.coorchicelibone.CustemViews.artist;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,17 +16,11 @@ import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.compat.BuildConfig;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
 import com.chenbing.coorchicelibone.Utils.LogUtils;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import com.chenbing.iceweather.BuildConfig;
 
 /**
  * Created by coorchice on 2017/10/13.

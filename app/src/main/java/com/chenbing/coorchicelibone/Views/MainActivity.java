@@ -3,7 +3,9 @@ package com.chenbing.coorchicelibone.Views;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.os.Handler;
 import com.chenbing.coorchicelibone.AdaptersAndItemViews.Adapters.NavigatorAdapter;
+import com.chenbing.coorchicelibone.ArrowView.ArrowView;
 import com.chenbing.coorchicelibone.CustemViews.CustomDialog.CenterRVDialog;
 import com.chenbing.coorchicelibone.CustemViews.Titanic.Titanic;
 import com.chenbing.coorchicelibone.CustemViews.Titanic.TitanicTextView;
@@ -65,6 +67,8 @@ public class MainActivity extends BaseActivity implements LocationListener {
   Button btn3;
   @BindView(R.id.iv_blur)
   ImageView iv;
+  @BindView(R.id.av)
+  ArrowView av;
 
 
   SsoAuth ssoAuth;
@@ -149,6 +153,10 @@ public class MainActivity extends BaseActivity implements LocationListener {
 
     addActivityToNavigator(FlightFilterActivity.class.getName(), "FlightFilter");
 
+    addActivityToNavigator(AccessibilityActivity.class.getName(), "测试辅助模式");
+
+    addActivityToNavigator(SimpleTabLayoutActivity.class.getName(), "SimpleTabLayout");
+
   }
 
   private void getBitmapAndDisplay() {
@@ -217,6 +225,28 @@ public class MainActivity extends BaseActivity implements LocationListener {
     // }
 
     iv.setImageBitmap(mBitmap);
+
+    new Handler().postDelayed(new Runnable() {
+      @Override
+      public void run() {
+        av.setAngle(0);
+      }
+    }, 3000);
+
+    new Handler().postDelayed(new Runnable() {
+      @Override
+      public void run() {
+        av.asImageView(true);
+        av.setImageResource(R.drawable.app_icon);
+      }
+    }, 5000);
+
+    new Handler().postDelayed(new Runnable() {
+      @Override
+      public void run() {
+        av.asImageView(false);
+      }
+    }, 7000);
   }
 
   @Override

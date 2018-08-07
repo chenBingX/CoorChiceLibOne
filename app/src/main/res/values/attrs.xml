@@ -76,4 +76,27 @@
     <attr name="pressTextColor" format="reference|color"/>
   </declare-styleable>
 
+  <!--ArrowView-->
+  <declare-styleable name="ArrowView">
+    <attr name="av_angle" format="float"/>
+    <attr name="av_arrowColor" format="reference|color"/>
+    <attr name="av_rate" format="float"/>
+    <attr name="av_triangle" format="boolean"/>
+    <attr name="av_arrowWidth" format="dimension"/>
+    <attr name="av_paddingBottom" format="dimension"/>
+    <attr name="av_paddingLeft" format="dimension"/>
+    <attr name="av_paddingRight" format="dimension"/>
+    <attr name="av_paddingTop" format="dimension"/>
+    <attr name="av_asImageView" format="boolean"/>
+  </declare-styleable>
+
+
+  <!--FliggySimpleTabLayout-->
+  <declare-styleable name="FliggySimpleTabLayout">
+    <attr name="indicator" format="reference|color"/>
+    <attr name="tabSelectedColor" format="reference|color"/>
+    <attr name="tabUnselectedColor" format="reference|color"/>
+    <attr name="tabTextSize" format="dimension"/>
+  </declare-styleable>
+
 </resources>
