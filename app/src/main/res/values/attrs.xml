@@ -92,11 +92,20 @@
 
 
   <!--FliggySimpleTabLayout-->
-  <declare-styleable name="FliggySimpleTabLayout">
+  <declare-styleable name="SimpleTabLayout">
     <attr name="indicator" format="reference|color"/>
     <attr name="tabSelectedColor" format="reference|color"/>
     <attr name="tabUnselectedColor" format="reference|color"/>
     <attr name="tabTextSize" format="dimension"/>
+  </declare-styleable>
+
+  <!--SelectTextView-->
+  <declare-styleable name="SelectTextView">
+    <attr name="sltv_selectedColor" format="reference|color"/>
+    <attr name="sltv_unselectedColor" format="reference|color"/>
+    <attr name="sltv_triangleColor" format="reference|color"/>
+    <attr name="sltv_isSelected" format="reference|boolean"/>
+    <attr name="sltv_corner" format="dimension"/>
   </declare-styleable>
 
 </resources>

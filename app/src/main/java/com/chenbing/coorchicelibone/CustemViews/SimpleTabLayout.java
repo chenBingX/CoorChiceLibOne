@@ -30,7 +30,7 @@ import com.chenbing.iceweather.R;
  * @date 2018/08/03
  */
 
-public class FliggySimpleTabLayout extends LinearLayout {
+public class SimpleTabLayout extends LinearLayout {
 
     private LinearLayout tabContainer;
     private View indicator;
@@ -48,18 +48,18 @@ public class FliggySimpleTabLayout extends LinearLayout {
     private static float density = Resources.getSystem().getDisplayMetrics().density;
     private boolean isFirst = true;
 
-    public FliggySimpleTabLayout(Context context) {
+    public SimpleTabLayout(Context context) {
         super(context);
         init(null);
     }
 
-    public FliggySimpleTabLayout(Context context, @Nullable AttributeSet attrs) {
+    public SimpleTabLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
 
     }
 
-    public FliggySimpleTabLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public SimpleTabLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
@@ -78,16 +78,16 @@ public class FliggySimpleTabLayout extends LinearLayout {
         addView(indicator, lp);
 
         if (attrs != null) {
-            TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.FliggySimpleTabLayout);
-            selectedColor = typedArray.getColor(R.styleable.FliggySimpleTabLayout_tabSelectedColor,
+            TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.SimpleTabLayout);
+            selectedColor = typedArray.getColor(R.styleable.SimpleTabLayout_tabSelectedColor,
                 Color.parseColor("#3d3d3d"));
-            unselectedColor = typedArray.getColor(R.styleable.FliggySimpleTabLayout_tabUnselectedColor,
+            unselectedColor = typedArray.getColor(R.styleable.SimpleTabLayout_tabUnselectedColor,
                 Color.parseColor("#3d3d3d"));
-            Drawable drawable = typedArray.getDrawable(R.styleable.FliggySimpleTabLayout_indicator);
+            Drawable drawable = typedArray.getDrawable(R.styleable.SimpleTabLayout_indicator);
             if (drawable != null) {
                 indicator.setBackground(drawable);
             }
-            tabTextSize = typedArray.getDimension(R.styleable.FliggySimpleTabLayout_tabTextSize, 14);
+            tabTextSize = typedArray.getDimension(R.styleable.SimpleTabLayout_tabTextSize, 14);
             typedArray.recycle();
         }
 

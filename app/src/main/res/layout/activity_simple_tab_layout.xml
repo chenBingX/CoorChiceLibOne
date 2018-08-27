@@ -4,16 +4,80 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="45dp"
-    tools:context="com.chenbing.coorchicelibone.Views.SimpleTabLayoutActivity">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.chenbing.coorchicelibone.Views.SimpleTabLayoutActivity"
+    >
 
-    <com.chenbing.coorchicelibone.CustemViews.FliggySimpleTabLayout
+    <com.chenbing.coorchicelibone.CustemViews.SimpleTabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="45dp"
+        app:indicator="#ffc900"
         app:tabSelectedColor="#ffc900"
         app:tabUnselectedColor="#3d3d3d"
-        app:indicator="#ffc900"
         />
 
+    <com.chenbing.coorchicelibone.CustemViews.SelectTextView
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="测试"
+        app:sltv_corner="5dp"
+        app:sltv_isSelected="false"
+        />
+
+    <FrameLayout
+        android:layout_width="40dp"
+        android:layout_height="28dp">
+
+        <Switch
+            android:id="@+id/s_fliggy_buy_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:switchMinWidth="15dp"
+            android:textOff=""
+            android:textOn=""
+            android:thumb="@drawable/thumb_fliggy_buy_switch"
+            android:track="@drawable/bg_fliggy_buy_switch_thumb"
+            />
+    </FrameLayout>
+
+
+    <com.coorchice.library.SuperTextView
+        android:id="@+id/stv"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        app:autoAdjust="true"
+        app:corner="3dp"
+        app:solid="@color/blue"
+        app:stroke_color="#FCA500"
+        app:stroke_width="0.5dp"
+        android:text="测试文字"
+        android:gravity="center"
+        />
+
+    <View
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="80dp"
+        android:background="@color/colorAccent" />
+
+    <com.coorchice.library.SuperTextView
+        android:id="@+id/stv_2"
+        android:layout_width="90dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        app:autoAdjust="true"
+        app:corner="15dp"
+        app:solid="@color/gray"
+        app:stroke_color="#FCA500"
+        app:stroke_width="1dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        />
 </LinearLayout>
