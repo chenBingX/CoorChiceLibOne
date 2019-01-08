@@ -52,19 +52,22 @@
         android:layout_width="130dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
-        app:autoAdjust="true"
-        app:corner="3dp"
-        app:solid="@color/blue"
-        app:stroke_color="#FCA500"
-        app:stroke_width="0.5dp"
+        app:stv_autoAdjust="true"
+        app:stv_corner="3dp"
+        app:stv_solid="@color/blue"
+        app:stv_stroke_color="#FCA500"
+        app:stv_stroke_width="0.5dp"
         android:text="测试文字"
         android:gravity="center"
         />
 
-    <View
+    <TextView
         android:layout_width="360dp"
         android:layout_height="50dp"
         android:layout_marginTop="80dp"
+        android:text="文案文案文案文案文案文案案文案文案文案文案文"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
         android:background="@color/colorAccent" />
 
     <com.coorchice.library.SuperTextView

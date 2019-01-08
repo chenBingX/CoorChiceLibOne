@@ -18,7 +18,7 @@ public class IceApplication extends MultiDexApplication {
 
     @Override
     public void onCreate() {
-        DensityBoss.get().config(this, 360, true);
+        DensityBoss.newInstance().config(this, 360, true);
         super.onCreate();
         context = this;
         //初始化异常处理类

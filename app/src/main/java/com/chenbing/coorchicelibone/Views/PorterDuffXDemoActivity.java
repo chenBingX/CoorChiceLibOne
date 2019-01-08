@@ -69,10 +69,10 @@ public class PorterDuffXDemoActivity extends BaseActivity {
     lpNative.height = DisplayUtils.getScreenWidth();
 
     tvBitmap.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-    tvBitmap.setAdjuster(new PorterDuffAdjuster(TYPE_BITMAP));
+    tvBitmap.addAdjuster(new PorterDuffAdjuster(TYPE_BITMAP));
     tvBitmap.setAutoAdjust(true);
 
-    tvNative.setAdjuster(new PorterDuffAdjuster(TYPE_NATIVE));
+    tvNative.addAdjuster(new PorterDuffAdjuster(TYPE_NATIVE));
     tvNative.setAutoAdjust(true);
   }
 

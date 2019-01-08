@@ -3,6 +3,8 @@ package com.chenbing.coorchicelibone.Views;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.Color;
+import android.hardware.display.DisplayManager;
 import android.os.Handler;
 
 import com.chenbing.coorchicelibone.AdaptersAndItemViews.Adapters.NavigatorAdapter;
@@ -10,6 +12,7 @@ import com.chenbing.coorchicelibone.ArrowView.ArrowView;
 import com.chenbing.coorchicelibone.CustemViews.CustomDialog.CenterRVDialog;
 import com.chenbing.coorchicelibone.CustemViews.Titanic.Titanic;
 import com.chenbing.coorchicelibone.CustemViews.Titanic.TitanicTextView;
+import com.chenbing.coorchicelibone.CustemViews.span.TagSpan;
 import com.chenbing.coorchicelibone.Datas.Navigator;
 import com.chenbing.coorchicelibone.Utils.AppUtils;
 import com.chenbing.coorchicelibone.Utils.BitmapUtils;
@@ -42,10 +45,14 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,6 +69,8 @@ public class MainActivity extends BaseActivity implements LocationListener {
 
     @BindView(R.id.titanic_options)
     TitanicTextView btnOptions;
+    @BindView(R.id.tv)
+    TextView tv;
     @BindView(R.id.bt1)
     Button btn1;
     @BindView(R.id.bt2)
@@ -84,13 +93,17 @@ public class MainActivity extends BaseActivity implements LocationListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DensityBoss.get().open(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initData();
         initView();
         addListener();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -161,6 +174,8 @@ public class MainActivity extends BaseActivity implements LocationListener {
 
         addActivityToNavigator(SimpleTabLayoutActivity.class.getName(), "SimpleTabLayout");
 
+        addActivityToNavigator(SplitVerificationCodeActivity.class.getName(), "分割验证码");
+
     }
 
     private void getBitmapAndDisplay() {
@@ -205,6 +220,9 @@ public class MainActivity extends BaseActivity implements LocationListener {
     protected void initView() {
         new Titanic().start(btnOptions);
 
+        SpannableString 文案 = new SpannableString("文案文案文案文案文案文案");
+        文案.setSpan(new TagSpan(Color.RED, Color.RED, DisplayUtils.dipToPx(5), DisplayUtils.dipToPx(3)), 0, 5, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        tv.setText(文案);
         // LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         // if (ActivityCompat.checkSelfPermission(this,
         // Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED

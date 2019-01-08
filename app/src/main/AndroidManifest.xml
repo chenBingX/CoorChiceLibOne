@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.chenbing.iceweather">
+    package="com.chenbing.iceweather">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.READ_LOGS"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.DIAGNOSTIC"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.DIAGNOSTIC" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
-    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:name="com.chenbing.coorchicelibone.IceApplication"
@@ -32,48 +32,47 @@
             android:name="com.chenbing.coorchicelibone.Views.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.chenbing.coorchicelibone.Views.TableActivity"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.SideSlipListActivity"/>
+        <activity android:name="com.chenbing.coorchicelibone.Views.TableActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.SideSlipListActivity" />
         <activity
             android:name="com.chenbing.coorchicelibone.Views.DrawTextActivity"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.HeaderFooterRecyclerViewActivity"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.CrackPasswordActivity"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.CustomLayoutManagerActivity"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.DraggerRecyclerViewActivity"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.WindowActivity"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.WebActivity"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.HorizontalPinterestActivity"/>
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.HeaderFooterRecyclerViewActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.CrackPasswordActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.CustomLayoutManagerActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.DraggerRecyclerViewActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.WindowActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.WebActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.HorizontalPinterestActivity" />
         <activity
             android:name="com.chenbing.coorchicelibone.Views.TabActivity"
             android:label="@string/title_activity_tab"
-            android:theme="@style/AppTheme"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.RxJavaActivity"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.RoundCornerTextViewActivity"/>
+            android:theme="@style/AppTheme" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.RxJavaActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.RoundCornerTextViewActivity" />
         <activity
             android:name="com.chenbing.coorchicelibone.Views.TaskActivity_A"
-            android:launchMode="singleTask"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.TaskActivity_B"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.TaskActivity_C"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.CalendarActivity"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.ThreadActivity"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.CameraActivity"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.SquareLayoutActivity"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.AnalyzeViewFrameworkActivity"/>
+            android:launchMode="singleTask" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.TaskActivity_B" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.TaskActivity_C" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.CalendarActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.ThreadActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.CameraActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.SquareLayoutActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.AnalyzeViewFrameworkActivity" />
         <activity
             android:name="com.chenbing.coorchicelibone.Views.CameraDemoActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.PorterDuffXDemoActivity"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.FlightFilterActivity"/>
-        <activity android:name="com.chenbing.coorchicelibone.Views.AccessibilityActivity">
-        </activity>
-        <activity android:name="com.chenbing.coorchicelibone.Views.SimpleTabLayoutActivity">
-        </activity>
+            android:screenOrientation="portrait" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.PorterDuffXDemoActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.FlightFilterActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.AccessibilityActivity"></activity>
+        <activity android:name="com.chenbing.coorchicelibone.Views.SimpleTabLayoutActivity"></activity>
+        <activity android:name="com.chenbing.coorchicelibone.Views.SplitVerificationCodeActivity"></activity>
     </application>
 
 </manifest>

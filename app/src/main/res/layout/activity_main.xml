@@ -9,11 +9,15 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.chenbing.coorchicelibone.Views.MainActivity">
 
-    <View
+    <TextView
+        android:id="@+id/tv"
         android:layout_width="360dp"
         android:layout_height="50dp"
         android:layout_marginTop="80dp"
-        android:background="@color/colorAccent" />
+        android:text="文案文案文案文案文案文案案文案文案文案文案文"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        />
 
     <com.chenbing.coorchicelibone.CustemViews.Titanic.TitanicTextView
         android:id="@+id/titanic_options"

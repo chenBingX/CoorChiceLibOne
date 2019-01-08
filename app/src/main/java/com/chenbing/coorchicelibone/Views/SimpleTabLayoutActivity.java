@@ -21,7 +21,6 @@ public class SimpleTabLayoutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DensityBoss.get().close(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_tab_layout);
 
@@ -40,7 +39,7 @@ public class SimpleTabLayoutActivity extends AppCompatActivity {
         stv.setShaderEnable(true);
         stv.setShaderStartColor(Color.parseColor("#ffdc00"));
         stv.setShaderEndColor(Color.parseColor("#ffc900"));
-        stv.setShaderMode(ShaderMode.LEFT_TO_RIGHT.code);
+        stv.setShaderMode(ShaderMode.LEFT_TO_RIGHT);
         stv.addAdjuster(new BtnAddPassengerAdjuster(Color.BLACK, 8, 9));
 
         stv2.addAdjuster(new SwitchAdjuster());
