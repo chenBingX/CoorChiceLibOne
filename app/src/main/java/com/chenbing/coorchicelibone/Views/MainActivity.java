@@ -176,6 +176,8 @@ public class MainActivity extends BaseActivity implements LocationListener {
 
         addActivityToNavigator(SplitVerificationCodeActivity.class.getName(), "分割验证码");
 
+        addActivityToNavigator(AnnotationActivity.class.getName(), "注解ButterKnife");
+
     }
 
     private void getBitmapAndDisplay() {

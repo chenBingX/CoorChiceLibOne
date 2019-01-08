@@ -70,9 +70,10 @@
             android:screenOrientation="portrait" />
         <activity android:name="com.chenbing.coorchicelibone.Views.PorterDuffXDemoActivity" />
         <activity android:name="com.chenbing.coorchicelibone.Views.FlightFilterActivity" />
-        <activity android:name="com.chenbing.coorchicelibone.Views.AccessibilityActivity"></activity>
-        <activity android:name="com.chenbing.coorchicelibone.Views.SimpleTabLayoutActivity"></activity>
-        <activity android:name="com.chenbing.coorchicelibone.Views.SplitVerificationCodeActivity"></activity>
+        <activity android:name="com.chenbing.coorchicelibone.Views.AccessibilityActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.SimpleTabLayoutActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.SplitVerificationCodeActivity" />
+        <activity android:name="com.chenbing.coorchicelibone.Views.AnnotationActivity"></activity>
     </application>
 
 </manifest>
