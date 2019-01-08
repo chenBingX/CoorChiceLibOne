@@ -141,8 +141,8 @@ public class MainActivity extends BaseActivity implements LocationListener {
         addActivityToNavigator(TableActivity.class.getName(),
                 getString(R.string.table_activity));
 
-        addActivityToNavigator(WebActivity.class.getName(),
-                getString(R.string.web_view));
+//        addActivityToNavigator(WebActivity.class.getName(),
+//                getString(R.string.web_view));
 
         addActivityToNavigator(HorizontalPinterestActivity.class.getName(),
                 getString(R.string.horizontal_pinterest_activity));
