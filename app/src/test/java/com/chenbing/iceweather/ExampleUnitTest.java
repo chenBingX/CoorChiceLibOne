@@ -1,7 +1,10 @@
 package com.chenbing.iceweather;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -225,5 +228,24 @@ public class ExampleUnitTest {
             = "https://h5.m.taobao.com/trip/rx-pay-success/index/index.html?_wx_tpl=https%3A%2F%2Fh5.m.taobao"
             + ".com%2Ftrip%2Frx-pay-success%2Findex%2Findex.weex.js&bizType=%s&multiOrderIdList=%s";
         System.out.println(sb);
+    }
+
+    @org.junit.Test
+    public void testTType(){
+        TestClass.test(new TestClass.Listener<TestClass.T1>() {
+            @Override
+            public void on(TestClass.T1 data) {
+                System.out.println("r = " + data.p);
+            }
+        });
+    }
+
+    @org.junit.Test
+    public void decodeURL(){
+        try {
+            System.out.println(URLDecoder.decode("sub_trigger=FlightSearch,vercodeUrl+=+http%3A%2F%2Fjipiao-fuying.cn-hangzhou.oss-pub.aliyun-inc.com%2Ffltch%2F0483aee1-0efb-4af8-844f-5d0ae7ff0fef.png%2C+mRealCode+%3D+6316%2C+alinn_code+%3D+null%2C+isSuccess+%3D+false,trigger=Home_Index", "utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 }

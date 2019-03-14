@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.graphics.Color;
-import android.hardware.display.DisplayManager;
 import android.os.Handler;
 
 import com.chenbing.coorchicelibone.AdaptersAndItemViews.Adapters.NavigatorAdapter;
@@ -16,7 +15,6 @@ import com.chenbing.coorchicelibone.CustemViews.span.TagSpan;
 import com.chenbing.coorchicelibone.Datas.Navigator;
 import com.chenbing.coorchicelibone.Utils.AppUtils;
 import com.chenbing.coorchicelibone.Utils.BitmapUtils;
-import com.chenbing.coorchicelibone.Utils.DensityBoss;
 import com.chenbing.coorchicelibone.Utils.DisplayUtils;
 import com.chenbing.coorchicelibone.Utils.LogUtils;
 import com.chenbing.coorchicelibone.Utils.RenderScriptGaussianBlur;
@@ -47,8 +45,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -178,6 +174,7 @@ public class MainActivity extends BaseActivity implements LocationListener {
 
         addActivityToNavigator(AnnotationActivity.class.getName(), "注解ButterKnife");
 
+        addActivityToNavigator(FlutterDemoActivity.class.getName(), "Flutter页面");
     }
 
     private void getBitmapAndDisplay() {

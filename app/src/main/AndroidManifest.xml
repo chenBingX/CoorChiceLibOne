@@ -28,6 +28,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name="com.chenbing.coorchicelibone.Views.FlutterDemoActivity"
+            ></activity>
         <activity
             android:name="com.chenbing.coorchicelibone.Views.MainActivity"
             android:screenOrientation="portrait">
@@ -73,7 +75,7 @@
         <activity android:name="com.chenbing.coorchicelibone.Views.AccessibilityActivity" />
         <activity android:name="com.chenbing.coorchicelibone.Views.SimpleTabLayoutActivity" />
         <activity android:name="com.chenbing.coorchicelibone.Views.SplitVerificationCodeActivity" />
-        <activity android:name="com.chenbing.coorchicelibone.Views.AnnotationActivity"></activity>
+        <activity android:name="com.chenbing.coorchicelibone.Views.AnnotationActivity" />
     </application>
 
 </manifest>
