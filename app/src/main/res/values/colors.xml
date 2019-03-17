@@ -55,7 +55,7 @@
   <color name="opacity_9_green">#e600ff00</color>
   
   <!--Pink-->
-  <color name="pink">	#FFC0CB</color>
+  <color name="pink">#FFC0CB</color>
 
   <!--gray-->
   <color name="gray">#BEBEBE</color>
@@ -84,6 +84,7 @@
   <color name="opacity_9_a233be">#ccA233BE</color>
   <color name="a233be">#A233BE</color>
 
+  <color name="test">#FF342A</color>
 
 
 </resources>

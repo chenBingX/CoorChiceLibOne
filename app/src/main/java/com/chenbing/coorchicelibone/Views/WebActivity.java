@@ -68,21 +68,22 @@ public class WebActivity extends AppCompatActivity {
 //    urls.add("http://www.jianshu.com/p/14d6aa8c026d");
 //    urls.add("http://www.jianshu.com/p/7b2fdb182eba");
 //    urls.add("http://www.jianshu.com/p/2a17572cf2c4");
-    urls.add("http://www.jianshu.com/p/beddc8c8bbca");
-
-    urls.add("http://www.jianshu.com/p/dbc05cee9f87");
-    urls.add("http://www.jianshu.com/p/c5708834b601");
-    urls.add("http://www.jianshu.com/p/cbb563529e01");
+//    urls.add("http://www.jianshu.com/p/beddc8c8bbca");
+//
+//    urls.add("http://www.jianshu.com/p/dbc05cee9f87");
+//    urls.add("http://www.jianshu.com/p/c5708834b601");
+//    urls.add("http://www.jianshu.com/p/cbb563529e01");
 
     //app
-    urls.add("http://www.jianshu.com/p/968b3aa57d4d");
-    urls.add("http://www.jianshu.com/p/4170361c5a7e");
-    urls.add("http://www.jianshu.com/p/d2f15c788aa6");
-    urls.add("http://www.jianshu.com/p/dca0d01134fe");
-    urls.add("http://www.jianshu.com/p/488d9674c8b4");
-    urls.add("http://www.jianshu.com/p/06a28e86f073");
+//    urls.add("http://www.jianshu.com/p/968b3aa57d4d");
+//    urls.add("http://www.jianshu.com/p/4170361c5a7e");
+//    urls.add("http://www.jianshu.com/p/d2f15c788aa6");
+//    urls.add("http://www.jianshu.com/p/dca0d01134fe");
+//    urls.add("http://www.jianshu.com/p/488d9674c8b4");
+//    urls.add("http://www.jianshu.com/p/06a28e86f073");
 
 
+//    urls.add("https://blog.csdn.net/qq_31370269/article/details/85779210");
   }
 
   private void initView() {

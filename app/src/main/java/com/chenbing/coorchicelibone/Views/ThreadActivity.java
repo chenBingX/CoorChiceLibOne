@@ -18,7 +18,7 @@ public class ThreadActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     count++;
     setContentView(R.layout.activity_thread);
-    Log.e("ThreadActivity", " -> onCreate: count = " + count);
+    Log.e("ThreadActivity", " -> onCreate: itemCount = " + count);
     Thread mainThread = Thread.currentThread();
     Thread newThread = new Thread(()->{
       try {

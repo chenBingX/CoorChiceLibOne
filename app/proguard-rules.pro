@@ -87,8 +87,8 @@
 -keep class android.support.v4.** { *; }
 
 -keep class com.blinnnk.kratos.animation.** {*;}
--keep class com.blinnnk.kratos.data.api.request.** {*;}
--keep class com.blinnnk.kratos.data.api.response.** {*;}
+-keep class com.blinnnk.kratos.datas.api.request.** {*;}
+-keep class com.blinnnk.kratos.datas.api.response.** {*;}
 -keep class **.R$* {*;}
 -keep class **.R{*;}
 -keep class **.R

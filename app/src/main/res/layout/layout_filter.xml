@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#f2f3f4"
+    android:orientation="vertical">
+
+    <!--头部-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="取消"
+            android:textColor="#3d3d3d"
+            android:textSize="16sp" />
+
+        <!--<View-->
+            <!--android:layout_width="0.5dp"-->
+            <!--android:layout_height="27dp"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_toRightOf="@+id/tv_cancel"-->
+            <!--android:background="#525f6f" />-->
+
+
+        <TextView
+            android:id="@+id/tv_result_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="共101个结果"
+            android:textColor="#3d3d3d"
+            android:textSize="16sp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            />
+
+        <!--<View-->
+            <!--android:layout_width="0.5dp"-->
+            <!--android:layout_height="27dp"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:layout_toLeftOf="@+id/tv_confirm"-->
+            <!--android:background="#525f6f" />-->
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="确定"
+            android:textColor="#3d3d3d"
+            android:textSize="16sp"
+
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#e0e0e0" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_conditions"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#e0e0e0" />
+
+    <!--中部操作条-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff"
+        >
+
+        <CheckBox
+            android:id="@+id/cb_left"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/checkbox_v1"
+            android:button="@null"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="有发票"
+            android:textColor="#343434"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/cb_left"
+            android:layout_marginLeft="12dp"
+            />
+
+
+        <CheckBox
+            android:id="@+id/cb_right"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/checkbox_v1"
+            android:button="@null"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="隐藏共享航班"
+            android:textColor="#343434"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/cb_right"
+            android:layout_marginRight="12dp"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#e0e0e0" />
+
+    <!--筛选列表-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="277dp"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_left"
+            android:layout_width="119dp"
+            android:layout_height="match_parent" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:paddingLeft="9.3dp"
+            />
+    </LinearLayout>
+</LinearLayout>

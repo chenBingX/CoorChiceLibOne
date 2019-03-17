@@ -1,23 +1,23 @@
 <resources>
-  <string name="app_name">代码演示库1</string>
-  <string name="side_slip_list_test_string">马达加斯加企鹅</string>
+    <string name="app_name">代码演示库1</string>
+    <string name="side_slip_list_test_string">马达加斯加企鹅</string>
 
-  <!--项目名称-->
-  <string name="name_draw_activity">画布</string>
-  <string name="name_side_slip_list_activity">侧滑ListView</string>
-  <string name="name_draw_text_activity">文字绘制的各种效果</string>
-  <string name="header_footer_activity">头脚Activity</string>
-  <string name="track_password">破解密码</string>
-  <string name="custom_layout_manager">自定义LayoutManager</string>
-  <string name="dragger_rv">可拖拽RecyclerView</string>
-  <string name="window_demo">Window的Demo</string>
-  <string name="main_button1">遍历更新</string>
-  <string name="main_button2">Blur</string>
-  <string name="main_button3">Button3</string>
-  <string name="table_activity">绘制Activity-有个表格</string>
-  <string name="web_view">WebView</string>
-  <string name="horizontal_pinterest_activity">水平瀑布流</string>
-  <string name="title_activity_tab">TabActivity</string>
-  <string name="action_settings">Settings</string>
-  <string name="section_format">Hello World from section: %1$d</string>
+    <!--项目名称-->
+    <string name="name_draw_activity">画布</string>
+    <string name="name_side_slip_list_activity">侧滑ListView</string>
+    <string name="name_draw_text_activity">文字绘制的各种效果</string>
+    <string name="header_footer_activity">头脚Activity</string>
+    <string name="track_password">破解密码</string>
+    <string name="custom_layout_manager">自定义LayoutManager</string>
+    <string name="dragger_rv">可拖拽RecyclerView</string>
+    <string name="window_demo">Window的Demo</string>
+    <string name="main_button1">遍历更新</string>
+    <string name="main_button2">Blur</string>
+    <string name="main_button3">Button3</string>
+    <string name="table_activity">绘制Activity-有个表格</string>
+    <string name="web_view">WebView</string>
+    <string name="horizontal_pinterest_activity">水平瀑布流</string>
+    <string name="title_activity_tab">TabActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
