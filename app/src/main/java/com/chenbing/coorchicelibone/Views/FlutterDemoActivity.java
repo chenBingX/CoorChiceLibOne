@@ -31,11 +31,12 @@ public class FlutterDemoActivity extends AppCompatActivity {
         // 第一帧绘制好后在显示，避免黑屏
         ((FlutterView) flutterView).addFirstFrameListener(() -> root.setVisibility(View.VISIBLE));
 
-        new MethodChannel(flutterView, FlutterChannel).setMethodCallHandler((methodCall, result) -> {
-            if (methodCall.method.equals("finish")) {
-                finish();
-                result.success("success");
+        MethodChannel channel = new MethodChannel(flutterView, FlutterChannel);
+        channel.setMethodCallHandler((methodCall, result) -> {
+            if (methodCall.method.equals("bar")) {
+                result.success("success, " + methodCall.arguments);
             }
         });
+        channel.invokeMethod("update", "Hi, I'm Native!");
     }
 }
