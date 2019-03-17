@@ -69,10 +69,10 @@ public class PorterDuffXDemoActivity extends BaseActivity {
     lpNative.height = DisplayUtils.getScreenWidth();
 
     tvBitmap.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-    tvBitmap.setAdjuster(new PorterDuffAdjuster(TYPE_BITMAP));
+    tvBitmap.addAdjuster(new PorterDuffAdjuster(TYPE_BITMAP));
     tvBitmap.setAutoAdjust(true);
 
-    tvNative.setAdjuster(new PorterDuffAdjuster(TYPE_NATIVE));
+    tvNative.addAdjuster(new PorterDuffAdjuster(TYPE_NATIVE));
     tvNative.setAutoAdjust(true);
   }
 
@@ -204,6 +204,25 @@ public class PorterDuffXDemoActivity extends BaseActivity {
 
   public static PorterDuffXfermode getXfermode(PorterDuff.Mode mode) {
     return new PorterDuffXfermode(mode);
+  }
+
+
+  public static class MyAdjuster extends SuperTextView.Adjuster{
+
+    @Override
+    protected void adjust(SuperTextView superTextView, Canvas canvas) {
+
+    }
+
+    @Override
+    public void onAttach(SuperTextView stv) {
+      // 当 Adjuster 被加入一个 SuperTextView 时会被调用
+    }
+
+    @Override
+    public void onDetach(SuperTextView stv) {
+      // 当 Adjuster 被从 SuperTextView 移除时会被调用
+    }
   }
 
 }

@@ -34,7 +34,7 @@
       android:layout_width="match_parent"
       android:layout_height="250dp"
       android:layout_below="@+id/title_bitmap"
-      app:solid="#76b2a6"
+      app:stv_solid="#76b2a6"
       />
 
     <TextView
@@ -56,8 +56,7 @@
       android:layout_width="match_parent"
       android:layout_height="250dp"
       android:layout_below="@+id/title_native"
-      app:solid="#76b2a6"
-
+      app:stv_solid="#76b2a6"
       />
 
   </RelativeLayout>

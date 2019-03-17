@@ -53,15 +53,15 @@
 
   </LinearLayout>
 
-  <com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView
-    android:id="@+id/focus_square"
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    android:visibility="gone"
-    tools:visibility="visible"
-    app:solid="@color/transparent"
-    app:stroke_width="1dp"
-    app:stroke_color="@color/red"
-    />
+  <!--<com.chenbing.coorchicelibone.CustemViews.RoundCornerTextView-->
+    <!--android:id="@+id/focus_square"-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:visibility="gone"-->
+    <!--tools:visibility="visible"-->
+    <!--app:solid="@color/transparent"-->
+    <!--app:stroke_width="1dp"-->
+    <!--app:stroke_color="@color/red"-->
+    <!--/>-->
 
 </RelativeLayout>

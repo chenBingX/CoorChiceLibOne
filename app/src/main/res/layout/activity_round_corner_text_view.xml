@@ -17,8 +17,8 @@
     android:gravity="center"
     android:text="圆角矩形"
     android:textSize="8sp"
-    app:corner="5dp"
-    app:solid="@color/red"
+    app:stv_corner="5dp"
+    app:stv_solid="@color/red"
     />
 
 
@@ -31,9 +31,9 @@
     android:gravity="center"
     android:text="边框"
     android:textSize="8sp"
-    app:solid="@color/pink"
-    app:stroke_color="@color/opacity_7_yellow"
-    app:stroke_width="5dp"
+    app:stv_solid="@color/pink"
+    app:stv_stroke_color="@color/opacity_7_yellow"
+    app:stv_stroke_width="5dp"
     />
 
   <com.coorchice.library.SuperTextView
@@ -45,10 +45,10 @@
     android:gravity="center"
     android:text="圆角边框"
     android:textSize="8sp"
-    app:solid="@color/pink"
-    app:stroke_color="@color/opacity_1_black"
-    app:stroke_width="5dp"
-    app:corner="5dp"
+    app:stv_solid="@color/pink"
+    app:stv_stroke_color="@color/opacity_1_black"
+    app:stv_stroke_width="5dp"
+    app:stv_corner="5dp"
     />
 
   <com.coorchice.library.SuperTextView
@@ -60,8 +60,8 @@
     android:text="圆形"
     android:textSize="8sp"
     android:gravity="center"
-    app:corner="25dp"
-    app:solid="@color/blue"/>
+    app:stv_corner="25dp"
+    app:stv_solid="@color/blue"/>
 
   <com.coorchice.library.SuperTextView
     android:id="@+id/rctv_5"
@@ -72,10 +72,10 @@
     android:text="边框圆形"
     android:textSize="8sp"
     android:gravity="center"
-    app:corner="25dp"
-    app:solid="@color/blue"
-    app:stroke_color="@color/opacity_5_red"
-    app:stroke_width="5dp"
+    app:stv_corner="25dp"
+    app:stv_solid="@color/blue"
+    app:stv_stroke_color="@color/opacity_5_red"
+    app:stv_stroke_width="5dp"
     />
 
   <com.coorchice.library.SuperTextView
@@ -89,10 +89,10 @@
     android:text="圆环"
     android:textSize="8sp"
     android:gravity="center"
-    app:corner="25dp"
-    app:solid="@color/transparent"
-    app:stroke_color="@color/black"
-    app:stroke_width="2dp"
+    app:stv_corner="25dp"
+    app:stv_solid="@color/transparent"
+    app:stv_stroke_color="@color/black"
+    app:stv_stroke_width="2dp"
     />
 
   <com.coorchice.library.SuperTextView
@@ -107,11 +107,11 @@
     android:textSize="8sp"
     android:textColor="@color/black"
     android:gravity="bottom|center"
-    app:corner="5dp"
-    app:solid="@color/opacity_5_red"
-    app:state_drawable="@drawable/vector_emoji_1"
-    app:isShowState="true"
-    app:state_drawable_mode="center"
+    app:stv_corner="5dp"
+    app:stv_solid="@color/opacity_5_red"
+    app:stv_state_drawable="@drawable/vector_emoji_1"
+    app:stv_isShowState="true"
+    app:stv_state_drawable_mode="center"
 
     />
 
@@ -123,11 +123,11 @@
     android:layout_marginTop="10dp"
     android:text="空心文字"
     android:gravity="center"
-    app:text_stroke="true"
-    app:text_stroke_color="@color/red"
-    app:text_stroke_width="0.1dp"
-    app:text_fill_color="@color/transparent"
-    app:autoAdjust="true"
+    app:stv_text_stroke="true"
+    app:stv_text_stroke_color="@color/red"
+    app:stv_text_stroke_width="0.1dp"
+    app:stv_text_fill_color="@color/transparent"
+    app:stv_autoAdjust="true"
     />
 
   <com.coorchice.library.SuperTextView
@@ -140,11 +140,11 @@
     android:layout_marginLeft="10dp"
     android:text="描边文字"
     android:gravity="center"
-    app:text_stroke="true"
-    app:text_stroke_color="@color/black"
-    app:text_stroke_width="1dp"
-    app:text_fill_color="@color/blue"
-    app:autoAdjust="true"
+    app:stv_text_stroke="true"
+    app:stv_text_stroke_color="@color/black"
+    app:stv_text_stroke_width="1dp"
+    app:stv_text_fill_color="@color/blue"
+    app:stv_autoAdjust="true"
     />
 
   <com.coorchice.library.SuperTextView
@@ -156,13 +156,13 @@
     android:textSize="8sp"
     android:gravity="center"
     android:textColor="@color/black"
-    app:corner="10dp"
-    app:solid="@color/opacity_1_black"
-    app:autoAdjust="true"
-    app:left_top_corner="true"
-    app:right_top_corner="true"
-    app:stroke_width="10dp"
-    app:stroke_color="@color/blue"
+    app:stv_corner="10dp"
+    app:stv_solid="@color/opacity_1_black"
+    app:stv_autoAdjust="true"
+    app:stv_left_top_corner="true"
+    app:stv_right_top_corner="true"
+    app:stv_stroke_width="10dp"
+    app:stv_stroke_color="@color/blue"
     android:layout_alignTop="@+id/rctv_7"
     android:layout_alignStart="@+id/rctv_4"/>
 
@@ -175,8 +175,8 @@
     android:paddingRight="@dimen/smallest_margin_size"
     android:textColor="@color/white"
     android:textSize="@dimen/small_title_size"
-    app:corner="9dp"
-    app:solid="@color/purple"
+    app:stv_corner="9dp"
+    app:stv_solid="@color/purple"
     android:text="dadadadadadad"
     android:layout_alignTop="@+id/rctv_10"
     android:layout_alignStart="@+id/rctv_3"

@@ -28,7 +28,7 @@ public class RoundCornerTextViewActivity extends AppCompatActivity {
     setContentView(R.layout.activity_round_corner_text_view);
     ButterKnife.bind(this);
 
-    tv11.setAdjuster(new SuperTextView.Adjuster() {
+    tv11.addAdjuster(new SuperTextView.Adjuster() {
       private PorterDuffXfermode xfermode = new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP);
       private float totalWidth = 25f;
       private float startLocation = -99999f;

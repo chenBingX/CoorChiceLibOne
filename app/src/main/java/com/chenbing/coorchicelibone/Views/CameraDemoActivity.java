@@ -45,8 +45,8 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
   SurfaceView surfaceView;
   @BindView(R.id.btn_Pic)
   Button btnPic;
-  @BindView(R.id.focus_square)
-  TextView focusSquare;
+//  @BindView(R.id.focus_square)
+//  TextView focusSquare;
 
   @BindView(R.id.btn_video)
   Button btnVideo;
@@ -159,7 +159,7 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
     camera.setOnGetPictureDataListener(this::onGetPictureData);
 
     camera.setOnFocusListener(() -> {
-      focusSquare.setVisibility(View.GONE);
+//      focusSquare.setVisibility(View.GONE);
     });
 
     btnPic.setOnClickListener(v -> {
@@ -331,17 +331,17 @@ public class CameraDemoActivity extends BaseActivity implements SurfaceHolder.Ca
 
   @Override
   public boolean onTouchEvent(MotionEvent event) {
-    if (camera != null) {
-      int width = DisplayUtils.dipToPx(50);
-      int height = width;
-      camera.focusTouchArea(event.getX(), event.getY(), width);
-      ViewGroup.MarginLayoutParams lp =
-          (ViewGroup.MarginLayoutParams) focusSquare.getLayoutParams();
-      lp.leftMargin = (int) (event.getX() - width / 2);
-      lp.topMargin = (int) (event.getY() - height / 2);
-      focusSquare.setLayoutParams(lp);
-      focusSquare.setVisibility(View.VISIBLE);
-    }
+//    if (camera != null) {
+//      int width = DisplayUtils.dipToPx(50);
+//      int height = width;
+//      camera.focusTouchArea(event.getX(), event.getY(), width);
+//      ViewGroup.MarginLayoutParams lp =
+//          (ViewGroup.MarginLayoutParams) focusSquare.getLayoutParams();
+//      lp.leftMargin = (int) (event.getX() - width / 2);
+//      lp.topMargin = (int) (event.getY() - height / 2);
+//      focusSquare.setLayoutParams(lp);
+//      focusSquare.setVisibility(View.VISIBLE);
+//    }
     return super.onTouchEvent(event);
   }
 }
