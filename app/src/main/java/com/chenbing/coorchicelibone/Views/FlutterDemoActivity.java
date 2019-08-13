@@ -1,6 +1,7 @@
 package com.chenbing.coorchicelibone.Views;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,10 +32,27 @@ public class FlutterDemoActivity extends AppCompatActivity {
         // 第一帧绘制好后在显示，避免黑屏
         ((FlutterView) flutterView).addFirstFrameListener(() -> root.setVisibility(View.VISIBLE));
 
-        new MethodChannel(flutterView, FlutterChannel).setMethodCallHandler((methodCall, result) -> {
+        MethodChannel channel = new MethodChannel(flutterView, FlutterChannel);
+        channel.setMethodCallHandler((methodCall, result) -> {
             if (methodCall.method.equals("finish")) {
                 finish();
                 result.success("success");
+            }
+        });
+        channel.invokeMethod("bar", "message", new MethodChannel.Result() {
+            @Override
+            public void success(@Nullable Object o) {
+                // 发送成功时回调
+            }
+
+            @Override
+            public void error(String s, @Nullable String s1, @Nullable Object o) {
+                // 发送失败时回调
+            }
+
+            @Override
+            public void notImplemented() {
+                // 如果该通道在Flutter端未实现，会回调这里
             }
         });
     }

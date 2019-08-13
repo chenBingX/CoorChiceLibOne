@@ -6,6 +6,8 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.TextView;
 import com.chenbing.iceweather.R;
@@ -58,6 +60,13 @@ public class AccessibilityActivity extends AppCompatActivity {
 
             tvContent.setText(sb.toString());
         }
+
+        getWindow().getDecorView().setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        });
 
     }
 }

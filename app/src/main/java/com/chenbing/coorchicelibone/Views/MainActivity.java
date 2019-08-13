@@ -175,6 +175,8 @@ public class MainActivity extends BaseActivity implements LocationListener {
         addActivityToNavigator(AnnotationActivity.class.getName(), "注解ButterKnife");
 
         addActivityToNavigator(FlutterDemoActivity.class.getName(), "Flutter页面");
+
+        addActivityToNavigator(TextViewActivity.class.getName(), "TextView扩展Demo");
     }
 
     private void getBitmapAndDisplay() {

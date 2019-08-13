@@ -93,7 +93,7 @@ dependencies {
     implementation 'cn.edu.hfut.dmic.webcollector:WebCollector:2.09'
     implementation 'io.reactivex.rxjava2:rxjava:2.0.3'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    implementation 'com.github.chenBingX:SuperTextView:v3.1.4'
+    implementation 'com.github.chenBingX:SuperTextView:v3.2.0.1'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.6'
