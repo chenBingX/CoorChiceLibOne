@@ -3,6 +3,8 @@ package com.chenbing.coorchicelibone.Views;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.chenbing.coorchicelibone.CustemViews.SimpleTabLayout;
@@ -41,7 +43,6 @@ public class SimpleTabLayoutActivity extends AppCompatActivity {
         stv.setShaderEndColor(Color.parseColor("#ffc900"));
         stv.setShaderMode(ShaderMode.LEFT_TO_RIGHT);
         stv.addAdjuster(new BtnAddPassengerAdjuster(Color.BLACK, 8, 9));
-
         stv2.addAdjuster(new SwitchAdjuster());
         stv2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +51,10 @@ public class SimpleTabLayoutActivity extends AppCompatActivity {
                 LogUtils.e("stv onclicked");
             }
         });
+
+        long now = System.currentTimeMillis();
+        MotionEvent motionEvent = MotionEvent.obtain(now, now, MotionEvent.ACTION_DOWN, 0f, 0f, 0);
+        stv2.setFilterTouchesWhenObscured(true);
 
     }
 }
