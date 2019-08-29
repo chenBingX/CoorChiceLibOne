@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.coorchice.coorchicelibone"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
         versionName "1.1"
@@ -19,11 +19,26 @@ android {
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
 
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+                cFlags ""
+                abiFilters "armeabi-v7a"
+            }
+        }
+
         ndk {
             abiFilters "armeabi-v7a"
-            abiFilters "x86"
         }
     }
+
+    externalNativeBuild {
+        cmake {
+            path 'src/main/cpp/CMakeLists.txt'
+        }
+    }
+
+
 
     sourceSets {
         main {

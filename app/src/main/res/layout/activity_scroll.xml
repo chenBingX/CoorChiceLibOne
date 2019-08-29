@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="com.chenbing.coorchicelibone.Views.ScrollActivity">
+
+  <com.chenbing.coorchicelibone.CustemViews.MyScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      >
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:background="@color/gray"
+        />
+
+
+      <com.chenbing.coorchicelibone.CustemViews.MyScrollView2
+        android:layout_width="wrap_content"
+        android:layout_height="100dp">
+
+        <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:orientation="horizontal"
+          >
+
+          <View
+            android:layout_width="500dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"
+            />
+
+          <View
+            android:layout_width="500dp"
+            android:layout_height="match_parent"
+            android:background="@color/yellow"
+            />
+
+        </LinearLayout>
+
+
+      </com.chenbing.coorchicelibone.CustemViews.MyScrollView2>
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1000dp"
+        android:background="@color/blue"
+        />
+    </LinearLayout>
+
+
+  </com.chenbing.coorchicelibone.CustemViews.MyScrollView>
+
+</android.support.constraint.ConstraintLayout>

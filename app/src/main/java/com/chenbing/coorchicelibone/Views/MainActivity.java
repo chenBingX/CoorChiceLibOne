@@ -179,6 +179,8 @@ public class MainActivity extends BaseActivity implements LocationListener {
         addActivityToNavigator(TextViewActivity.class.getName(), "TextView扩展Demo");
 
         addActivityToNavigator(BearActivity.class.getName(), "Bear演示");
+
+        addActivityToNavigator(GifDecoderActivity.class.getName(), "Gif解析演示");
     }
 
     private void getBitmapAndDisplay() {

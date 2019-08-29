@@ -14,15 +14,19 @@ import java.util.Enumeration;
 
 import com.chenbing.coorchicelibone.IceApplication;
 import com.chenbing.iceweather.BuildConfig;
+import com.chenbing.iceweather.R;
 
 import android.annotation.SuppressLint;
 import android.app.KeyguardManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Build;
 import android.os.PowerManager;
+import android.support.annotation.DrawableRes;
 import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.view.View;
@@ -307,5 +311,14 @@ public class AppUtils {
 
   public static String getModelVersion() {
     return Build.MODEL;
+  }
+
+  public static Uri getDrawablePath(@DrawableRes int drawableId){
+    Resources r = IceApplication.getAppContext().getResources();
+    return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + r.getResourcePackageName(drawableId) + "/" + r.getResourceTypeName(drawableId) + "/" + r.getResourceEntryName(drawableId));
+  }
+
+  public static String getDrawablePathToString(@DrawableRes int drawableId){
+    return getDrawablePath(drawableId).getPath();
   }
 }
