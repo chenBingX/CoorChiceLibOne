@@ -14,7 +14,6 @@ import java.util.Enumeration;
 
 import com.chenbing.coorchicelibone.IceApplication;
 import com.chenbing.iceweather.BuildConfig;
-import com.chenbing.iceweather.R;
 
 import android.annotation.SuppressLint;
 import android.app.KeyguardManager;
@@ -313,12 +312,11 @@ public class AppUtils {
     return Build.MODEL;
   }
 
-  public static Uri getDrawablePath(@DrawableRes int drawableId){
+  public static String getDrawablePath(@DrawableRes int drawableId){
     Resources r = IceApplication.getAppContext().getResources();
-    return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + r.getResourcePackageName(drawableId) + "/" + r.getResourceTypeName(drawableId) + "/" + r.getResourceEntryName(drawableId));
-  }
-
-  public static String getDrawablePathToString(@DrawableRes int drawableId){
-    return getDrawablePath(drawableId).getPath();
+    return ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+        r.getResourcePackageName(drawableId) + "/" +
+        r.getResourceTypeName(drawableId) + "/" +
+        r.getResourceEntryName(drawableId);
   }
 }
