@@ -1,32 +1,42 @@
 package com.chenbing.coorchicelibone.Utils;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 /**
- * Project Name:AnimDveDemo
- * Author:IceChen
- * Date:16/8/24
  * Notes:
  */
 public class GsonUtils {
-  private static Gson gson;
+    private Gson gson;
+    private final JsonParser jsonParser;
 
-  private GsonUtils() {
-
-  }
-
-  public static Gson getSingleInstance() {
-    if (gson == null) {
-      synchronized (GsonUtils.class) {
-        if (gson == null) {
-          gson = new Gson();
-        }
-      }
+    private GsonUtils() {
+        gson = new Gson();
+        jsonParser = new JsonParser();
     }
-    return gson;
-  }
 
-  public static Gson newInstance(){
-    return new Gson();
-  }
+    private static final class Holder {
+        private static final GsonUtils instance = new GsonUtils();
+    }
+
+    public static String toJson(Object o) {
+        return getSingleInstance().toJson(o);
+    }
+
+    public static <T> T fromJson(String json, Class<T> classOfT) {
+        return getSingleInstance().fromJson(json, classOfT);
+    }
+
+    public static JsonObject fromJson(String json) {
+        return Holder.instance.jsonParser.parse(json).getAsJsonObject();
+    }
+
+    public static Gson getSingleInstance() {
+        return Holder.instance.gson;
+    }
+
+    public static Gson newInstance() {
+        return new Gson();
+    }
 }

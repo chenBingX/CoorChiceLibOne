@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.chenbing.coorchicelibone.Views.TextViewActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+        <com.coorchice.library.SuperTextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:stv_text_stroke="true"
+            app:stv_text_stroke_color="#f500c9"
+            app:stv_text_fill_color="#00000000"
+            app:stv_text_stroke_width="0.2dp"
+            tools:text="asdfasdf"
+            />
+
+    </LinearLayout>
+
+
+</ScrollView>

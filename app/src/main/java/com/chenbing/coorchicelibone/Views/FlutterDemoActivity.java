@@ -1,6 +1,7 @@
 package com.chenbing.coorchicelibone.Views;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +34,26 @@ public class FlutterDemoActivity extends AppCompatActivity {
 
         MethodChannel channel = new MethodChannel(flutterView, FlutterChannel);
         channel.setMethodCallHandler((methodCall, result) -> {
-            if (methodCall.method.equals("bar")) {
-                result.success("success, " + methodCall.arguments);
+            if (methodCall.method.equals("finish")) {
+                finish();
+                result.success("success");
             }
         });
-        channel.invokeMethod("update", "Hi, I'm Native!");
+        channel.invokeMethod("bar", "message", new MethodChannel.Result() {
+            @Override
+            public void success(@Nullable Object o) {
+                // 发送成功时回调
+            }
+
+            @Override
+            public void error(String s, @Nullable String s1, @Nullable Object o) {
+                // 发送失败时回调
+            }
+
+            @Override
+            public void notImplemented() {
+                // 如果该通道在Flutter端未实现，会回调这里
+            }
+        });
     }
 }
