@@ -6,6 +6,10 @@
 #define COORCHICELIBONE_DECODER_H
 
 #include "common.h"
+#include "gif_lib.h"
+#include "gifinfo.h"
+#include <android/bitmap.h>
+
 
 jlong openFile(JNIEnv *env, jclass clazz, jstring jpath);
 

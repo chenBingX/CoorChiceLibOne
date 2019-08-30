@@ -37,8 +37,11 @@ typedef struct GifFilePrivateType {
             CrntShiftState;    /* Number of bits in CrntShiftDWord. */
     unsigned long CrntShiftDWord;   /* For bytes decomposition into codes. */
     unsigned long PixelCount;   /* Number of pixels in image. */
+    // Gif 文件
     FILE *File;    /* File as stream. */
+    // 读取函数
     InputFunc Read;     /* function to read gif input (TVT) */
+    // 写入函数
     OutputFunc Write;   /* function to write gif output (MRB) */
     GifByteType Buf[256];   /* Compressed input is buffered here. */
     GifByteType Stack[LZ_MAX_CODE]; /* Decoded pixels are stacked here. */

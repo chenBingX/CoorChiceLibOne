@@ -25,8 +25,8 @@
 
   <ImageView
     android:id="@+id/gif"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
     android:layout_centerInParent="true"
     android:background="@color/opacity_3_5_black"
     />

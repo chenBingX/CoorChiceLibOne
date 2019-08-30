@@ -1,5 +1,7 @@
 package com.chenbing.coorchicelibone.gifdecoder;
 
+import android.graphics.Bitmap;
+
 /**
  * Project Name:CoorChiceLibOne
  * Author:CoorChice
@@ -8,9 +10,41 @@ package com.chenbing.coorchicelibone.gifdecoder;
  */
 public class JNI {
 
-  static {
-    System.loadLibrary("GifLib");
-  }
+    static {
+        System.loadLibrary("GifLib");
+    }
 
-  public static native long openFile(String path);
+    /**
+     * 通过文件路径打开 gif 图
+     *
+     * @param path
+     * @return
+     */
+    public static native long openFile(String path);
+
+    /**
+     * 更新一帧
+     *
+     * @param ptr
+     * @param bitmap
+     * @return
+     */
+    public static native int updateFrame(long ptr, Bitmap bitmap);
+
+    /**
+     * 取得宽度
+     *
+     * @param ptr
+     * @return
+     */
+    public static native int getWidth(long ptr);
+
+    /**
+     * 取得高度
+     *
+     * @param ptr
+     * @return
+     */
+    public static native int getHeight(long ptr);
+
 }
