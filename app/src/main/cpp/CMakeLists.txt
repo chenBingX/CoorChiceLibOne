@@ -25,8 +25,8 @@ find_library(lib-log log)
 set(LIBS)
 list(APPEND LIBS
         jnigraphics
-        android
-        GLESv2
+#        android
+#        GLESv2
         log
         )
 

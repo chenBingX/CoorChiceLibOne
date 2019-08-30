@@ -47,4 +47,11 @@ public class JNI {
      */
     public static native int getHeight(long ptr);
 
+    /**
+     * 销毁
+     * @param ptr
+     * @return
+     */
+    public static native int destroy(long ptr);
+
 }

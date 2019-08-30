@@ -25,6 +25,7 @@ public class GifDecoderActivity extends AppCompatActivity {
 
     private SuperTextView stvStart;
     private ImageView gif;
+    private GifDecoder gifDecoder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +37,17 @@ public class GifDecoderActivity extends AppCompatActivity {
         findView();
         stvStart.setOnClickListener((v) -> {
 //      String gifPath = AppUtils.getDrawablePath(R.drawable.gif_1);
-            String gifPath = Environment.getExternalStorageDirectory().getPath() + "/gif_1.gif";
-            GifDecoder gifDecoder = GifDecoder.openFile(gifPath);
-            LogUtils.e(String.format("ptr = %s", String.valueOf(gifDecoder.getPtr())));
-
-            showGif(gifDecoder, 0);
+            if (gifDecoder == null) {
+                String gifPath = Environment.getExternalStorageDirectory().getPath() + "/gif_1.gif";
+                gifDecoder = GifDecoder.openFile(gifPath);
+                showGif(gifDecoder, 0);
+            }
         });
     }
 
     private void showGif(GifDecoder gifDecoder, int delay) {
         gif.postDelayed(() -> {
+            if (gifDecoder == null || gifDecoder.isDestroy()) return;
             int d = gifDecoder.updateFrame();
             gif.setImageBitmap(gifDecoder.getBitmap());
             showGif(gifDecoder, d);
@@ -58,10 +60,9 @@ public class GifDecoderActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case 1:
-                break;
-        }
+    protected void onDestroy() {
+        super.onDestroy();
+        gifDecoder.destroy();
+        gifDecoder = null;
     }
 }

@@ -30,14 +30,16 @@ jlong openFile(JNIEnv *env, jclass clazz, jstring jpath) {
         }
     }
     gifInfo->frameDuration = gifInfo->totalDuration / gifFileType->ImageCount;
-    LOGE("帧数：%d", gifFileType->ImageCount);
-    LOGE("每帧时长：%d", gifInfo->frameDuration);
-    LOGE("总时长：%d", gifInfo->totalDuration);
-
     gifInfo->width = gifFileType->SWidth;
     gifInfo->height = gifFileType->SHeight;
     gifInfo->totalFrame = gifFileType->ImageCount;
-
     gifFileType->UserData = gifInfo;
+    LOGE("帧数：%d", gifFileType->ImageCount);
+    LOGE("每帧时长：%d", gifInfo->frameDuration);
+    LOGE("总时长：%d", gifInfo->totalDuration);
     return (long long) gifFileType;
+}
+
+jlong openByte(JNIEnv *env, jclass clazz, jbyteArray bytes){
+
 }

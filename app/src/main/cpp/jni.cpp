@@ -8,17 +8,15 @@
 jint updateFrame(JNIEnv *env, jclass clazz, jlong ptr, jobject bitmap) {
     GifFileType *gifFileType = (GifFileType *) ptr;
     GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
-
-    AndroidBitmapInfo info;
-
+    AndroidBitmapInfo bitmapInfo;
     // 一张图片的数组
     void *pixels;
-    AndroidBitmap_getInfo(env, bitmap, &info);
+    AndroidBitmap_getInfo(env, bitmap, &bitmapInfo);
     // 锁定画布
     AndroidBitmap_lockPixels(env, bitmap, &pixels);
-    drawFrame(gifFileType, gifInfo, info, pixels);
+    drawFrame(gifFileType, bitmapInfo, pixels);
     gifInfo->curFrame += 1;
-    if (gifInfo->curFrame >= gifInfo->totalFrame - 1) {
+    if (gifInfo->curFrame >= gifInfo->totalFrame) {
         gifInfo->curFrame = 0;
     }
     // 解锁画布
@@ -38,6 +36,17 @@ jint getHeight(JNIEnv *env, jclass clazz, jlong ptr) {
     return gifInfo->height;
 }
 
+void destroy(JNIEnv *env, jclass jclazz, jlong ptr) {
+    GifFileType *gifFileType = (GifFileType *) ptr;
+    GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
+    if (gifInfo != NULL) {
+        gifFileType->UserData = NULL;
+        delete gifInfo;
+    }
+    free(gifFileType);
+    gifFileType = NULL;
+}
+
 
 // 提供一个函数映射表，注册给JVM，这样JVM就可以通过函数映射表来调用相应的函数
 // 这样的效率比静态注册的效率高
@@ -51,6 +60,7 @@ static JNINativeMethod nativeMethod[] = {
         {"updateFrame", "(JLandroid/graphics/Bitmap;)I", (void *) updateFrame},
         {"getWidth",    "(J)I",                          (void *) getWidth},
         {"getHeight",   "(J)I",                          (void *) getHeight},
+        {"destroy",     "(J)I",                          (void *) destroy},
 };
 
 

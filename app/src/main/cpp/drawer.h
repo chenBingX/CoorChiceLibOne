@@ -7,6 +7,6 @@
 
 #include "decoder.h"
 
-void drawFrame(GifFileType *gifFileType, GifInfo *gifInfo, AndroidBitmapInfo info,void *pixels);
+void drawFrame(GifFileType *gifFileType, AndroidBitmapInfo bitmapInfo,void *pixels);
 
 #endif //COORCHICELIBONE_DRAWER_H
