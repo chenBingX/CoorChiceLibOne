@@ -5,6 +5,17 @@
 #include "decoder.h"
 #include "drawer.h"
 
+static JavaVM *g_jvm;
+static struct JavaVMAttachArgs attachArgs = {.version=JNI_VERSION_1_6, .group=NULL, .name="GifIOThread"};
+
+JNIEnv * getEnv() {
+    JNIEnv *env;
+    if (g_jvm->AttachCurrentThread(&env, &attachArgs) == JNI_OK) {
+        return env;
+    }
+    return NULL;
+}
+
 jint updateFrame(JNIEnv *env, jclass clazz, jlong ptr, jobject bitmap) {
     GifFileType *gifFileType = (GifFileType *) ptr;
     GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
@@ -57,6 +68,7 @@ void destroy(JNIEnv *env, jclass jclazz, jlong ptr) {
  */
 static JNINativeMethod nativeMethod[] = {
         {"openFile",    "(Ljava/lang/String;)J",         (void *) openFile},
+        {"openBytes",   "([B)J",                         (void *) openBytes},
         {"updateFrame", "(JLandroid/graphics/Bitmap;)I", (void *) updateFrame},
         {"getWidth",    "(J)I",                          (void *) getWidth},
         {"getHeight",   "(J)I",                          (void *) getHeight},
@@ -66,15 +78,16 @@ static JNINativeMethod nativeMethod[] = {
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved) {
     JNIEnv *env;
+    g_jvm = jvm;
     if (jvm->GetEnv((void **) &env, JNI_VERSION_1_6) != JNI_OK) {
         return JNI_ERR;
     }
 
     jclass clz = env->FindClass(JAVA_JNI_CLASS);
     if (clz == NULL) {
-        LOGE("类名不对");
+        LOGE("Class Not Found!");
     } else {
-        LOGE("类加载成功");
+        LOGE("Class load success!");
     }
 
     jint method_size = sizeof(nativeMethod) / sizeof(nativeMethod[0]);

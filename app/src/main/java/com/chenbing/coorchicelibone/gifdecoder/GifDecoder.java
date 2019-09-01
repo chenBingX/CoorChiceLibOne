@@ -18,10 +18,22 @@ public class GifDecoder {
         return new GifDecoder(filePtah);
     }
 
+    public static GifDecoder openBytes(byte[] bytes) {
+        return new GifDecoder(bytes);
+    }
 
     private GifDecoder(String filePtah) {
         if (!TextUtils.isEmpty(filePtah)) {
             ptr = JNI.openFile(filePtah);
+        } else {
+            throw new IllegalArgumentException("File path can not be null or empty!");
+        }
+        init();
+    }
+
+    private GifDecoder(byte[] bytes) {
+        if (bytes != null) {
+            ptr = JNI.openBytes(bytes);
         } else {
             throw new IllegalArgumentException("File path can not be null or empty!");
         }

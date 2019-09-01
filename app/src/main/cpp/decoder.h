@@ -12,5 +12,8 @@
 
 
 jlong openFile(JNIEnv *env, jclass clazz, jstring jpath);
+jlong openBytes(JNIEnv *env, jclass clazz, jbyteArray bytes);
+
+void initGifInfo(GifFileType *gifFileType, GifInfo *gifInfo);
 
 #endif //COORCHICELIBONE_DECODER_H

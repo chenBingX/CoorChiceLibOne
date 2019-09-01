@@ -23,6 +23,13 @@ public class JNI {
     public static native long openFile(String path);
 
     /**
+     * 通过byte数组打开 gif 图
+     * @param bytes
+     * @return
+     */
+    public static native long openBytes(byte[] bytes);
+
+    /**
      * 更新一帧
      *
      * @param ptr

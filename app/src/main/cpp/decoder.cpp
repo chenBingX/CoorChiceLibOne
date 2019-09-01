@@ -3,30 +3,22 @@
 //
 
 #include "decoder.h"
+#include "gif_lib_private.h"
 
-jlong openFile(JNIEnv *env, jclass clazz, jstring jpath) {
-    char *fPath = jstring2string(env, jpath);
-    int *Error = 0;
-    GifFileType *gifFileType = DGifOpenFileName(fPath, Error);
+void initGifInfo(GifFileType *gifFileType, GifInfo *gifInfo) {
     // 解析
     DGifSlurp(gifFileType);
-    GifInfo *gifInfo = new GifInfo();
-    int totalDuration = 0;
+    gifInfo->graphicsControlBlock = (GraphicsControlBlock *) (malloc(sizeof(GraphicsControlBlock) * gifFileType->ImageCount));
     SavedImage *frame;
-    ExtensionBlock *extension;
     for (int i = 0; i < gifFileType->ImageCount; i++) {
         frame = &(gifFileType->SavedImages[i]);
-        extension = NULL;
         for (int j = 0; j < frame->ExtensionBlockCount; j++) {
             ExtensionBlock block = frame->ExtensionBlocks[j];
             if (block.Function == GRAPHICS_EXT_FUNC_CODE) {
-                extension = &block;
+                DGifExtensionToGCB(block.ByteCount, block.Bytes, &gifInfo->graphicsControlBlock[i]);
+                gifInfo->totalDuration += (gifInfo->graphicsControlBlock[i].DelayTime * 10);
                 break;
             }
-        }
-        if (extension) {
-            totalDuration = 10 * (extension->Bytes[2] << 8 | extension->Bytes[1]);
-            gifInfo->totalDuration += totalDuration;
         }
     }
     gifInfo->frameDuration = gifInfo->totalDuration / gifFileType->ImageCount;
@@ -37,9 +29,42 @@ jlong openFile(JNIEnv *env, jclass clazz, jstring jpath) {
     LOGE("帧数：%d", gifFileType->ImageCount);
     LOGE("每帧时长：%d", gifInfo->frameDuration);
     LOGE("总时长：%d", gifInfo->totalDuration);
+}
+
+jlong openFile(JNIEnv *env, jclass clazz, jstring jpath) {
+    char *fPath = jstring2string(env, jpath);
+    int *Error = 0;
+    GifFileType *gifFileType = DGifOpenFileName(fPath, Error);
+    if (gifFileType == nullptr) {
+        free(fPath);
+        return 0;
+    }
+    GifInfo *gifInfo = new GifInfo();
+    initGifInfo(gifFileType, gifInfo);
     return (long long) gifFileType;
 }
 
-jlong openByte(JNIEnv *env, jclass clazz, jbyteArray bytes){
 
+jlong openBytes(JNIEnv *env, jclass clazz, jbyteArray bytes) {
+    if (bytes == NULL) {
+        return 0;
+    }
+    GifInfo *gifInfo = new GifInfo();
+    gifInfo->buffer = (jbyteArray) (env->NewGlobalRef(bytes));
+    if (gifInfo->buffer == nullptr) {
+        delete gifInfo;
+        return 0;
+    }
+    gifInfo->length = (uint) (env->GetArrayLength(gifInfo->buffer));
+    int *Error;
+    GifFileType *gifFileType = DGifOpen(gifInfo, (InputFunc) (bytesRead), (int *) (&Error));
+    if (gifFileType == NULL) {
+        env->DeleteGlobalRef(gifInfo->buffer);
+        delete gifInfo;
+        return 0;
+    }
+    initGifInfo(gifFileType, gifInfo);
+    return (long long) gifFileType;
 }
+
+

@@ -6,6 +6,7 @@
 #define COORCHICELIBONE_GIFINFO_H
 
 #include "common.h"
+#include "gif_lib.h"
 
 class GifInfo{
 public:
@@ -15,6 +16,11 @@ public:
     int totalFrame;
     int frameDuration;
     int totalDuration;
+    GraphicsControlBlock *graphicsControlBlock;
+
+    uint_fast32_t curPosition;
+    unsigned int length;
+    jbyteArray buffer;
 
     GifInfo();
     ~GifInfo();

@@ -14,6 +14,7 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
+#include "gif_lib.h"
 
 using namespace std;
 
@@ -26,4 +27,7 @@ using namespace std;
 
 char* jstring2string(JNIEnv *env, jstring jstr);
 
+JNIEnv * getEnv();
+
+uint_fast8_t bytesRead(GifFileType *gif, GifByteType *bytes, uint_fast8_t size);
 #endif //_COMMON_H

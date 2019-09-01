@@ -11,8 +11,21 @@ GifInfo::GifInfo() {
     this->totalFrame = 0;
     this->frameDuration = 0;
     this->totalDuration = 0;
+    this->curPosition=0;
+    this->length=0;
+    this->buffer= nullptr;
 }
 
 GifInfo::~GifInfo() {
-
+    if(graphicsControlBlock != nullptr){
+        free(graphicsControlBlock);
+        graphicsControlBlock = nullptr;
+    }
+    if(this->buffer != nullptr){
+        JNIEnv *env = getEnv();
+        if (env != NULL){
+            env->DeleteGlobalRef(this->buffer);
+            this->buffer = nullptr;
+        }
+    }
 }
