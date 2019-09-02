@@ -8,7 +8,7 @@
 static JavaVM *g_jvm;
 static struct JavaVMAttachArgs attachArgs = {.version=JNI_VERSION_1_6, .group=NULL, .name="GifIOThread"};
 
-JNIEnv * getEnv() {
+JNIEnv *getEnv() {
     JNIEnv *env;
     if (g_jvm->AttachCurrentThread(&env, &attachArgs) == JNI_OK) {
         return env;
@@ -49,12 +49,22 @@ jint getHeight(JNIEnv *env, jclass clazz, jlong ptr) {
 
 void destroy(JNIEnv *env, jclass jclazz, jlong ptr) {
     GifFileType *gifFileType = (GifFileType *) ptr;
+    if (ptr == NULL)
+        return;
     GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
     if (gifInfo != NULL) {
-        gifFileType->UserData = NULL;
+        if (gifInfo->graphicsControlBlock != NULL) {
+            free(gifInfo->graphicsControlBlock);
+            gifInfo->graphicsControlBlock = NULL;
+        }
+        if (gifInfo->buffer != NULL) {
+            env->DeleteGlobalRef(gifInfo->buffer);
+            gifInfo->buffer = NULL;
+        }
         delete gifInfo;
+        gifFileType->UserData = NULL;
     }
-    free(gifFileType);
+    DGifCloseFile(gifFileType, GIF_ERROR);
     gifFileType = NULL;
 }
 

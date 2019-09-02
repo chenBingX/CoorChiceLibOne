@@ -23,7 +23,7 @@ public:
     jbyteArray buffer;
 
     GifInfo();
-    ~GifInfo();
+//    ~GifInfo();
 
 };
 

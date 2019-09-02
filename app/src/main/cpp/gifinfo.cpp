@@ -16,16 +16,16 @@ GifInfo::GifInfo() {
     this->buffer= nullptr;
 }
 
-GifInfo::~GifInfo() {
-    if(graphicsControlBlock != nullptr){
-        free(graphicsControlBlock);
-        graphicsControlBlock = nullptr;
-    }
-    if(this->buffer != nullptr){
-        JNIEnv *env = getEnv();
-        if (env != NULL){
-            env->DeleteGlobalRef(this->buffer);
-            this->buffer = nullptr;
-        }
-    }
-}
+//GifInfo::~GifInfo() {
+//    if(graphicsControlBlock != nullptr){
+//        free(graphicsControlBlock);
+//        graphicsControlBlock = nullptr;
+//    }
+//    if(buffer != nullptr){
+//        JNIEnv *env = getEnv();
+//        if (env != NULL){
+//            env->DeleteGlobalRef(this->buffer);
+//            buffer = nullptr;
+//        }
+//    }
+//}

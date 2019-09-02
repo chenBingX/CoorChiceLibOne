@@ -52,7 +52,8 @@
     <activity android:name="com.chenbing.coorchicelibone.Views.CrackPasswordActivity"/>
     <activity android:name="com.chenbing.coorchicelibone.Views.CustomLayoutManagerActivity"/>
     <activity android:name="com.chenbing.coorchicelibone.Views.DraggerRecyclerViewActivity"/>
-    <activity android:name="com.chenbing.coorchicelibone.Views.WindowActivity"/>
+    <activity
+        android:name="com.chenbing.coorchicelibone.Views.WindowActivity"/>
     <activity android:name="com.chenbing.coorchicelibone.Views.WebActivity"/>
     <activity android:name="com.chenbing.coorchicelibone.Views.HorizontalPinterestActivity"/>
     <activity

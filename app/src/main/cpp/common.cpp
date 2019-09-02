@@ -21,6 +21,8 @@ char *jstring2string(JNIEnv *env, jstring jstr) {
         charString[len] = 0;
     }
     // 用完释放
+    env->DeleteLocalRef(stringClass);
+    env->DeleteLocalRef(encode);
     env->ReleaseByteArrayElements(jStringArray, bytes, 0);
     return charString;
 }
