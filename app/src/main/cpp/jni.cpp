@@ -16,7 +16,14 @@ JNIEnv *getEnv() {
     return NULL;
 }
 
+bool checkIsNull(jlong ptr) {
+    GifFileType *gifFileType = (GifFileType *) ptr;
+    return gifFileType == nullptr || gifFileType->UserData == nullptr;
+}
+
 jint updateFrame(JNIEnv *env, jclass clazz, jlong ptr, jobject bitmap) {
+    if (checkIsNull(ptr))
+        return 0;
     GifFileType *gifFileType = (GifFileType *) ptr;
     GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
     AndroidBitmapInfo bitmapInfo;
@@ -36,15 +43,74 @@ jint updateFrame(JNIEnv *env, jclass clazz, jlong ptr, jobject bitmap) {
 }
 
 jint getWidth(JNIEnv *env, jclass clazz, jlong ptr) {
+    if (checkIsNull(ptr))
+        return 1;
     GifFileType *gifFileType = (GifFileType *) ptr;
     GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
     return gifInfo->width;
 }
 
 jint getHeight(JNIEnv *env, jclass clazz, jlong ptr) {
+    if (checkIsNull(ptr))
+        return 1;
     GifFileType *gifFileType = (GifFileType *) ptr;
     GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
     return gifInfo->height;
+}
+
+jint getFrameCount(JNIEnv *env, jclass clazz, jlong ptr) {
+    if (checkIsNull(ptr))
+        return 1;
+    GifFileType *gifFileType = (GifFileType *) ptr;
+    GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
+    return gifInfo->totalFrame;
+}
+
+jint getFrameDuration(JNIEnv *env, jclass clazz, jlong ptr) {
+    if (checkIsNull(ptr))
+        return 1;
+    GifFileType *gifFileType = (GifFileType *) ptr;
+    GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
+    return gifInfo->frameDuration;
+}
+
+void setFrameDuration(JNIEnv *env, jclass clazz, jlong ptr, jint duration) {
+    if (checkIsNull(ptr))
+        return;
+    GifFileType *gifFileType = (GifFileType *) ptr;
+    GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
+    gifInfo->frameDuration = duration;
+}
+
+jint getCurrentFrame(JNIEnv *env, jclass clazz, jlong ptr) {
+    if (checkIsNull(ptr))
+        return 1;
+    GifFileType *gifFileType = (GifFileType *) ptr;
+    GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
+    return gifInfo->curFrame;
+}
+
+void gotoFrame(JNIEnv *env, jclass clazz, jlong ptr, jint position) {
+    if (checkIsNull(ptr))
+        return;
+    GifFileType *gifFileType = (GifFileType *) ptr;
+    GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
+    if (position >= gifInfo->totalFrame) {
+        position = gifInfo->totalFrame - 1;
+    }
+    gifInfo->curFrame = position;
+}
+
+void getFrame(JNIEnv *env, jclass clazz, jlong ptr, jint position, jobject bitmap) {
+    if (checkIsNull(ptr))
+        return;
+    GifFileType *gifFileType = (GifFileType *) ptr;
+    GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
+    if (position >= gifInfo->totalFrame) {
+        position = gifInfo->totalFrame - 1;
+    }
+    gifInfo->curFrame = position;
+    updateFrame(env, clazz, ptr, bitmap);
 }
 
 void destroy(JNIEnv *env, jclass jclazz, jlong ptr) {
@@ -77,12 +143,20 @@ void destroy(JNIEnv *env, jclass jclazz, jlong ptr) {
  * @param3 函数指针，指向被调用的c++函数。名车需要和函数名一样。
  */
 static JNINativeMethod nativeMethod[] = {
-        {"openFile",    "(Ljava/lang/String;)J",         (void *) openFile},
-        {"openBytes",   "([B)J",                         (void *) openBytes},
-        {"updateFrame", "(JLandroid/graphics/Bitmap;)I", (void *) updateFrame},
-        {"getWidth",    "(J)I",                          (void *) getWidth},
-        {"getHeight",   "(J)I",                          (void *) getHeight},
-        {"destroy",     "(J)I",                          (void *) destroy},
+        {"openFile",         "(Ljava/lang/String;)J",          (void *) openFile},
+        {"openBytes",        "([B)J",                          (void *) openBytes},
+
+        {"updateFrame",      "(JLandroid/graphics/Bitmap;)I",  (void *) updateFrame},
+        {"getWidth",         "(J)I",                           (void *) getWidth},
+        {"getHeight",        "(J)I",                           (void *) getHeight},
+        {"getFrameCount",    "(J)I",                           (void *) getFrameCount},
+        {"getFrameDuration", "(J)I",                           (void *) getFrameDuration},
+        {"setFrameDuration", "(JI)V",                          (void *) setFrameDuration},
+        {"getCurrentFrame",  "(J)I",                           (void *) getCurrentFrame},
+        {"gotoFrame",        "(JI)V",                          (void *) gotoFrame},
+        {"getFrame",         "(JILandroid/graphics/Bitmap;)V", (void *) getFrame},
+
+        {"destroy",          "(J)V",                           (void *) destroy},
 };
 
 

@@ -55,10 +55,62 @@ public class JNI {
     public static native int getHeight(long ptr);
 
     /**
+     * 获取帧数
+     * @param ptr
+     * @return
+     */
+    public static native int getFrameCount(long ptr);
+
+
+    /**
+     * 获取当前帧间隔
+     *
+     * @param ptr
+     * @return
+     */
+    public static native int getFrameDuration(long ptr);
+
+    /**
+     * 修改帧间隔
+     *
+     * @param ptr
+     * @param duration
+     */
+    public static native void setFrameDuration(long ptr, int duration);
+
+
+    /**
+     * 获取当前帧位置
+     *
+     * @param ptr
+     * @return
+     */
+    public static native int getCurrentFrame(long ptr);
+
+    /**
+     * 跳到指定帧
+     *
+     * @param ptr
+     * @param frame
+     */
+    public static native void gotoFrame(long ptr, int frame);
+
+
+    /**
+     * 获取指定帧图像
+     *
+     * @param ptr
+     * @param frame
+     * @param bitmap
+     */
+    public static native void getFrame(long ptr, int frame, Bitmap bitmap);
+
+
+    /**
      * 销毁
      * @param ptr
      * @return
      */
-    public static native int destroy(long ptr);
+    public static native void destroy(long ptr);
 
 }

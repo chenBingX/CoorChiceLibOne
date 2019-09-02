@@ -1,6 +1,8 @@
 package com.chenbing.coorchicelibone.gifdecoder;
 
 import android.graphics.Bitmap;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 
 /**
@@ -13,6 +15,18 @@ public class GifDecoder {
 
     private long ptr;
     private Bitmap frameCanvas;
+    private boolean canPlay = true;
+    private OnFrameListener onFrameListener;
+
+    private Handler handler = new Handler(Looper.getMainLooper());
+    private Runnable playRunnable = () -> {
+        if (isDestroy() || !canPlay) return;
+        int d = updateFrame();
+        if (onFrameListener != null) {
+            onFrameListener.onFrame(this, getBitmap());
+        }
+        innerPlay(d);
+    };
 
     public static GifDecoder openFile(String filePtah) {
         return new GifDecoder(filePtah);
@@ -57,6 +71,38 @@ public class GifDecoder {
         return JNI.getHeight(ptr);
     }
 
+    public int getFrameCount() {
+        check();
+        return JNI.getFrameCount(ptr);
+    }
+
+    public int getFrameDuration() {
+        check();
+        return JNI.getFrameDuration(ptr);
+    }
+
+    public void setFrameDuration(int duration) {
+        check();
+        JNI.setFrameDuration(ptr, duration);
+    }
+
+    public int getCurrentFrame() {
+        check();
+        return JNI.getCurrentFrame(ptr);
+    }
+
+
+    public void gotoFrame(int frame) {
+        check();
+        JNI.gotoFrame(ptr, frame);
+    }
+
+    public Bitmap getFrame(int frame) {
+        check();
+        JNI.getFrame(ptr, frame, frameCanvas);
+        return frameCanvas;
+    }
+
     public int updateFrame() {
         check();
         int r = 1;
@@ -84,12 +130,31 @@ public class GifDecoder {
         }
     }
 
+    public void play() {
+        if (isDestroy()) return;
+        canPlay = true;
+        innerPlay(0);
+    }
+
+    private void innerPlay(int delay) {
+        handler.postDelayed(playRunnable, delay);
+    }
+
+    public boolean isPlaying() {
+        return canPlay;
+    }
+
+    public void stop() {
+        canPlay = false;
+    }
 
     public boolean isDestroy() {
         return ptr == 0;
     }
 
     public void destroy() {
+        canPlay = false;
+        handler.removeCallbacksAndMessages(null);
         check();
         JNI.destroy(ptr);
         ptr = 0;
@@ -97,4 +162,11 @@ public class GifDecoder {
         frameCanvas = null;
     }
 
+    public void setOnFrameListener(OnFrameListener onFrameListener) {
+        this.onFrameListener = onFrameListener;
+    }
+
+    public static interface OnFrameListener {
+        void onFrame(GifDecoder gd, Bitmap bitmap);
+    }
 }
