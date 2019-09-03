@@ -14,8 +14,9 @@
 jlong openFile(JNIEnv *env, jclass clazz, jstring jpath);
 jlong openBytes(JNIEnv *env, jclass clazz, jbyteArray bytes);
 
-jboolean fileIsGif(JNIEnv *env, jclass clazz, jstring jpath);
-jboolean bytesIsGif(JNIEnv *env, jclass clazz, jbyteArray bytes);
+bool fileIsGif(JNIEnv *env, jclass clazz, jstring jpath);
+
+bool bytesIsGif(JNIEnv *env, jclass clazz, jbyteArray bytes);
 
 void initGifInfo(GifFileType *gifFileType, GifInfo *gifInfo);
 

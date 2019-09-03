@@ -47,13 +47,13 @@ public class GifDecoderActivity extends AppCompatActivity {
                     is.read(bytes);
                     gif.post(() -> {
                         LogUtils.e("isGif = " + JNI.bytesIsGif(bytes));
-                        GifDecoder gifDecoder = GifDecoder.openBytes(bytes);
-                        gifDecoders.add(gifDecoder);
-                        gifDecoder.setOnFrameListener((gd, bitmap) -> {
-                            if (bitmap != null)
-                                gif.setImageBitmap(bitmap);
-                        });
-                        gifDecoder.play();
+//                        GifDecoder gifDecoder = GifDecoder.openBytes(bytes);
+//                        gifDecoders.add(gifDecoder);
+//                        gifDecoder.setOnFrameListener((gd, bitmap) -> {
+//                            if (bitmap != null)
+//                                gif.setImageBitmap(bitmap);
+//                        });
+//                        gifDecoder.play();
                     });
 
 
