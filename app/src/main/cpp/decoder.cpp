@@ -2,13 +2,16 @@
 // Created by 陈冰 on 2019/8/30.
 //
 
+#include <asm/fcntl.h>
+#include <fcntl.h>
 #include "decoder.h"
 #include "gif_lib_private.h"
 
 void initGifInfo(GifFileType *gifFileType, GifInfo *gifInfo) {
     // 解析
     DGifSlurp(gifFileType);
-    gifInfo->graphicsControlBlock = (GraphicsControlBlock *) (malloc(sizeof(GraphicsControlBlock) * gifFileType->ImageCount));
+    gifInfo->graphicsControlBlock = (GraphicsControlBlock *) (malloc(
+            sizeof(GraphicsControlBlock) * gifFileType->ImageCount));
     SavedImage *frame;
     for (int i = 0; i < gifFileType->ImageCount; i++) {
         frame = &(gifFileType->SavedImages[i]);
@@ -66,5 +69,36 @@ jlong openBytes(JNIEnv *env, jclass clazz, jbyteArray bytes) {
     initGifInfo(gifFileType, gifInfo);
     return (long long) gifFileType;
 }
+
+jboolean bytesIsGif(JNIEnv *env, jclass clazz, jbyteArray bytes) {
+    if (bytes != nullptr) {
+        char Buf[GIF_STAMP_LEN + 1];
+        env->GetByteArrayRegion(bytes, 0, GIF_STAMP_LEN, (jbyte *) Buf);
+        Buf[GIF_STAMP_LEN] = '\0';
+        bool r = strncmp(GIF_STAMP, Buf, GIF_VERSION_POS) == 0;
+        free(Buf);
+        return (jboolean) r;
+    }
+    return (jboolean) (false);
+}
+
+
+jboolean fileIsGif(JNIEnv *env, jclass clazz, jstring filePath) {
+    char *FileName = jstring2string(env, filePath);
+    int FileHandle;
+    if ((FileHandle = open(FileName, O_RDONLY)) == -1) {
+        return (jboolean) (false);
+    }
+    FILE *f = fdopen(FileHandle, "rb");
+    char Buf[GIF_STAMP_LEN + 1];
+    fread(Buf, 1, GIF_STAMP_LEN, f);
+    Buf[GIF_STAMP_LEN] = '\0';
+    bool r = strncmp(GIF_STAMP, Buf, GIF_VERSION_POS) == 0;
+    free(Buf);
+    fclose(f);
+    return (jboolean) r;
+}
+
+
 
 

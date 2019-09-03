@@ -149,6 +149,9 @@ static JNINativeMethod nativeMethod[] = {
         {"openFile",         "(Ljava/lang/String;)J",          (void *) openFile},
         {"openBytes",        "([B)J",                          (void *) openBytes},
 
+        {"fileIsGif",        "(Ljava/lang/String;)Z",          (void *) fileIsGif},
+        {"bytesIsGif",       "([B)Z",                          (void *) bytesIsGif},
+
         {"updateFrame",      "(JLandroid/graphics/Bitmap;)I",  (void *) updateFrame},
         {"getWidth",         "(J)I",                           (void *) getWidth},
         {"getHeight",        "(J)I",                           (void *) getHeight},
