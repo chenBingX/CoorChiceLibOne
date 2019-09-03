@@ -41,7 +41,7 @@ public class GifDecoderActivity extends AppCompatActivity {
         stvStart.setOnClickListener((v) -> {
             ThreadPool.run(() -> {
                 try {
-                    InputStream is = getResources().openRawResource(R.drawable.gif_4);
+                    InputStream is = getResources().openRawResource(R.drawable.gif_1);
                     byte[] bytes = new byte[is.available()];
                     is.read(bytes);
                     gif.post(() -> {
@@ -117,7 +117,7 @@ public class GifDecoderActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!(v.getTag() instanceof GifDecoder)) {
                     try {
-                        InputStream is = getResources().openRawResource(R.drawable.gif_1);
+                        InputStream is = getResources().openRawResource(R.drawable.flag);
                         byte[] bytes = new byte[is.available()];
                         is.read(bytes);
                         LogUtils.e(String.format("bytes.length = %d", bytes.length));

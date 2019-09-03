@@ -13,6 +13,24 @@ void drawFrame(GifFileType *gifFileType, AndroidBitmapInfo bitmapInfo, void *pix
     GifImageDesc imageDesc = savedImage.ImageDesc;
     // 用于获取图形控制扩展信息
     GraphicsControlBlock GCB = gifInfo->graphicsControlBlock[gifInfo->curFrame];
+    if (GCB.DisposalMode == DISPOSE_BACKGROUND) {
+        //像素位置
+//        GifColorType backgroundRGB = gifFileType->SColorMap->Colors[gifFileType->SBackGroundColor];
+        //全局像素数组
+        int *px = (int *) pixels;
+        int *line;
+        px = (int *) ((char *) px + bitmapInfo.stride * imageDesc.Top);
+        for (int y = imageDesc.Top; y < imageDesc.Top + imageDesc.Height; y++) {
+            // 一行像素数组
+            line = px;
+            for (int x = imageDesc.Left; x < imageDesc.Left + imageDesc.Width; x++) {
+                line[x] = 0;
+//                line[x] = argb(255, backgroundRGB.Red, backgroundRGB.Green, backgroundRGB.Blue);
+            }
+            // 处理完一行，指针移动到下一行
+            px = (int *) ((char *) px + bitmapInfo.stride);
+        }
+    }
     //像素位置
     int pointPixel;
     //全局像素数组
@@ -36,14 +54,48 @@ void drawFrame(GifFileType *gifFileType, AndroidBitmapInfo bitmapInfo, void *pix
             pointPixel = (y - imageDesc.Top) * imageDesc.Width + (x - imageDesc.Left);
             // 一个像素点的值
             gifByteType = savedImage.RasterBits[pointPixel];
-            // 如果是透明的，就需要跳过
-            bool skip = gifByteType == GCB.TransparentColor;
             //需要给每个像素赋颜色
-            if (colorMapObject != NULL && !skip) {
-                // 通过索引，从颜色列表中获取颜色
-                gifColorType = colorMapObject->Colors[gifByteType];
-                // 合成一个像素点颜色，给它赋值
-                line[x] = argb(255, gifColorType.Red, gifColorType.Green, gifColorType.Blue);
+            if (colorMapObject != NULL) {
+                if (GCB.TransparentColor == NO_TRANSPARENT_COLOR) {
+                    // 通过索引，从颜色列表中获取颜色
+                    gifColorType = colorMapObject->Colors[gifByteType];
+                    // 合成一个像素点颜色，给它赋值
+                    line[x] = argb(255, gifColorType.Red, gifColorType.Green, gifColorType.Blue);
+                } else {
+                    // 如果是透明的，就需要跳过
+                    bool skip = gifByteType == GCB.TransparentColor;
+                    if (!skip) {
+                        // 通过索引，从颜色列表中获取颜色
+                        gifColorType = colorMapObject->Colors[gifByteType];
+                        // 合成一个像素点颜色，给它赋值
+                        line[x] =
+                                argb(255, gifColorType.Red, gifColorType.Green, gifColorType.Blue);
+                    }
+                }
+            }
+
+        }
+        // 处理完一行，指针移动到下一行
+        px = (int *) ((char *) px + bitmapInfo.stride);
+    }
+}
+
+void prepareCanvas(GifFileType *gifFileType, AndroidBitmapInfo bitmapInfo, void *pixels) {
+    GifColorType backgroundRGB;
+    if (gifFileType->SColorMap != NULL && gifFileType->SColorMap->Colors != NULL) {
+        backgroundRGB = gifFileType->SColorMap->Colors[gifFileType->SBackGroundColor];
+    }
+    //全局像素数组
+    int *px = (int *) pixels;
+    int *line;
+    for (int y = 0; y < gifFileType->SHeight; y++) {
+        // 一行像素数组
+        line = px;
+        for (int x = 0; x < gifFileType->SWidth; x++) {
+            if (gifFileType->SBackGroundColor == 0) {
+                line[x] = argb(0, 0, 0, 0);
+            } else {
+                line[x] = argb(255, backgroundRGB.Red, backgroundRGB.Green, backgroundRGB.Blue);
             }
         }
         // 处理完一行，指针移动到下一行

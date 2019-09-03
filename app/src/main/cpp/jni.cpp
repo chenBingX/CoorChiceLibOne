@@ -32,6 +32,9 @@ jint updateFrame(JNIEnv *env, jclass clazz, jlong ptr, jobject bitmap) {
     AndroidBitmap_getInfo(env, bitmap, &bitmapInfo);
     // 锁定画布
     AndroidBitmap_lockPixels(env, bitmap, &pixels);
+//    if (gifInfo->curFrame == 0) {
+//        prepareCanvas(gifFileType, bitmapInfo, pixels);
+//    }
     drawFrame(gifFileType, bitmapInfo, pixels);
     gifInfo->curFrame += 1;
     if (gifInfo->curFrame >= gifInfo->totalFrame) {
