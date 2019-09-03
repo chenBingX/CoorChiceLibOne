@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.4.1)
 
 # 配置编译设置
 #set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -D__ANDROID_ -g -std=gnu++11 -fexceptions -frtti -lstdc++ -Wundefined-internal")
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__ANDROID_ -g -std=gnu++11 -lstdc++ -O0")
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__ANDROID_ -g -lstdc++ -O0")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__ANDROID_ -g -std=gnu++11 -lstdc++")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__ANDROID_ -g -lstdc++")
 # 开启优化
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__ANDROID_ -g -std=gnu++11 -lstdc++ -s -Os")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__ANDROID_ -g -lstdc++ -s -Os")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__ANDROID_ -g -std=gnu++11 -lstdc++ -s -Os")
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__ANDROID_ -g -lstdc++ -s -Os")
 # 配置 .so 输出路径
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../jniLibs/${ANDROID_ABI})
 

@@ -10,6 +10,7 @@ import java.util.Random;
 import com.chenbing.coorchicelibone.Utils.AppUtils;
 import com.chenbing.coorchicelibone.Utils.LogUtils;
 import com.chenbing.coorchicelibone.gifdecoder.GifDecoder;
+import com.chenbing.coorchicelibone.gifdecoder.JNI;
 import com.chenbing.iceweather.R;
 import com.coorchice.library.SuperTextView;
 import com.coorchice.library.utils.ThreadPool;
@@ -45,6 +46,7 @@ public class GifDecoderActivity extends AppCompatActivity {
                     byte[] bytes = new byte[is.available()];
                     is.read(bytes);
                     gif.post(() -> {
+                        LogUtils.e("isGif = " + JNI.bytesIsGif(bytes));
                         GifDecoder gifDecoder = GifDecoder.openBytes(bytes);
                         gifDecoders.add(gifDecoder);
                         gifDecoder.setOnFrameListener((gd, bitmap) -> {

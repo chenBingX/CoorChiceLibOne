@@ -1,6 +1,7 @@
 package com.chenbing.coorchicelibone.gifdecoder;
 
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -11,21 +12,25 @@ import android.text.TextUtils;
  * Date:2019/8/30
  * Notes:
  */
-public class GifDecoder {
+public class GifDecoder{
 
     private long ptr;
     private Bitmap frameCanvas;
+    private Rect bounds;
     private boolean canPlay = true;
     private OnFrameListener onFrameListener;
 
     private Handler handler = new Handler(Looper.getMainLooper());
-    private Runnable playRunnable = () -> {
-        if (isDestroy() || !canPlay) return;
-        int d = updateFrame();
-        if (onFrameListener != null) {
-            onFrameListener.onFrame(this, getBitmap());
+    private Runnable playRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (isDestroy() || !canPlay) return;
+            int d = updateFrame();
+            if (onFrameListener != null) {
+                onFrameListener.onFrame(GifDecoder.this, getBitmap());
+            }
+            innerPlay(d);
         }
-        innerPlay(d);
     };
 
     public static GifDecoder openFile(String filePtah) {
@@ -166,7 +171,36 @@ public class GifDecoder {
         this.onFrameListener = onFrameListener;
     }
 
+    public Rect getBounds() {
+        if (bounds == null || bounds.isEmpty()) {
+            if (!isDestroy() && frameCanvas != null) {
+                bounds = new Rect(0, 0, getWidth(), getHeight());
+            } else {
+                bounds = new Rect(0, 0, 1, 1);
+            }
+        }
+        return bounds;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        if (!isDestroy()) {
+            destroy();
+        }
+    }
+
     public static interface OnFrameListener {
         void onFrame(GifDecoder gd, Bitmap bitmap);
+    }
+
+    public static boolean isGif(Object o) {
+        boolean r = false;
+        if (o instanceof String) {
+            r = ((String) o).toUpperCase().endsWith(".gif");
+        } else if (o instanceof byte[]) {
+            r = JNI.bytesIsGif((byte[]) o);
+        }
+        return r;
     }
 }
