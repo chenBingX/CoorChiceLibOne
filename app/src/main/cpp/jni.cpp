@@ -27,6 +27,7 @@ jint updateFrame(JNIEnv *env, jclass clazz, jlong ptr, jobject bitmap) {
     GifFileType *gifFileType = (GifFileType *) ptr;
     GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
     AndroidBitmapInfo bitmapInfo;
+    long renderStartTime = getRealTime();
     // 一张图片的数组
     void *pixels;
     AndroidBitmap_getInfo(env, bitmap, &bitmapInfo);
@@ -42,7 +43,7 @@ jint updateFrame(JNIEnv *env, jclass clazz, jlong ptr, jobject bitmap) {
     }
     // 解锁画布
     AndroidBitmap_unlockPixels(env, bitmap);
-    return gifInfo->frameDuration;
+    return calculateInvalidationDelay(renderStartTime, gifInfo->frameDuration);
 }
 
 jint getWidth(JNIEnv *env, jclass clazz, jlong ptr) {

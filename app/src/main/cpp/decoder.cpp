@@ -96,7 +96,7 @@ bool fileIsGif(JNIEnv *env, jclass clazz, jstring filePath) {
         bool r = strncmp(GIF_STAMP, Buf, GIF_VERSION_POS) == 0;
         fclose(f);
         return r;
-    } catch (exception) {
+    } catch (const char* msg) {
 
     }
     return false;

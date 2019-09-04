@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "gif_lib.h"
+#include "gifinfo.h"
 
 using namespace std;
 
@@ -31,4 +32,8 @@ char* jstring2string(JNIEnv *env, jstring jstr);
 JNIEnv * getEnv();
 
 uint_fast8_t bytesRead(GifFileType *gif, GifByteType *bytes, uint_fast8_t size);
+
+long long calculateInvalidationDelay(long renderStartTime, uint_fast32_t frameDuration);
+
+long getRealTime(void);
 #endif //_COMMON_H
