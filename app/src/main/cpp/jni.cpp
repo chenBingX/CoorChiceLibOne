@@ -33,10 +33,8 @@ jint updateFrame(JNIEnv *env, jclass clazz, jlong ptr, jobject bitmap) {
     AndroidBitmap_getInfo(env, bitmap, &bitmapInfo);
     // 锁定画布
     AndroidBitmap_lockPixels(env, bitmap, &pixels);
-//    if (gifInfo->curFrame == 0) {
-//        prepareCanvas(gifFileType, bitmapInfo, pixels);
-//    }
-    drawFrame(gifFileType, bitmapInfo, pixels);
+    drawFrame(gifFileType, nullptr, bitmapInfo, pixels);
+    gifInfo->relFrame = (gifInfo->curFrame);
     gifInfo->curFrame += 1;
     if (gifInfo->curFrame >= gifInfo->totalFrame) {
         gifInfo->curFrame = 0;
@@ -91,10 +89,10 @@ jint getCurrentFrame(JNIEnv *env, jclass clazz, jlong ptr) {
         return 1;
     GifFileType *gifFileType = (GifFileType *) ptr;
     GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
-    return gifInfo->curFrame;
+    return gifInfo->relFrame;
 }
 
-void gotoFrame(JNIEnv *env, jclass clazz, jlong ptr, jint position) {
+void gotoFrame(JNIEnv *env, jclass clazz, jlong ptr, jint position, jobject bitmap) {
     if (checkIsNull(ptr))
         return;
     GifFileType *gifFileType = (GifFileType *) ptr;
@@ -102,7 +100,34 @@ void gotoFrame(JNIEnv *env, jclass clazz, jlong ptr, jint position) {
     if (position >= gifInfo->totalFrame) {
         position = gifInfo->totalFrame - 1;
     }
+    if (position < 0) {
+        position = 0;
+    }
+    if (gifInfo->strict) {
+        gifInfo->curFrame = 0;
+        for (int i = 0; i <= position; ++i) {
+            updateFrame(env, clazz, ptr, bitmap);
+        }
+    } else {
+        gifInfo->curFrame = position;
+        updateFrame(env, clazz, ptr, bitmap);
+    }
+    gifInfo->relFrame = position;
+}
+
+void setFrame(JNIEnv *env, jclass clazz, jlong ptr, jint position) {
+    if (checkIsNull(ptr))
+        return;
+    GifFileType *gifFileType = (GifFileType *) ptr;
+    GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
+    if (position >= gifInfo->totalFrame) {
+        position = gifInfo->totalFrame - 1;
+    }
+    if (position < 0) {
+        position = 0;
+    }
     gifInfo->curFrame = position;
+    gifInfo->relFrame = position;
 }
 
 void getFrame(JNIEnv *env, jclass clazz, jlong ptr, jint position, jobject bitmap) {
@@ -110,11 +135,61 @@ void getFrame(JNIEnv *env, jclass clazz, jlong ptr, jint position, jobject bitma
         return;
     GifFileType *gifFileType = (GifFileType *) ptr;
     GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
-    if (position >= gifInfo->totalFrame) {
-        position = gifInfo->totalFrame - 1;
+    if (gifInfo->strict) {
+        GifInfo *temp = new GifInfo();
+        temp->totalFrame = gifInfo->totalFrame;
+        temp->graphicsControlBlock = gifInfo->graphicsControlBlock;
+        if (position >= temp->totalFrame) {
+            position = temp->totalFrame - 1;
+        }
+        if (position < 0) {
+            position = 0;
+        }
+        AndroidBitmapInfo bitmapInfo;
+        // 一张图片的数组
+        void *pixels;
+        AndroidBitmap_getInfo(env, bitmap, &bitmapInfo);
+        // 锁定画布
+        AndroidBitmap_lockPixels(env, bitmap, &pixels);
+        temp->curFrame = 0;
+        for (int i = 0; i <= position; ++i) {
+            drawFrame(gifFileType, temp, bitmapInfo, pixels);
+            temp->curFrame += 1;
+            if (temp->curFrame >= temp->totalFrame) {
+                temp->curFrame = 0;
+            }
+        }
+        // 解锁画布
+        AndroidBitmap_unlockPixels(env, bitmap);
+        delete temp;
+    } else {
+        if (position >= gifInfo->totalFrame) {
+            position = gifInfo->totalFrame - 1;
+        }
+        if (position < 0) {
+            position = 0;
+        }
+        int temp = gifInfo->curFrame;
+        gifInfo->curFrame = position;
+        updateFrame(env, clazz, ptr, bitmap);
+        setFrame(env, clazz, ptr, temp);
     }
-    gifInfo->curFrame = position;
-    updateFrame(env, clazz, ptr, bitmap);
+}
+
+void setStrict(JNIEnv *env, jclass clazz, jlong ptr, jboolean strict) {
+    if (checkIsNull(ptr))
+        return;
+    GifFileType *gifFileType = (GifFileType *) ptr;
+    GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
+    gifInfo->strict = strict;
+}
+
+jboolean getStrict(JNIEnv *env, jclass clazz, jlong ptr) {
+    if (checkIsNull(ptr))
+        return false;
+    GifFileType *gifFileType = (GifFileType *) ptr;
+    GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
+    return gifInfo->strict;
 }
 
 void destroy(JNIEnv *env, jclass jclazz, jlong ptr) {
@@ -149,10 +224,8 @@ void destroy(JNIEnv *env, jclass jclazz, jlong ptr) {
 static JNINativeMethod nativeMethod[] = {
         {"openFile",         "(Ljava/lang/String;)J",          (void *) openFile},
         {"openBytes",        "([B)J",                          (void *) openBytes},
-
         {"fileIsGif",        "(Ljava/lang/String;)Z",          (void *) fileIsGif},
         {"bytesIsGif",       "([B)Z",                          (void *) bytesIsGif},
-
         {"updateFrame",      "(JLandroid/graphics/Bitmap;)I",  (void *) updateFrame},
         {"getWidth",         "(J)I",                           (void *) getWidth},
         {"getHeight",        "(J)I",                           (void *) getHeight},
@@ -160,9 +233,11 @@ static JNINativeMethod nativeMethod[] = {
         {"getFrameDuration", "(J)I",                           (void *) getFrameDuration},
         {"setFrameDuration", "(JI)V",                          (void *) setFrameDuration},
         {"getCurrentFrame",  "(J)I",                           (void *) getCurrentFrame},
-        {"gotoFrame",        "(JI)V",                          (void *) gotoFrame},
+        {"gotoFrame",        "(JILandroid/graphics/Bitmap;)V", (void *) gotoFrame},
         {"getFrame",         "(JILandroid/graphics/Bitmap;)V", (void *) getFrame},
-
+        {"setFrame",         "(JI)V",                          (void *) setFrame},
+        {"setStrict",        "(JZ)V",                           (void *) setStrict},
+        {"getStrict",        "(J)Z",                            (void *) getStrict},
         {"destroy",          "(J)V",                           (void *) destroy},
 };
 

@@ -4,11 +4,15 @@
 
 #include "drawer.h"
 
-void drawFrame(GifFileType *gifFileType, AndroidBitmapInfo bitmapInfo, void *pixels) {
+void
+drawFrame(GifFileType *gifFileType, GifInfo *info, AndroidBitmapInfo bitmapInfo, void *pixels) {
     if (gifFileType->UserData == NULL)
         return;
     //获取当前帧
-    GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
+    GifInfo *gifInfo = info;
+    if (gifInfo == nullptr) {
+        gifInfo = (GifInfo *) (gifFileType->UserData);
+    }
     SavedImage savedImage = gifFileType->SavedImages[gifInfo->curFrame];
     GifImageDesc imageDesc = savedImage.ImageDesc;
     // 用于获取图形控制扩展信息

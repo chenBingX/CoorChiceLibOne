@@ -13,6 +13,7 @@ public:
     int width;
     int height;
     int curFrame;
+    int relFrame;
     int totalFrame;
     int frameDuration;
     int totalDuration;
@@ -21,6 +22,8 @@ public:
     uint_fast32_t curPosition;
     unsigned int length;
     jbyteArray buffer;
+
+    bool strict;
 
     GifInfo();
 //    ~GifInfo();

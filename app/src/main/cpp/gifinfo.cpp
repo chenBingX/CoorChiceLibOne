@@ -8,12 +8,14 @@ GifInfo::GifInfo() {
     this->width = 1;
     this->height = 1;
     this->curFrame = 0;
+    this->relFrame=0;
     this->totalFrame = 0;
     this->frameDuration = 0;
     this->totalDuration = 0;
     this->curPosition=0;
     this->length=0;
     this->buffer= nullptr;
+    this->strict= false;
 }
 
 //GifInfo::~GifInfo() {
