@@ -41,67 +41,66 @@ public class GifDecoderActivity extends AppCompatActivity {
         findView();
         stvStart.setOnClickListener((v) -> {
             ThreadPool.run(() -> {
-                try {
-                    InputStream is = getResources().openRawResource(R.drawable.gif_1);
-                    byte[] bytes = new byte[is.available()];
-                    is.read(bytes);
-                    gif.post(() -> {
-                        LogUtils.e("isGif = " + JNI.bytesIsGif(bytes));
-//                        GifDecoder gifDecoder = GifDecoder.openBytes(bytes);
+//                try {
+//                    InputStream is = getResources().openRawResource(R.drawable.gif_1);
+//                    byte[] bytes = new byte[is.available()];
+//                    is.read(bytes);
+//                    gif.post(() -> {
+//                        LogUtils.e("isGif = " + JNI.bytesIsGif(bytes));
+////                        GifDecoder gifDecoder = GifDecoder.openBytes(bytes);
+////                        gifDecoders.add(gifDecoder);
+////                        gifDecoder.setOnFrameListener((gd, bitmap) -> {
+////                            if (bitmap != null)
+////                                gif.setImageBitmap(bitmap);
+////                        });
+////                        gifDecoder.play();
+//                    });
+//
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//
+//                try {
+//                    InputStream is = getResources().openRawResource(R.drawable.gif_3);
+//                    byte[] bytes = new byte[is.available()];
+//                    is.read(bytes);
+//                    gif_2.post(() -> {
+//                        final GifDecoder gifDecoder = GifDecoder.openBytes(bytes);
 //                        gifDecoders.add(gifDecoder);
 //                        gifDecoder.setOnFrameListener((gd, bitmap) -> {
 //                            if (bitmap != null)
-//                                gif.setImageBitmap(bitmap);
+//                                gif_2.setImageBitmap(bitmap);
 //                        });
 //                        gifDecoder.play();
-                    });
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    InputStream is = getResources().openRawResource(R.drawable.gif_3);
-                    byte[] bytes = new byte[is.available()];
-                    is.read(bytes);
-                    gif_2.post(() -> {
-                        final GifDecoder gifDecoder = GifDecoder.openBytes(bytes);
-                        gifDecoders.add(gifDecoder);
-                        gifDecoder.setOnFrameListener((gd, bitmap) -> {
-                            if (bitmap != null)
-                                gif_2.setImageBitmap(bitmap);
-                        });
-                        gifDecoder.play();
-                        gif_2.setOnClickListener(v1 -> {
-                            gifDecoder.gotoFrame(gifDecoder.getFrameCount() / 2);
-                        });
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                        gif_2.setOnClickListener(v1 -> {
+//                            gifDecoder.gotoFrame(gifDecoder.getFrameCount() / 2);
+//                        });
+//                    });
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 
 
                 try {
-                    InputStream is = getResources().openRawResource(R.drawable.gif_2);
+                    InputStream is = getResources().openRawResource(R.drawable.alpha_gif2);
                     byte[] bytes = new byte[is.available()];
                     is.read(bytes);
-                    gif_3.post(() -> {
-                        final GifDecoder gifDecoder = GifDecoder.openBytes(bytes);
-                        gifDecoders.add(gifDecoder);
-                        gifDecoder.setOnFrameListener((gd, bitmap) -> {
-                            if (bitmap != null)
-                                gif_3.setImageBitmap(bitmap);
-                        });
-                        gifDecoder.play();
-                        gif_3.setOnClickListener(v1 -> {
-                            if (gifDecoder.isPlaying()) {
-                                gifDecoder.stop();
-                            } else {
-                                gifDecoder.play();
-                            }
-                        });
+                    final GifDecoder gifDecoder = GifDecoder.openBytes(bytes);
+                    gifDecoders.add(gifDecoder);
+                    gifDecoder.setOnFrameListener((gd, bitmap) -> {
+                        if (bitmap != null){
+                            runOnUiThread(() -> gif_3.setImageBitmap(bitmap));
+                        }
                     });
+                    gif_3.setOnClickListener(v1 -> {
+                        if (gifDecoder.isPlaying()) {
+                            gifDecoder.stop();
+                        } else {
+                            gifDecoder.play();
+                        }
+                    });
+                    gifDecoder.play();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

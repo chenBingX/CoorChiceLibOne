@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2019 CoorChice <icechen_@outlook.com>
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ * <p>
+ * Last modified 9/2/19 7:46 PM
+ */
+
 package com.chenbing.coorchicelibone.gifdecoder;
 
 import android.graphics.Bitmap;
@@ -108,18 +124,33 @@ public class JNI {
      * @param ptr
      * @param frame
      */
-    public static native void gotoFrame(long ptr, int frame);
-
+    public static native void gotoFrame(long ptr, int frame, Bitmap bitmap);
 
     /**
-     * 获取指定帧图像
+     * 获得指定帧图像
      *
      * @param ptr
      * @param frame
-     * @param bitmap
      */
     public static native void getFrame(long ptr, int frame, Bitmap bitmap);
 
+    public static native void setFrame(long ptr, int frame);
+
+    /**
+     * 启用/停止严格模式
+     *
+     * @param ptr
+     * @param strict
+     */
+    public static native void setStrict(long ptr, boolean strict);
+
+
+    /**
+     * 是否启用严格模式
+     *
+     * @param ptr
+     */
+    public static native boolean getStrict(long ptr);
 
     /**
      * 销毁

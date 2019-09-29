@@ -75,6 +75,9 @@ drawFrame(GifFileType *gifFileType, GifInfo *info, AndroidBitmapInfo bitmapInfo,
                         line[x] =
                                 argb(255, gifColorType.Red, gifColorType.Green, gifColorType.Blue);
                     }
+//                    else {
+//                        line[x] = argb(0, 0, 0, 0);;
+//                    }
                 }
             }
 
