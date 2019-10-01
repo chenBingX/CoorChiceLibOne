@@ -39,7 +39,7 @@ public class BearActivity extends AppCompatActivity {
 
     private static final int TCP_PORT = 8837;
     // 19
-    private static final String IP = "30.25.58.100";
+    private static final String IP = "30.25.58.65";
     // 21
 //    private static final String IP = "30.25.66.150";
 
@@ -112,6 +112,8 @@ public class BearActivity extends AppCompatActivity {
                         sizeData.put("type", "init");
                         sizeData.put("w", img.getWidth());
                         sizeData.put("h", img.getHeight());
+                        sizeData.put("density", BearActivity.this.getResources().getDisplayMetrics().density);
+                        sizeData.put("scaledDensity", BearActivity.this.getResources().getDisplayMetrics().scaledDensity);
                         sendData(outputStream, sizeData.toString().getBytes());
 
                         // doWork
