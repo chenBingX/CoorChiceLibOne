@@ -194,7 +194,7 @@ jboolean getStrict(JNIEnv *env, jclass clazz, jlong ptr) {
 
 void destroy(JNIEnv *env, jclass jclazz, jlong ptr) {
     GifFileType *gifFileType = (GifFileType *) ptr;
-    if (ptr == NULL)
+    if (gifFileType == NULL)
         return;
     GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
     if (gifInfo != NULL) {
@@ -211,6 +211,66 @@ void destroy(JNIEnv *env, jclass jclazz, jlong ptr) {
     }
     DGifCloseFile(gifFileType, GIF_ERROR);
     gifFileType = NULL;
+}
+
+
+void copyGifDestroy(JNIEnv *env, jclass jclazz, jlong ptr) {
+    GifFileType *gifFileType = (GifFileType *) ptr;
+    if (gifFileType == NULL)
+        return;
+    GifInfo *gifInfo = (GifInfo *) (gifFileType->UserData);
+    if (gifInfo != NULL) {
+        gifInfo->width = NULL;
+        gifInfo->height = NULL;
+        gifInfo->totalFrame = NULL;
+        gifInfo->frameDuration = NULL;
+        gifInfo->totalDuration = NULL;
+        gifInfo->length = 0;
+        gifInfo->graphicsControlBlock = NULL;
+        gifInfo->buffer = NULL;
+        delete gifInfo;
+    }
+    memset(gifFileType, 0, sizeof(GifFileType));
+    free(gifFileType);
+    gifFileType = NULL;
+}
+
+jlong copyGif(JNIEnv *env, jclass jclazz, jlong ptr) {
+    GifFileType *gifFileType = (GifFileType *) ptr;
+    if (gifFileType == NULL)
+        return 0;
+    GifFileType* copy = (GifFileType*)malloc(sizeof(GifFileType));
+    copy->SWidth = gifFileType->SWidth;
+    copy->SHeight = gifFileType->SHeight;
+    copy->SColorResolution = gifFileType->SColorResolution;
+    copy->SBackGroundColor = gifFileType->SBackGroundColor;
+    copy->AspectByte = gifFileType->AspectByte;
+    copy->SColorMap = gifFileType->SColorMap;
+    copy->ImageCount = gifFileType->ImageCount;
+    copy->Image = gifFileType->Image;
+    copy->SavedImages = gifFileType->SavedImages;
+    copy->ExtensionBlockCount = gifFileType->ExtensionBlockCount;
+    copy->ExtensionBlocks = gifFileType->ExtensionBlocks;
+    copy->Error = gifFileType->Error;
+    if (gifFileType->UserData){
+        GifInfo *gifInfo = (GifInfo *)(gifFileType->UserData);
+        GifInfo *copyGifInfo = new GifInfo();
+        copyGifInfo->width = gifInfo->width;
+        copyGifInfo->height = gifInfo->height;
+        copyGifInfo->curFrame = 0;
+        copyGifInfo->relFrame = 0;
+        copyGifInfo->totalFrame = gifInfo->totalFrame;
+        copyGifInfo->frameDuration = gifInfo->frameDuration;
+        copyGifInfo->totalDuration = gifInfo->totalDuration;
+        copyGifInfo->graphicsControlBlock = gifInfo->graphicsControlBlock;
+        copyGifInfo->curPosition = 0;
+        copyGifInfo->length = gifInfo->length;
+        copyGifInfo->buffer = gifInfo->buffer;
+        copyGifInfo->strict = false;
+        copy->UserData = copyGifInfo;
+    }
+    copy->Private = gifFileType->Private;
+    return (long long) copy;
 }
 
 
@@ -236,9 +296,12 @@ static JNINativeMethod nativeMethod[] = {
         {"gotoFrame",        "(JILandroid/graphics/Bitmap;)V", (void *) gotoFrame},
         {"getFrame",         "(JILandroid/graphics/Bitmap;)V", (void *) getFrame},
         {"setFrame",         "(JI)V",                          (void *) setFrame},
-        {"setStrict",        "(JZ)V",                           (void *) setStrict},
-        {"getStrict",        "(J)Z",                            (void *) getStrict},
+        {"setStrict",        "(JZ)V",                          (void *) setStrict},
+        {"getStrict",        "(J)Z",                           (void *) getStrict},
         {"destroy",          "(J)V",                           (void *) destroy},
+        {"copy",             "(J)J",                           (void *) copyGif},
+        {"copyDestroy",          "(J)V",                           (void *) copyGifDestroy},
+
 };
 
 

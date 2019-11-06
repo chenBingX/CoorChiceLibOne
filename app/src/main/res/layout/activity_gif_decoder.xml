@@ -31,33 +31,30 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <ImageView
                 android:id="@+id/gif"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="9dp"
-                android:background="@color/opacity_3_5_black" />
+                android:layout_height="200dp"
+                />
 
             <ImageView
                 android:id="@+id/gif_1"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="9dp"
-                android:background="@color/opacity_3_5_black" />
+                android:layout_height="200dp"
+                />
 
             <ImageView
                 android:id="@+id/gif_2"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="9dp"
-                android:background="@color/opacity_3_5_black" />
+                android:layout_height="200dp"
+                />
 
             <ImageView
                 android:id="@+id/gif_3"
-                android:layout_width="237dp"
-                android:layout_height="296dp"
-                android:layout_marginTop="9dp"
-                android:background="@color/opacity_3_5_black" />
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                />
 
         </LinearLayout>
     </ScrollView>
