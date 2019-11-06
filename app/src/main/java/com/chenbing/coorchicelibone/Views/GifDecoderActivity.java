@@ -46,7 +46,7 @@ public class GifDecoderActivity extends AppCompatActivity {
         ThreadPool.run(new Runnable() {
             @Override
             public void run() {
-                GifDrawable gifDrawable = GifCache.getInstance().get(R.drawable.gif_m_7);
+                GifDrawable gifDrawable = GifCache.fromResource(GifDecoderActivity.this, R.drawable.gif_m_7);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -59,9 +59,9 @@ public class GifDecoderActivity extends AppCompatActivity {
         stv_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gif_1.setImageDrawable(GifCache.getInstance().get(R.drawable.gif_m_7));
-                gif_2.setImageDrawable(GifCache.getInstance().get(R.drawable.gif_m_7));
-                gif_3.setImageDrawable(GifCache.getInstance().get(R.drawable.gif_m_7));
+                gif_1.setImageDrawable(GifCache.fromResource(GifDecoderActivity.this, R.drawable.gif_m_7));
+                gif_2.setImageDrawable(GifCache.fromResource(GifDecoderActivity.this, R.drawable.gif_m_7));
+                gif_3.setImageDrawable(GifCache.fromResource(GifDecoderActivity.this, R.drawable.gif_m_7));
             }
         });
     }

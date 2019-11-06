@@ -219,8 +219,10 @@ public class GifDecoder implements Gif {
             gotoFrameSchedule = ThreadPool.globleExecutor().schedule(gotoFrameRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    JNI.gotoFrame(ptr, frame, GifDecoder.this.frame);
-                    copyFrameToBuffer();
+                    synchronized (lock) {
+                        JNI.gotoFrame(ptr, frame, GifDecoder.this.frame);
+                        copyFrameToBuffer();
+                    }
                     handler.postAtTime(onFrameRunnable, SystemClock.uptimeMillis());
                 }
             }, 0, TimeUnit.MILLISECONDS);
@@ -274,8 +276,10 @@ public class GifDecoder implements Gif {
         check();
         int r = 1;
         if (frame != null) {
-            r = JNI.updateFrame(ptr, frame);
-            copyFrameToBuffer();
+            synchronized (lock) {
+                r = JNI.updateFrame(ptr, frame);
+                copyFrameToBuffer();
+            }
         }
         return r;
     }
@@ -414,11 +418,9 @@ public class GifDecoder implements Gif {
     }
 
     private void copyFrameToBuffer() {
-        synchronized (lock) {
-            if (buffer != null && bufferCanvas != null && frame != null) {
-                bufferCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-                bufferCanvas.drawBitmap(frame, 0, 0, paint);
-            }
+        if (buffer != null && bufferCanvas != null && frame != null) {
+            bufferCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+            bufferCanvas.drawBitmap(frame, 0, 0, paint);
         }
     }
 
